@@ -15,20 +15,27 @@ include('includes/header.php');
                 <?php alertMessage() ?>
                 <form action="code.php" method="POST">
                     <div class="row">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-4">
+                            <label for="product_id">Select Brand *</label>
+                            <select name="brand_id" class="form-control myselect2" required>
+                                <option value="not_defined">Select Product</option>
+                                <?php
+                                $products = getAll('brands');
+                                if (mysqli_num_rows($products) > 0) {
+                                    foreach ($products as $item) :
+                                ?>
+                                        <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
+                                <?php
+                                    endforeach;
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <label for="name">Name *</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="description">Description</label>
-                            <textarea name="description" class="form-control" rows="3"></textarea>
-                        </div>
                         <div class="col-md-6 mb-3">
-                            <label for="status">Status (Unchecked = Visible; Checked=Hidden)</label>
-                            <br>
-                            <input type="checkbox" name="status" style="width: 30px; height:30px;">
-                        </div>
-                        <div class="col-md-6 mb-3 text-end">
                             <button type="submit" name="saveCategory" class="btn btn-primary">Save</button>
                         </div>
                     </div>

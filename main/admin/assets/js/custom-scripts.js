@@ -133,8 +133,29 @@ $(document).ready(function () {
         document.getElementById("submain").innerHTML = html;
       },
     });
+  });
 
-
+  $(document).on("change", "#brand_id", function () {
+    var id = document.getElementById("brand_id").value;
+    var data = {
+      id:id,
+      getCategoryOpt:true
+    };
+    $.ajax({
+      type: "POST",
+      url: "orders-code.php",
+      data: data,
+      success: function (response) {
+        var res = JSON.parse(response);
+        var items = res['message'];
+        console.log(items);
+        var html = "";
+        for(let i in items){
+          html += `<option value='${items[i]['id']}'>${items[i]['name']}</option>`;
+        }
+        document.getElementById("category_id").innerHTML = html;
+      },
+    });
   });
 
 

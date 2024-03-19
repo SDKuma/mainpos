@@ -22,7 +22,7 @@ require 'authentication.php';
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
   <link href="assets/css/custom-style.css" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="./../assets/favicon.ico">
-
+  <link rel="stylesheet" href="assets/js/DataTables/datatables.css" />
 </head>
 
 <body class="sb-nav-fixed">

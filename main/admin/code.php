@@ -96,8 +96,9 @@ if (isset($_POST['updateAdmin'])) {
 // Insert category
 if (isset($_POST['saveCategory'])) {
     $name = validate($_POST['name']);
-    $description = validate($_POST['description']);
-    $status = isset($_POST['status']) == true ? 1 : 0;
+    $description = "";
+    $brand = validate($_POST['brand_id']);
+    $status =  1;
 
     if ($name != '') {
         $nameCheck = mysqli_query($conn, "SELECT * FROM categories WHERE name='$name'");
@@ -111,7 +112,8 @@ if (isset($_POST['saveCategory'])) {
         $data = [
             'name' => $name,
             'description' => $description,
-            'status' => $status
+            'status' => $status,
+            'brand_id'=>$brand
         ];
         $result = insert('categories', $data);
         if ($result) {
@@ -128,7 +130,7 @@ if (isset($_POST['saveCategory'])) {
 if (isset($_POST['saveBrand'])) {
     $name = validate($_POST['name']);
     $description = validate($_POST['description']);
-    $status = isset($_POST['status']) == true ? 1 : 0;
+    $status = 1 ;
 
     if ($name != '') {
         $nameCheck = mysqli_query($conn, "SELECT * FROM brands WHERE name='$name'");
@@ -158,8 +160,11 @@ if (isset($_POST['saveBrand'])) {
 // Insert Brand
 if (isset($_POST['saveType'])) {
     $name = validate($_POST['name']);
-    $description = validate($_POST['description']);
-    $status = isset($_POST['status']) == true ? 1 : 0;
+    $description = "";
+    $cat = validate($_POST['category_id']);
+    $buy_price = validate($_POST['buy_price']);
+    $sell_price = validate($_POST['sell_price']);
+    $status =  1 ;
 
     if ($name != '') {
         $nameCheck = mysqli_query($conn, "SELECT * FROM `type` WHERE name='$name'");
@@ -173,7 +178,9 @@ if (isset($_POST['saveType'])) {
         $data = [
             'name' => $name,
             'description' => $description,
-            //'status' => $status
+            'category'=>$cat,
+            'buying_price'=>$buy_price,
+            'selling_price'=>$sell_price,
         ];
         $result = insert('type', $data);
         if ($result) {
@@ -449,5 +456,23 @@ if (isset($_POST['updateRate'])) {
         redirect('scrap.php', 'Rate Updated');
     } else {
         redirect('scrap.php', 'Something went wrong.');
+    }
+}
+
+if (isset($_POST['updateType'])) {
+    $rateid = validate($_POST['typeid']);
+    $buy = validate($_POST['buy_price']);
+    $sell = validate($_POST['sell_price']);
+
+    $data = [
+        'buying_price' => $buy,
+        'selling_price'=>$sell
+    ];
+    $result = update('type',$rateid, $data);
+    if ($result) {
+         redirect('type-create.php', 'Rate Updated');
+        //print_r($result);
+    } else {
+        redirect('type-create.php', 'Something went wrong.');
     }
 }

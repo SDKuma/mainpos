@@ -37,6 +37,12 @@
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="assets/js/custom-scripts.js"></script>
+<script src="assets/js/DataTables/datatables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#type-table').DataTable();
+} );
+</script>
 </body>
 
 </html>

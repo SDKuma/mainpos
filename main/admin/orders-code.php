@@ -293,18 +293,25 @@ if (isset($_POST['saveOrder'])) {
 if (isset($_POST['getSubScrap'])) {
     $id = $_POST['id'];
     $arr_scrap = explode("-",$id);
-
-
-
     $query = "SELECT * FROM `scrap_weights` WHERE `scrap_id`='$arr_scrap[0]';";
     $result = mysqli_query($conn,$query);
     $data = array();
     while($row = mysqli_fetch_assoc($result)){
         array_push($data,$row);
     }
+    jsonResponse(200,$query,$data);
+    // return ["came"];
+}
 
 
-
+if (isset($_POST['getCategoryOpt'])) {
+    $id = $_POST['id'];
+    $query = "SELECT * FROM `categories` WHERE `brand_id`='$id';";
+    $result = mysqli_query($conn,$query);
+    $data = array();
+    while($row = mysqli_fetch_assoc($result)){
+        array_push($data,$row);
+    }
     jsonResponse(200,$query,$data);
     // return ["came"];
 }
