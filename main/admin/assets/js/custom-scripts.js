@@ -158,6 +158,30 @@ $(document).ready(function () {
     });
   });
 
+  $(document).on("change", "#type_id_prod", function () {
+    var id = document.getElementById("type_id_prod").value;
+    var data = {
+      id:id,
+      getTypePrice:true
+    };
+    $.ajax({
+      type: "POST",
+      url: "orders-code.php",
+      data: data,
+      success: function (response) {
+        var res = JSON.parse(response);
+        var items = res['message'];
+        console.log(items[0]);
+        if(items[0]){
+          document.getElementById('buy_prod').value = items[0]['buying_price'];
+          document.getElementById('by_sell').value = items[0]['selling_price'];
+          document.getElementById('category_id').value = items[0]['category'];
+
+        }
+      },
+    });
+  });
+
 
   // Add customer to customer's table
   $(document).on("click", ".saveCustomer", function () {

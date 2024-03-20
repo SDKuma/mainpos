@@ -303,10 +303,21 @@ if (isset($_POST['getSubScrap'])) {
     // return ["came"];
 }
 
-
 if (isset($_POST['getCategoryOpt'])) {
     $id = $_POST['id'];
     $query = "SELECT * FROM `categories` WHERE `brand_id`='$id';";
+    $result = mysqli_query($conn,$query);
+    $data = array();
+    while($row = mysqli_fetch_assoc($result)){
+        array_push($data,$row);
+    }
+    jsonResponse(200,$query,$data);
+    // return ["came"];
+}
+
+if (isset($_POST['getTypePrice'])) {
+    $id = $_POST['id'];
+    $query = "SELECT * FROM `type` WHERE `id`='$id' LIMIT 1;";
     $result = mysqli_query($conn,$query);
     $data = array();
     while($row = mysqli_fetch_assoc($result)){
