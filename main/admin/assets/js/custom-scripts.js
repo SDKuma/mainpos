@@ -115,8 +115,8 @@ $(document).ready(function () {
   $(document).on("change", "#mainscrap", function () {
     var id = document.getElementById("mainscrap").value;
     var data = {
-      id:id,
-      getSubScrap:true
+      id: id,
+      getSubScrap: true
     };
     $.ajax({
       type: "POST",
@@ -127,7 +127,7 @@ $(document).ready(function () {
         var items = res['message'];
         console.log(items);
         var html = "";
-        for(let i in items){
+        for (let i in items) {
           html += `<option value='${items[i]['id']}-${items[i]['name']}'>${items[i]['name']}</option>`;
         }
         document.getElementById("submain").innerHTML = html;
@@ -138,8 +138,8 @@ $(document).ready(function () {
   $(document).on("change", "#brand_id", function () {
     var id = document.getElementById("brand_id").value;
     var data = {
-      id:id,
-      getCategoryOpt:true
+      id: id,
+      getCategoryOpt: true
     };
     $.ajax({
       type: "POST",
@@ -150,7 +150,7 @@ $(document).ready(function () {
         var items = res['message'];
         console.log(items);
         var html = "";
-        for(let i in items){
+        for (let i in items) {
           html += `<option value='${items[i]['id']}'>${items[i]['name']}</option>`;
         }
         document.getElementById("category_id").innerHTML = html;
@@ -161,8 +161,8 @@ $(document).ready(function () {
   $(document).on("change", "#type_id_prod", function () {
     var id = document.getElementById("type_id_prod").value;
     var data = {
-      id:id,
-      getTypePrice:true
+      id: id,
+      getTypePrice: true
     };
     $.ajax({
       type: "POST",
@@ -172,7 +172,7 @@ $(document).ready(function () {
         var res = JSON.parse(response);
         var items = res['message'];
         console.log(items[0]);
-        if(items[0]){
+        if (items[0]) {
           document.getElementById('buy_prod').value = items[0]['buying_price'];
           document.getElementById('by_sell').value = items[0]['selling_price'];
           document.getElementById('category_id').value = items[0]['category'];
@@ -275,7 +275,7 @@ function downloadPDF(invoiceNo) {
   });
 }
 
-document.getElementById("saveProduct").addEventListener("click",async (e)=>{
+document.getElementById("saveProduct").addEventListener("click", async (e) => {
   e.preventDefault();
   var name = document.getElementById('name_').value;
   var price = document.getElementById('by_sell').value;
@@ -289,25 +289,49 @@ document.getElementById("saveProduct").addEventListener("click",async (e)=>{
     price: price,
     buyprice: buyprice,
     type_id: type_id,
-    category_id:category_id,
+    category_id: category_id,
   };
 
-  $.ajax({
+  let resc = await checkforitem(name);
+  console.log(resc);
+  if (resc=='0') {
+    $.ajax({
+      type: "POST",
+      url: "code.php",
+      data: data,
+      success: async function (response) {
+        console.log(response);
+        var res = JSON.parse(response);
+        if (res.status == 200) {
+          console.log(res);
+          await swal(res.message, res.message, res.status_type);
+          document.getElementById('name_').value = "";
+        } else {
+          swal("Error", "Product craete Error", 'error');
+        }
+      },
+    });
+  }else{
+    swal("Error", "Product already exist", 'error');
+  }
+
+});
+
+async function checkforitem(code) {
+  
+  let x = $.ajax({
     type: "POST",
     url: "code.php",
-    data: data,
-    success:async function (response) {
-      console.log(response);
-      var res = JSON.parse(response);
-      if (res.status == 200) {
-        console.log(res);
-        await swal(res.message, res.message, res.status_type);
-        document.getElementById('name_').value = "";
-        // $("#orderPlaceSuccess").text(res.message);
-        // $("#orderSuccessModal").modal("show");
-      } else {
-        swal(res.message, res.message, res.status_type);
-      }
+    data: {
+      item: code,
+      isItemCheck: true
+    },
+    success: async function (response) {
+      return response;
     },
   });
-});
+
+  return x;
+
+
+}

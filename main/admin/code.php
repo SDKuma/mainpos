@@ -1,6 +1,6 @@
 <?php
-
 include("../config/function.php");
+
 
 // Insert admin
 if (isset($_POST['saveAdmin'])) {
@@ -420,6 +420,15 @@ if (isset($_POST['saveScrap'])) {
     } else {
         redirect('scrap.php', 'Something went wrong.');
     }
+}
+
+// Item check
+if (isset($_POST['isItemCheck'])) {
+    $item = validate($_POST['item']);
+    $result = checkitem($item); 
+    // jsonResponse(200, 'success', 'Product Creation Done.');
+    
+    echo ($result);
 }
 
 // Create Scrap weight

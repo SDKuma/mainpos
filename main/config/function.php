@@ -51,6 +51,15 @@ function insert($tableName, $data)
     return $result;
 }
 
+function checkitem($item){
+    global $conn;
+    $q = "SELECT * FROM products WHERE `name`='".$item."';";
+    $r=mysqli_query($conn,$q);
+    $rowcount = mysqli_num_rows($r);
+
+    return $rowcount;
+}
+
 // Update data using this function
 function update($tableName, $id, $data)
 {
