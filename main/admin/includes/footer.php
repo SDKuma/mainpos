@@ -42,6 +42,10 @@
 $(document).ready( function () {
     $('#type-table').DataTable();
 } );
+
+$(document).ready( function () {
+        $('#product-table').DataTable();   
+    });
 </script>
 </body>
 

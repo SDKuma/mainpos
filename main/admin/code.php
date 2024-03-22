@@ -249,18 +249,18 @@ if (isset($_POST['saveProduct'])) {
     }
 
     // To check if the image is selected or not
-    if ($_FILES['image']['size'] > 0) {
-        $path = "../assets/uploads/products/";
-        // Get image extention
-        $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-        // Generate file name
-        $fileName = time() . '.' . $image_ext;
-        // Move the uploaded image
-        move_uploaded_file($_FILES['image']['tmp_name'], $path . $fileName);
-        $finalImage = "assets/uploads/products/" . $fileName;
-    } else {
-        $finalImage = "";
-    }
+    // if ($_FILES['image']['size'] > 0) {
+    //     $path = "../assets/uploads/products/";
+    //     // Get image extention
+    //     $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+    //     // Generate file name
+    //     $fileName = time() . '.' . $image_ext;
+    //     // Move the uploaded image
+    //     move_uploaded_file($_FILES['image']['tmp_name'], $path . $fileName);
+    //     $finalImage = "assets/uploads/products/" . $fileName;
+    // } else {
+    //     $finalImage = "";
+    // }
 
     $data = [
         'category_id' => $category_id,
@@ -268,7 +268,7 @@ if (isset($_POST['saveProduct'])) {
         'description' => $description,
         'price' => $price,
         'quantity' => $quantity,
-        'image' => $finalImage,
+        'image' => "/images/prods",
         'Brand'=>$brand,
         'Type'=>$type,
         'buying_price'=>$buying,
@@ -276,9 +276,9 @@ if (isset($_POST['saveProduct'])) {
     ];
     $result = insert('products', $data);
     if ($result) {
-        redirect('products.php', 'Product created successfully.');
+        jsonResponse(200, 'success', 'Product Creation Done.');
     } else {
-        redirect('product-create.php', 'Something went wrong.');
+        jsonResponse(200, 'error', 'Product Creation Error');
     }
 }
 

@@ -274,3 +274,40 @@ function downloadPDF(invoiceNo) {
     windowWidth: 650,
   });
 }
+
+document.getElementById("saveProduct").addEventListener("click",async (e)=>{
+  e.preventDefault();
+  var name = document.getElementById('name_').value;
+  var price = document.getElementById('by_sell').value;
+  var buyprice = document.getElementById('buy_prod').value;
+  var type_id = document.getElementById('type_id_prod').value;
+  var category_id = document.getElementById('category_id').value;
+
+  var data = {
+    saveProduct: true,
+    name: name,
+    price: price,
+    buyprice: buyprice,
+    type_id: type_id,
+    category_id:category_id,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: "code.php",
+    data: data,
+    success:async function (response) {
+      console.log(response);
+      var res = JSON.parse(response);
+      if (res.status == 200) {
+        console.log(res);
+        await swal(res.message, res.message, res.status_type);
+        document.getElementById('name_').value = "";
+        // $("#orderPlaceSuccess").text(res.message);
+        // $("#orderSuccessModal").modal("show");
+      } else {
+        swal(res.message, res.message, res.status_type);
+      }
+    },
+  });
+});
