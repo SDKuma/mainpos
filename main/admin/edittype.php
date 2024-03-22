@@ -24,7 +24,7 @@ $data = mysqli_fetch_assoc($res);
                         <div class="col-md-4 mb-3">
                             <label for="name">Type *</label>
                             <input type="hidden" name="typeid" class="form-control" value="<?php echo $data['id']; ?>">
-                            <input type="text" name="name" class="form-control" value="<?php echo $data['name']; ?>" disabled>
+                            <input type="text" name="editname" class="form-control" value="<?php echo $data['name']; ?>">
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="name">Buying Price *</label>

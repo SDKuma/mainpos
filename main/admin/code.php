@@ -462,8 +462,11 @@ if (isset($_POST['updateType'])) {
     $rateid = validate($_POST['typeid']);
     $buy = validate($_POST['buy_price']);
     $sell = validate($_POST['sell_price']);
+    $name = validate($_POST['editname']);
+
 
     $data = [
+        'name'=>$name,
         'buying_price' => $buy,
         'selling_price'=>$sell
     ];
