@@ -13,6 +13,7 @@ if (!isset($_SESSION['productItems'])) {
 if (isset($_POST['addItem'])) {
     $product_id = validate($_POST['product_id']);
     $quantity = validate($_POST['quantity']);
+    echo $product_id;
 
     if ($product_id != 'not_defined') {
         $row = getProductById("products", $product_id);
@@ -20,7 +21,7 @@ if (isset($_POST['addItem'])) {
             if ($quantity <= $row['data']['quantity']&&$row['data']['quantity']>0) {
                 $productData = [
                     'product_id' => $row['data']['id'],
-                    'name' => $row['data']['brand'].'-'.$row['data']['type_'].'-'.$row['data']['name'],
+                    'name' => $row['data']['brand'].' '.$row['data']['type_'].' '.$row['data']['amp'].'AMP <br><span style="font-size:12px">'.$row['data']['name'].'<span>',
                     'image' => $row['data']['image'],
                     'price' => $row['data']['price'],
                     'quantity' => $quantity
@@ -36,7 +37,7 @@ if (isset($_POST['addItem'])) {
 
                             $productData = [
                                 'product_id' => $row['data']['id'],
-                                'name' => $row['data']['name'],
+                                'name' => $row['data']['brand'].' '.$row['data']['type_'].' '.$row['data']['amp'].'AMP-'.$row['data']['name'],
                                 'image' => $row['data']['image'],
                                 'price' => $row['data']['price'],
                                 'quantity' => $newQuantity
@@ -45,9 +46,9 @@ if (isset($_POST['addItem'])) {
                         }
                     }
                 }
-                redirect('order-create.php', 'Item "' . $row['data']['name'] . '" added in cart.');
+               redirect('order-create.php', 'Item "' . $row['data']['name'] . '" added in cart.');
             } else {
-                redirect('order-create.php', 'Only ' . $row['data']['quantity'] . ' products are available.');
+               redirect('order-create.php', 'Only ' . $row['data']['quantity'] . ' products are available.');
             }
         } else {
             redirect('order-create.php', 'No product found.');

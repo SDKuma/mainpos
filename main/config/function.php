@@ -162,8 +162,8 @@ function getProductById($tableName, $id)
     $id = validate($id);
 
     // $query = "SELECT * FROM $table LEFT JOIN  WHERE id='$id' LIMIT 1";
-    $q = "SELECT `products`.*,`brands`.`name` as 'brand',`type`.`name` as 'type_' FROM products LEFT JOIN `brands` ON `products`.`Brand`=`brands`.`id` LEFT JOIN `type` ON `type`.`id`=`products`.`Type` WHERE `products`.`id`=".$id." LIMIT 1;"; 
-
+    // $q = "SELECT `products`.*,`brands`.`name` as 'brand',`type`.`name` as 'type_' FROM products LEFT JOIN `brands` ON `products`.`Brand`=`brands`.`id` LEFT JOIN `type` ON `type`.`id`=`products`.`Type` WHERE `products`.`id`=".$id." LIMIT 1;"; 
+    $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE `products`.`id`=".$id." LIMIT 1;";
     $result = mysqli_query($conn, $q);
 
     if ($result) {
