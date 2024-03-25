@@ -74,49 +74,21 @@ include('includes/header.php');
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Image</th>
+                                <th>Brand</th>
                                 <th>Name</th>
                                 <th>Price(Rs)</th>
                                 <th>Quantity</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $products = getAll('products');
-                            if (mysqli_num_rows($products) > 0) {
-                                foreach ($products as $item) :
-                            ?>
-                                    <tr>
-                                        <td><?= $item['id'] ?></td>
-                                        <td><img src="../<?= $item['image'] ?>" alt="image" style="width:50px; height:50px"></td>
-                                        <td><?= $item['name'] ?></td>
-                                        <td><?= $item['price'] ?></td>
-                                        <td><?= $item['quantity'] ?></td>
-                                        <td>
-                                            <?php
-                                            if ($item['status'] == 1) {
-                                                echo '<span class="badge bg-danger">Hidden</span>';
-                                            } else {
-                                                echo '<span class="badge bg-primary">Visible</span>';
-                                            }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <a href="product-edit.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-success">Edit</a>
-                                            <a href="product-delete.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                <?php
-                                endforeach;
-                            } else {
-                                ?>
-                                <tr>
-                                    <td colspan="6" class="text-center">No Records Found!</td>
-                                </tr>
-                            <?php
-                            }
+                                $q = "SELECT `products`.*,`brands`.`name` as 'brand',`type`.`name` as 'type_' FROM products LEFT JOIN `brands` ON `products`.`Brand`=`brands`.`id` LEFT JOIN `type` ON `type`.`id`=`products`.`Type`;"; 
+                                $result = mysqli_query($conn, $q);
+                                while($row = mysqli_fetch_assoc($result)){
+                                    echo "<tr><td>".$row['id']."</td><td>".$row['brand']."</td><td>".$row['type_']."-".$row['name']."</td><td>".$row['price']."</td><td>".$row['quantity']."</td><td><a href=product-edit.php?id=".$row['id']." class='btn btn-sm btn-success'>Edit</a>
+                                    <a href=product-delete.php?id=".$row['id']." class='btn btn-sm btn-danger'>Delete</a></td></tr>";
+                                }
                             ?>
 
                         </tbody>

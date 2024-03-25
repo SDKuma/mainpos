@@ -3,6 +3,7 @@ include('includes/header.php');
 if (!isset($_SESSION['productItems'])) {
     echo '<script> window.location.href="order-create.php"</script>';
 }
+date_default_timezone_set('Asia/Colombo');
 ?>
 
 <div class="modal fade" id="orderSuccessModal" data-bs-backdrop="static" data-bs-keyboards="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,7 +62,7 @@ if (!isset($_SESSION['productItems'])) {
                                                     <td align="end">
                                                         <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">Invoice Details</h5>
                                                         <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Invoice No: <?= $invoiceNo; ?> </p>
-                                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Invoice Date: <?= date('d M Y'); ?> </p>
+                                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Invoice Date: <?= date('d M Y H:i:s'); ?> </p>
                                                     </td>
                                                 </tr>
                                             </tbody>

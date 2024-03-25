@@ -225,7 +225,7 @@ $(document).ready(function () {
   });
 
   // On customer's order save
-  $(document).on("click", "#saveOrder", function () {
+  $(document).on("click", "#saveOrder", async function () {
     $.ajax({
       type: "POST",
       url: "orders-code.php",
@@ -237,7 +237,9 @@ $(document).ready(function () {
         if (res.status == 200) {
           swal(res.message, res.message, res.status_type);
           $("#orderPlaceSuccess").text(res.message);
-          $("#orderSuccessModal").modal("show");
+          // $("#orderSuccessModal").modal("show");
+          printBillingArea();
+          window.location.replace('http://localhost/mainpos/main/admin/order-create.php');
         } else {
           swal(res.message, res.message, res.status_type);
         }

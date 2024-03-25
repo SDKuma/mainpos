@@ -15,12 +15,12 @@ if (isset($_POST['addItem'])) {
     $quantity = validate($_POST['quantity']);
 
     if ($product_id != 'not_defined') {
-        $row = getById("products", $product_id);
+        $row = getProductById("products", $product_id);
         if ($row) {
             if ($quantity <= $row['data']['quantity']&&$row['data']['quantity']>0) {
                 $productData = [
                     'product_id' => $row['data']['id'],
-                    'name' => $row['data']['name'],
+                    'name' => $row['data']['brand'].'-'.$row['data']['type_'].'-'.$row['data']['name'],
                     'image' => $row['data']['image'],
                     'price' => $row['data']['price'],
                     'quantity' => $quantity

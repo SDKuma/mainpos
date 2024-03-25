@@ -137,6 +137,45 @@ function getById($tableName, $id)
     }
 }
 
+function getProductById($tableName, $id)
+{
+    global $conn;
+
+    $table = validate($tableName);
+    $id = validate($id);
+
+    // $query = "SELECT * FROM $table LEFT JOIN  WHERE id='$id' LIMIT 1";
+    $q = "SELECT `products`.*,`brands`.`name` as 'brand',`type`.`name` as 'type_' FROM products LEFT JOIN `brands` ON `products`.`Brand`=`brands`.`id` LEFT JOIN `type` ON `type`.`id`=`products`.`Type` WHERE `products`.`id`=".$id." LIMIT 1;"; 
+
+    $result = mysqli_query($conn, $q);
+
+    if ($result) {
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            $response = [
+                'status' => 200,
+                'data' => $row,
+                'message' => "Record found!"
+            ];
+            return $response;
+        } else {
+            $response = [
+                'status' => 404,
+                'message' => "No data found!"
+            ];
+            return $response;
+        }
+    } else {
+        $response = [
+            'status' => 500,
+            'message' => "Something went wronggg!"
+        ];
+        return $response;
+    }
+}
+
+
+
 // Delete data from db using id
 function delete($tableName, $id)
 {
