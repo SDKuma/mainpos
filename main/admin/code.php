@@ -475,12 +475,15 @@ if (isset($_POST['updateType'])) {
     $buy = validate($_POST['buy_price']);
     $sell = validate($_POST['sell_price']);
     $name = validate($_POST['editname']);
+    $amp = validate($_POST['amp']);
+
 
 
     $data = [
         'name'=>$name,
         'buying_price' => $buy,
-        'selling_price'=>$sell
+        'selling_price'=>$sell,
+        'amp'=>$amp
     ];
     $result = update('type',$rateid, $data);
     if ($result) {

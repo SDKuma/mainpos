@@ -21,16 +21,20 @@ $data = mysqli_fetch_assoc($res);
                 <form action="code.php" method="POST">
                     <div class="row">
                         
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label for="name">Type *</label>
                             <input type="hidden" name="typeid" class="form-control" value="<?php echo $data['id']; ?>">
                             <input type="text" name="editname" class="form-control" value="<?php echo $data['name']; ?>">
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
+                            <label for="name">Amp</label>
+                            <input type="text" name="amp" class="form-control" value="<?php echo $data['amp']; ?>" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
                             <label for="name">Buying Price *</label>
                             <input type="text" name="buy_price" class="form-control" value="<?php echo $data['buying_price']; ?>" required>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label for="name">Selling Price *</label>
                             <input type="text" name="sell_price" class="form-control" value="<?php echo $data['selling_price']; ?>" required>
                         </div>

@@ -76,6 +76,7 @@ include('includes/header.php');
                                 <th>ID</th>
                                 <th>Brand</th>
                                 <th>Name</th>
+                                <th>Amp</th>
                                 <th>Price(Rs)</th>
                                 <th>Quantity</th>
                                 <th>Action</th>
@@ -83,10 +84,11 @@ include('includes/header.php');
                         </thead>
                         <tbody>
                             <?php
-                                $q = "SELECT `products`.*,`brands`.`name` as 'brand',`type`.`name` as 'type_' FROM products LEFT JOIN `brands` ON `products`.`Brand`=`brands`.`id` LEFT JOIN `type` ON `type`.`id`=`products`.`Type`;"; 
+                                // $q = "SELECT `products`.*,`brands`.`name` as 'brand',`type`.`name` as 'type_' FROM products LEFT JOIN `brands` ON `products`.`Brand`=`brands`.`id` LEFT JOIN `type` ON `type`.`id`=`products`.`Type`;"; 
+                                $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id;";
                                 $result = mysqli_query($conn, $q);
                                 while($row = mysqli_fetch_assoc($result)){
-                                    echo "<tr><td>".$row['id']."</td><td>".$row['brand']."</td><td>".$row['type_']."-".$row['name']."</td><td>".$row['price']."</td><td>".$row['quantity']."</td><td><a href=product-edit.php?id=".$row['id']." class='btn btn-sm btn-success'>Edit</a>
+                                    echo "<tr><td>".$row['id']."</td><td>".$row['brand']."</td><td>".$row['type_']."-".$row['name']."</td><td>".$row['amp']."</td><td>".$row['price']."</td><td>".$row['quantity']."</td><td><a href=product-edit.php?id=".$row['id']." class='btn btn-sm btn-success'>Edit</a>
                                     <a href=product-delete.php?id=".$row['id']." class='btn btn-sm btn-danger'>Delete</a></td></tr>";
                                 }
                             ?>

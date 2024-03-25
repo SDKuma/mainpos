@@ -237,9 +237,9 @@ $(document).ready(function () {
         if (res.status == 200) {
           swal(res.message, res.message, res.status_type);
           $("#orderPlaceSuccess").text(res.message);
-          // $("#orderSuccessModal").modal("show");
-          printBillingArea();
-          window.location.replace('http://localhost/mainpos/main/admin/order-create.php');
+          $("#orderSuccessModal").modal("show");
+          // printBillingArea();
+          // window.location.replace('http://localhost/mainpos/main/admin/order-create.php');
         } else {
           swal(res.message, res.message, res.status_type);
         }
