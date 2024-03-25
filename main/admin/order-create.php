@@ -52,14 +52,14 @@ include('includes/header.php');
                             <label for="product_id">Select Product *</label>
                             <select name="product_id" class="form-control myselect2" required>
                                 <option value="not_defined">Select Product</option>
+
                                 <?php
-                                $products = getAll('products');
-                                if (mysqli_num_rows($products) > 0) {
-                                    foreach ($products as $item) :
-                                ?>
-                                        <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
-                                <?php
-                                    endforeach;
+                                $q = "SELECT `products`.*,`brands`.`name` as 'brand',`type`.`name` as 'type_',`type`.`amp` as 'amp' FROM products LEFT JOIN `brands` ON `products`.`Brand`=`brands`.`id` LEFT JOIN `type` ON `type`.`id`=`products`.`Type`;"; 
+                                $result = mysqli_query($conn, $q);
+                                while($row = mysqli_fetch_assoc($result)){
+                                    // echo "<tr><td>".$row['id']."</td><td>".$row['brand']."</td><td>".$row['type_']."-".$row['name']."</td><td>".$row['price']."</td><td>".$row['quantity']."</td><td><a href=product-edit.php?id=".$row['id']." class='btn btn-sm btn-success'>Edit</a>
+                                    // <a href=product-delete.php?id=".$row['id']." class='btn btn-sm btn-danger'>Delete</a></td></tr>";
+                                    echo "<option id='".$row['id']."'>".$row['brand']."-".$row['amp']."-".$row['name']."</option>";
                                 }
                                 ?>
                             </select>

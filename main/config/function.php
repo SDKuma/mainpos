@@ -100,6 +100,23 @@ function getAll($tableName, $status = NULL)
     return $result;
 }
 
+function getAllProds($tableName, $status = NULL)
+{
+    global $conn;
+
+    $table = validate($tableName);
+    $status = validate($status);
+
+    if ($status == "status") {
+        $query = "SELECT * FROM $table WHERE $status = '0'";
+    } else {
+        $query = "SELECT * FROM $table";
+    }
+
+    $result = mysqli_query($conn, $query);
+    return $result;
+}
+
 // Get by id data using this function
 function getById($tableName, $id)
 {

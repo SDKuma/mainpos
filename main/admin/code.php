@@ -164,6 +164,8 @@ if (isset($_POST['saveType'])) {
     $cat = validate($_POST['category_id']);
     $buy_price = validate($_POST['buy_price']);
     $sell_price = validate($_POST['sell_price']);
+    $amp = validate($_POST['amp']);
+
     $status =  1 ;
 
     if ($name != '') {
@@ -181,6 +183,7 @@ if (isset($_POST['saveType'])) {
             'category'=>$cat,
             'buying_price'=>$buy_price,
             'selling_price'=>$sell_price,
+            'amp'=>$amp
         ];
         $result = insert('type', $data);
         if ($result) {
