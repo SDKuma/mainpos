@@ -21,7 +21,7 @@ include('includes/header.php');
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="name">Rate Category</label>
-                            <select name="rateid" class="form-control">
+                            <select name="rateid" class="form-control myselect2">
                                 <option value="0">Select Category</option>
                             <?php
                                 $scraps = getAll('scrap_rate');
@@ -79,7 +79,7 @@ include('includes/header.php');
                     <div class="row">
                     <div class="col-md-4 mb-3">
                             <label for="name">Scrap</label>
-                            <select name="scrap" class="form-control">
+                            <select name="scrap" class="form-control myselect2">
                                 <option value="0">Select Scrap</option>
                             <?php
                                 $scraps = getAll('scrapsmaster');
@@ -104,14 +104,17 @@ include('includes/header.php');
                             <button type="submit" name="saveSubScrap" class="btn btn-primary">Save</button>
                         </div>
                         <div class="col-md-12">
-                            <div style="max-height:400px;overflow: scroll;">
-                            <table class="table" style="border:1px solid black">
+                            <div style="">
+                            <table class="" style="border:1px solid black" id="scrap-table">
+                            <thead>
                                 <tr>
                                     <td></td>
                                     <th>Main Scrap</th>
                                     <th>Name</th>
                                     <th>Weight</th>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 <?php
                                     $scraps = getAll('scrap_weights');
                                     if (mysqli_num_rows($scraps) > 0) {
@@ -124,10 +127,11 @@ include('includes/header.php');
                                                 $lable = "2W";
                                             }
 
-                                            echo "<tr><td></td><td>".$lable."</td><td>".$scrap['name']."</td><td>".$scrap['weight']."</td></tr>";
+                                            echo "<tr><td>".$scrap['id']."</td><td>".$lable."</td><td>".$scrap['name']."</td><td>".$scrap['weight']."</td></tr>";
                                         }
                                     } 
                                 ?>
+                            </tbody>
                             </table>
                             </div>    
                         </div>
@@ -151,7 +155,7 @@ include('includes/header.php');
                     <div class="row">
                     <div class="col-md-4 mb-3">
                             <label for="name">Rate Category</label>
-                            <select name="rateid" class="form-control">
+                            <select name="rateid" class="form-control myselect2">
                                 <option value="0">Select Category</option>
                             <?php
                                 $scraps = getAll('scrap_rate');

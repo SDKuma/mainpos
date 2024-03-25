@@ -39,11 +39,15 @@
 <script src="assets/js/custom-scripts.js"></script>
 <script src="assets/js/DataTables/datatables.js"></script>
 <script>
-$(document).ready( function () {
-    $('#type-table').DataTable();
-} );
+    $(document).ready( function () {
+        $('#type-table').DataTable();
+    } );
 
-$(document).ready( function () {
+    $(document).ready( function () {
+        $('#scrap-table').DataTable();
+    } );
+
+    $(document).ready( function () {
         $('#product-table').DataTable();   
     });
 </script>
