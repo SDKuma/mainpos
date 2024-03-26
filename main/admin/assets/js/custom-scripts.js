@@ -306,10 +306,10 @@ document.getElementById("saveProduct").addEventListener("click", async (e) => {
         var res = JSON.parse(response);
         if (res.status == 200) {
           console.log(res);
-          await swal(res.message, res.message, res.status_type);
+          // await swal(res.message, res.message, res.status_type);
           document.getElementById('name_').value = "";
         } else {
-          swal("Error", "Product craete Error", 'error');
+          swal("Error", "Product create Error", 'error');
         }
       },
     });

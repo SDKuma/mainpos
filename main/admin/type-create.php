@@ -44,7 +44,7 @@ include('includes/header.php');
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="name">Amp *</label>
-                            <input type="number" name="amp" class="form-control" required>
+                            <input type="text" name="amp" class="form-control" required>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="name">Buying Price *</label>
