@@ -470,6 +470,33 @@ if (isset($_POST['updateRate'])) {
     }
 }
 
+
+if (isset($_POST['filterType'])) {
+    $brand = validate($_POST['brand']);
+ 
+    // $data = [
+    //     'brand' => $brand
+    // ];
+    $result = filtertypes($brand);
+
+    $data = array();
+    while($row = mysqli_fetch_assoc($result)){
+        array_push($data,$row);
+    }
+    jsonResponse(200,'OK',$data);
+
+
+
+    // return jsonResponse(200, 'success', $result);;
+    // if ($result) {
+    //     redirect('scrap.php', 'Rate Updated');
+    // } else {
+    //     redirect('scrap.php', 'Something went wrong.');
+    // }
+}
+
+
+
 if (isset($_POST['updateType'])) {
     $rateid = validate($_POST['typeid']);
     $buy = validate($_POST['buy_price']);

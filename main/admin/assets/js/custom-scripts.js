@@ -277,6 +277,62 @@ function downloadPDF(invoiceNo) {
   });
 }
 
+async function filterTypes() {
+  
+  var brandid = document.getElementById("brand_id_prod").value;
+  var data = {
+    filterType: true,
+    brand: brandid
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "code.php",
+    data: data,
+    success: async function (response) {
+      let jsn = JSON.parse(response);
+      var html = "<option>Select Type</option>";
+      for(let i in jsn['message']){
+        html+=`<option value=${jsn['message'][i]['typeid']}>${jsn['message'][i]['typename']}</option>`;
+      }
+      document.getElementById("type_id_prod").innerHTML = html;
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+}
+
+
+document.getElementById("brand_id_prod").addEventListener("change", async (e) => {
+  e.preventDefault();
+  var brandid = document.getElementById("brand_id_prod").value;
+  var data = {
+    filterType: true,
+    brand: brandid
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "code.php",
+    data: data,
+    success: async function (response) {
+      let jsn = JSON.parse(response);
+      var html = "<option>Select Type</option>";
+      for(let i in jsn){
+        html+=`<option value=${jsn['typeid']}>${jsn['typename']}</option>`;
+      }
+      document.getElementById("type_id_prod").innerHTML = html;
+      console.log(jsn);
+      
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+
+});
+
 document.getElementById("saveProduct").addEventListener("click", async (e) => {
   e.preventDefault();
   var name = document.getElementById('name_').value;
@@ -295,8 +351,7 @@ document.getElementById("saveProduct").addEventListener("click", async (e) => {
   };
 
   let resc = await checkforitem(name);
-  console.log(resc);
-  if (resc=='0') {
+  if (resc == '0') {
     $.ajax({
       type: "POST",
       url: "code.php",
@@ -313,14 +368,17 @@ document.getElementById("saveProduct").addEventListener("click", async (e) => {
         }
       },
     });
-  }else{
+  } else {
     swal("Error", "Product already exist", 'error');
   }
 
 });
 
+
+
+
 async function checkforitem(code) {
-  
+
   let x = $.ajax({
     type: "POST",
     url: "code.php",

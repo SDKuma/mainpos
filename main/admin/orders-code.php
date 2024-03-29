@@ -21,7 +21,7 @@ if (isset($_POST['addItem'])) {
             if ($quantity <= $row['data']['quantity']&&$row['data']['quantity']>0) {
                 $productData = [
                     'product_id' => $row['data']['id'],
-                    'name' => $row['data']['brand'].' '.$row['data']['type_'].' '.$row['data']['amp'].'AMP <br><span style="font-size:12px">'.$row['data']['name'].'<span>',
+                    'name' => $row['data']['brand'].' '.$row['data']['type_'].' '.$row['data']['amp'].'<br><span style="font-size:12px">'.$row['data']['name'].'<span>',
                     'image' => $row['data']['image'],
                     'price' => $row['data']['price'],
                     'quantity' => $quantity

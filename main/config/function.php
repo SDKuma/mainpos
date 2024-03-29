@@ -60,6 +60,13 @@ function checkitem($item){
     return $rowcount;
 }
 
+function filtertypes($id){
+    global $conn;
+    $q = "SELECT brands.id as brand,`type`.name as typename,`type`.id as typeid  FROM `brands` JOIN categories ON brands.id=categories.brand_id JOIN `type` ON `type`.`category`=categories.id WHERE brands.id = ".$id.";";
+    $r = mysqli_query($conn,$q);
+    return $r;
+}
+
 // Update data using this function
 function update($tableName, $id, $data)
 {
