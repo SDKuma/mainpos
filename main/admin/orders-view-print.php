@@ -94,9 +94,16 @@
                                                             foreach ($orderItemsRes as $key => $row) :
                                                                 $totalAmount += $row['price'] * $row['orderItemQuantity'];
                                                             ?>
+                                                                <?php
+                                                                    $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE products.name='".$row['name']."' LIMIT 1;";
+                                                                    $res = mysqli_query($conn, $q);
+                                                                    $details = mysqli_fetch_assoc($res);
+                                                                ?>    
                                                                 <tr>
                                                                     <td align="start" style="border-bottom: 1px solid #ccc;"><?= $i++ ?></td>
-                                                                    <td align="start" style="border-bottom: 1px solid #ccc;"><?= $row['name']; ?></td>
+                                                                    <td align="start" style="border-bottom: 1px solid #ccc;"><?php 
+                                                                        echo $details['brand']." ".$details['type_']." ".$details['amp'];
+                                                                    ?><br><?= $row['name']; ?></td>
                                                                     <td align="start" style="border-bottom: 1px solid #ccc;"><?= number_format($row['price'], 0) ?></td>
                                                                     <td align="start" style="border-bottom: 1px solid #ccc;"><?= $row['orderItemQuantity']; ?></td>
                                                                     <td align="start" style="border-bottom: 1px solid #ccc;" class="fw-bold"><?= number_format($row['price'] * $row['orderItemQuantity'], 0) ?></td>
