@@ -34,6 +34,11 @@
                                     if (mysqli_num_rows($orders) > 0) {
                                         $orderData = mysqli_fetch_assoc($orders);
                                         $orderId = $orderData['id'];
+                                        $discount = $orderData['discount'];
+                                        $scrapdiscount = $orderData['on_scrap_discount'];
+                                        $netTotal = $orderData['net_total'];
+
+
                                     ?>
                                         <table style="width: 100%; margin-bottom: 20px;">
                                             <tbody>
@@ -56,7 +61,7 @@
                                                         <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">Invoice Details</h5>
                                                         <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Invoice No: <?= $orderData['invoice_no'] ?> </p>
                                                         <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Invoice Date: <?= date('d M Y'); ?> </p>
-                                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Address: #555, 1st street, 3rd cross, Dhaka, Bangladesh</p>
+                                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Address:No:285,Pallimulla,Matara.</p>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -106,12 +111,16 @@
                                                                 <td colspan="1" style="font-weight: bold;font-size:20px"><?= number_format($discount, 0) ?></td>
                                                             </tr>
                                                             <tr>
+                                                                <td colspan="4" align="end" style="font-weight: bold;font-size:20px">Scrap Discount:</td>
+                                                                <td colspan="1" style="font-weight: bold;font-size:20px"><?= number_format($scrapdiscount, 0) ?></td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td colspan="4" align="end" style="font-weight: bold;font-size:20px">Net Grand Total:</td>
                                                                 <?php
                                                                     $netotal = $totalAmount-$discount;
                                                                 
                                                                 ?>
-                                                                <td colspan="1" style="font-weight: bold;font-size:20px"><?= number_format($netotal, 0) ?></td>
+                                                                <td colspan="1" style="font-weight: bold;font-size:20px"><?php echo $netTotal; ?></td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="5">Payment Mode: <?= $row['payment_mode'] ?></td>
