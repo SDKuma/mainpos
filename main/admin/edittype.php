@@ -20,7 +20,6 @@ $data = mysqli_fetch_assoc($res);
                 <?php alertMessage() ?>
                 <form action="code.php" method="POST">
                     <div class="row">
-                        
                         <div class="col-md-3 mb-3">
                             <label for="name">Type *</label>
                             <input type="hidden" name="typeid" class="form-control" value="<?php echo $data['id']; ?>">

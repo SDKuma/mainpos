@@ -513,8 +513,10 @@ if (isset($_POST['updateType'])) {
         'amp'=>$amp
     ];
     $result = update('type',$rateid, $data);
+
     if ($result) {
-         redirect('type-create.php', 'Rate Updated');
+        $res = mysqli_query($conn, "UPDATE products SET `price`=".$sell." WHERE `Type`='".$rateid."';");
+        redirect('type-create.php', 'Rate Updated');
         //print_r($result);
     } else {
         redirect('type-create.php', 'Something went wrong.');
