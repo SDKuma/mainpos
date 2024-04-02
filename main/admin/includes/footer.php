@@ -50,6 +50,11 @@
     $(document).ready( function () {
         $('#product-table').DataTable();   
     });
+
+    $(document).ready( function () {
+        $('#orderstable').DataTable();   
+    });
+    
 </script>
 </body>
 

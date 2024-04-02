@@ -85,6 +85,24 @@ include('includes/header.php');
                 </div>
             </div>
             <div class="col-md-3 mb-3">
+                <div class="card card-body bg-danger p-3">
+                    <p class="text-sm mb-0 text-capitalize">Total Credit Amount</p>
+                    <h5 class="fw-bold mb-0">
+                        <?php
+                            $totalToday = 0;
+                            foreach ($todayOrders as $orderto){
+                                if($orderto['payment_mode']=="Credit"){
+                                    $totalToday += (int)$orderto['net_total'];
+                                }
+
+                            }
+                            echo 'Rs.'.$totalToday;
+                        ?>
+                        
+                    </h5>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
                 <div class="card card-body bg-info p-3">
                     <p class="text-sm mb-0 text-capitalize">Total Amount</p>
                     <h5 class="fw-bold mb-0">

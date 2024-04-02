@@ -188,6 +188,8 @@ include('includes/header.php');
                                     <option value="">-- Select Payment --</option>
                                     <option value="Cash Payment">Cash Payment</option>
                                     <option value="Online Payment">Online Payment</option>
+                                    <option value="Credit">Credit Payment</option>
+
                                 </select>
                             </div>
                             <div class="col-md-4">
