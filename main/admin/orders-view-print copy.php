@@ -70,14 +70,6 @@
                                         <br>
 
                                         <?php
-                                            $q1 = "SELECT id FROM orders WHERE `tracking_no`='".$trackingNo."'";
-                                            $res1 = mysqli_query($conn, $q1);
-                                            $order =  mysqli_fetch_assoc($res1);
-                                            print_r($order);
-
-
-                                            
-
                                         $orderItemQuery = "SELECT oi.quantity as orderItemQuantity, oi.price as orderItemPrice, o.*, oi.*, p.* FROM orders as o, order_items as oi, products as p WHERE oi.order_id = o.id AND p.id = oi.product_id AND o.tracking_no='$trackingNo'";
 
                                         $orderItemsRes = mysqli_query($conn, $orderItemQuery);
