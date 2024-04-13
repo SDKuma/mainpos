@@ -13,13 +13,23 @@ require 'authentication.php';
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>J K Battery Center</title>
-  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-  <link href="assets/css/styles.css" rel="stylesheet" />
-  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" /> -->
+  <link href="./../admin/assets/css/simpledb.min.css" rel="stylesheet" />
 
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+  <link href="assets/css/styles.css" rel="stylesheet" />
+  <!-- <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script> -->
+  <script src="./../admin/assets/js/fntaw.js" crossorigin="anonymous"></script>
+
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+  <link href="./../admin/assets/css/sl2.min.css" rel="stylesheet" />
+
+  <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" /> -->
+  <link rel="stylesheet" href="./../admin/assets/css/alrt.min.css" />
+
+  <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" /> -->
+  <link rel="stylesheet" href="./../admin/assets/css/def.min.css" />
+
   <link href="assets/css/custom-style.css" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="./../assets/favicon.ico">
   <link rel="stylesheet" href="assets/js/DataTables/datatables.css" />
