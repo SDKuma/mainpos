@@ -117,7 +117,7 @@ date_default_timezone_set('Asia/Colombo');
                                                     $scrapitems = $_SESSION['scrap_items'];
 
                                                     echo "<tr><th align='start' colspan='5'>Scrap Items(-)</th></tr>";
-                                                    echo "<tr><th align='start' colspan='3'>Product</th><th>Ampier</th><th>Discount(Rs.)</th></tr>";
+                                                    echo "<tr><th align='start' colspan='3' style='text-align:left'>Product</th><th style='text-align:left'>Ampier</th><th style='text-align:left'>Discount(Rs.)</th></tr>";
                                                     $y = 0;
                                                     foreach ($scrapitems as $key => $item) {
                                                         $y = $y+1;

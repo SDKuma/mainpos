@@ -25,12 +25,13 @@ include('includes/header.php');
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary confirmSettle" name="confirmSettle">Save</button>
+                        <button type="submit" class="btn btn-primary confirmSettle" name="confirmSettle">Settle</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
+
         <div class="container-fluid px-4">
             <div class="card mt-4 shadow-sm">
                 <div class="card-header">
@@ -82,7 +83,7 @@ include('includes/header.php');
                             $i = 1;
                             while ($row = mysqli_fetch_assoc($orders)) {
                                 echo "<tr><td>" . $row["invoice_no"] . "</td><td>" . $row['customer'] . "</td><td>" . $row['order_date'] . "</td><td>" . $row['total_amount'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['on_scrap_discount'] . "</td><td>Rs. " . number_format((int)$row['payed_amount']) . "</td><td>" . $row['pending_amount'] . "</td><td>" . $row['order_status'] . "</td><td>
-                                    <a href='orders-view-print.php?track=" . $row['tracking_no'] . "' class='btn btn-primary mb-0 px-2 btn-sm'>Print</a><a id='btnsettle' onclick='opensettlemodal(".$row["id"].",".$row["pending_amount"].")' class='btn btn-danger mb-0 px-2 btn-sm'>Settle</a></td></tr>";
+                                    <a href='orders-view-print.php?track=" . $row['tracking_no'] . "' class='btn btn-primary mb-0 px-2 btn-sm'>Print</a>  <a id='btnsettle' onclick='opensettlemodal(".$row["id"].",".$row["pending_amount"].")' class='btn btn-danger mb-0 px-2 btn-sm'>Settle</a>  <a href='credit-history.php?order=".$row['id']."' class='btn btn-info btn-sm'>View History</a></td></tr>";
                                 $i += 1;
                             }
                             ?>
