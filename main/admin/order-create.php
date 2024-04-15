@@ -49,7 +49,7 @@ include('includes/header.php');
                 <form action="orders-code.php" method="POST">
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="product_id">Select Product *</label>
+                            <label for="product_id"><b>Select Product *</b></label>
                             <select name="product_id" class="form-control myselect2" required>
                                 <option value="not_defined">Select Product</option>
 
@@ -132,7 +132,7 @@ include('includes/header.php');
                         <form action="orders-code.php" method="POST">
                         <div class="row">
                                 <div class="col-md-3">
-                                    <label for="forPaymentMode">Scrap Type</label>
+                                    <label for="forPaymentMode"><b>Scrap Type</b></label>
                                     <select class="form-control" name="mainscrap" id="mainscrap">
                                         <option>Select Scrap</option>
                                         <?php
@@ -145,14 +145,14 @@ include('includes/header.php');
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="forPaymentMode">Scrap weight Type</label>
+                                    <label for="forPaymentMode"><b>Scrap weight Type</b></label>
                                     <select class="form-control" id="submain" name="submain">
                                         <option>Select Scrap</option>
                                         
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="forPaymentMode">Reduction value</label>
+                                    <label for="forPaymentMode"><b>Reduction value</b></label>
                                     <input type="text" placeholder="Discount" id="scrapdiscount" name="scrapdiscount" class="form-control" value="0" />
                                 </div>
                                 <div class="col-md-3">
@@ -175,15 +175,24 @@ include('includes/header.php');
                                 </table>
                         </div>
                         </form>
+                        <hr/>
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="forPaymentMode">Discount</label>
+                                <label for="forPaymentMode"><b>Discount</b></label>
                                 <input type="number" placeholder="Discount" id="discount" name="discount" class="form-control" value="0" />
                             </div>
                         </div>
+                        <hr/>
+                        <div class="row" id="creditpay" style="display: none">
+                            <div class="col-md-4">
+                                <label for="forPaymentMode"><b>Payed Cash</b></label>
+                                <input type="number" placeholder="Cash Pay" id="creditpay_val" name="creditpay_val" class="form-control" value="0" />
+                            </div>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="forPaymentMode">Select Payment Mode</label>
+                                <label for="forPaymentMode"><b>Select Payment Mode</b></label>
                                 <select class="form-select" id="payment_mode">
                                     <option value="">-- Select Payment --</option>
                                     <option value="Cash Payment">Cash Payment</option>
@@ -193,7 +202,7 @@ include('includes/header.php');
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="cusNumber">Customer Phone Number</label>
+                                <label for="cusNumber"><b>Customer Phone Number</b></label>
                                 <input type="number" id="cphone" class="form-control">
                             </div>
                             <div class="col-md-4">

@@ -1,0 +1,4 @@
+ALTER TABLE `orders` ADD `payed_amount` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `order_status`;
+ALTER TABLE `orders` ADD `pending_amount` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `payed_amount`;
+
+CREATE TABLE `mainpos`.`credit_history` (`id` INT(11) NOT NULL AUTO_INCREMENT , `order_id` VARCHAR(255) NOT NULL , `payed` VARCHAR(255) NOT NULL , `date_payed` VARCHAR(255) NOT NULL , `time_payed` TEXT NOT NULL , PRIMARY KEY (`id`));

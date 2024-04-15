@@ -52,6 +52,16 @@ $(document).ready(function () {
     });
   }
 
+  $(document).on("change","#payment_mode",function(){
+    let ele = document.getElementById("payment_mode").value;
+    if(ele=="Credit"){
+      document.getElementById("creditpay").style.display = "block";
+    }else{
+      document.getElementById("creditpay").style.display = "none";
+      document.getElementById("creditpay_val").value = 0;
+    }
+  })
+
   // Procced to place order button click
   $(document).on("click", ".proceedToPlace", function () {
     var payment_mode = $("#payment_mode").val();
