@@ -109,6 +109,7 @@ if (isset($_POST['proccedToPlaceBtn'])) {
     $phone = validate($_POST['cphone']);
     $payment_mode = validate($_POST['payment_mode']);
     $discount = validate($_POST['discount']);
+    $payed_amount = validate($_POST['amount_payed']);//amount that user paid when it is a credit bill
 
     // Checking for customer
     $checkCustomer = mysqli_query($conn, "SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
@@ -119,6 +120,7 @@ if (isset($_POST['proccedToPlaceBtn'])) {
             $_SESSION['cphone'] = $phone;
             $_SESSION['payment_mode'] = $payment_mode;
             $_SESSION['discount'] = $discount;
+            $_SESSION['amount_payed'] = $payed_amount;
 
             jsonResponse(200, "success", 'Customer found with this phone number.');
         } else {
@@ -129,6 +131,21 @@ if (isset($_POST['proccedToPlaceBtn'])) {
         jsonResponse(500, "error", 'Something went wrong.');
     }
 }
+//settle credit
+if(isset($_POST['confirmSettle'])){
+    $orderid = validate($_POST['orderid']);
+    $paying_amount = validate($_POST['paying']);
+
+    $data = [
+        'paying' => $paying_amount,
+        'orderid' => $orderid
+    ];
+    $result = settleorder($data);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+}
+
+
 
 // Add customer to customer's table
 if (isset($_POST['saveCustomerBtn'])) {
@@ -162,12 +179,14 @@ if (isset($_POST['saveOrder'])) {
     $discount = validate($_SESSION['discount']);
     $payment_mode = validate($_SESSION['payment_mode']);
     $order_placed_by_id = $_SESSION['loggedInUser']['user_id'];
+    $amount_payed = $_SESSION['amount_payed'];
+
     $totalScrap = 0;
 
     $checkCustomer = mysqli_query($conn, "SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
 
     if (!$checkCustomer) {
-        jsonResponse(500, "error", 'Something went wrong.');
+        jsonResponse(500, "error", 'Something went wrong(Customer not found).');
     }
 
 
@@ -196,22 +215,41 @@ if (isset($_POST['saveOrder'])) {
             $netTotal = $totalAmount-$totalScrap;
         }
 
+        $status_ = "Booked";
+        $payed = $netTotal;
+        $pending_amount = 0;
+        if($payment_mode=="Credit"&&($netTotal>$amount_payed)){
+            $status_ = "Pending";
+            $payed = $amount_payed;
+            $pending_amount = $netTotal-$payed;
+        }
+
         $data = [
             'customer_id' => $customerData['id'],
             'tracking_no' => rand(11111, 99999),
             'invoice_no' => $invoice_no,
             'total_amount' => $totalAmount,
             'order_date' => date('Y-m-d'),
-            'order_status' => 'Booked',
+            'order_status' => $status_,
             'payment_mode' => $payment_mode,
             'order_placed_by_id' => $order_placed_by_id,
             'discount'=>$discount,
             'net_total'=>$netTotal,
-            'on_scrap_discount'=>$totalScrap
+            'on_scrap_discount'=>$totalScrap,
+            'payed_amount'=>$payed,
+            'pending_amount'=>$pending_amount
         ];
 
         $result = insert('orders', $data);
         $lastOrderId = mysqli_insert_id($conn);
+
+        $data1 = [
+            'order_id' => $lastOrderId,
+            'payed'=>$payed,
+            'date_payed'=>date('Y-m-d'),
+            'time_payed'=>date('H:i:s')
+        ];
+        $result = insert("credit_history", $data1);
 
         if (isset($_SESSION['scrap_items'])){
             $scrapitems = $_SESSION['scrap_items']; 
@@ -283,6 +321,7 @@ if (isset($_POST['saveOrder'])) {
         unset($_SESSION['payment_mode']);
         unset($_SESSION['invoice_no']);
         unset($_SESSION['scrap_items']);
+        unset($_SESSION['amount_payed']);
 
 
         jsonResponse(200, 'success', 'Order placed successfully.');

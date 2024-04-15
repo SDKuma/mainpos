@@ -51,6 +51,38 @@ function insert($tableName, $data)
     return $result;
 }
 
+function settleorder($data){
+    global $conn;
+    $orderid = $data['orderid'];
+    $amount_ = $data['paying'];
+
+    $query1 = "SELECT * FROM orders WHERE id = '$orderid';";
+    $result1 = mysqli_query($conn, $query1);
+    $row = mysqli_fetch_assoc($result1);
+    $pending = $row['pending_amount'];
+    $payed = $row['payed_amount'];
+    $amount = $row['net_total'];
+    //new values
+    $pending = (int)$pending - (int)$amount_;
+    $payed = (int)$payed + (int)$amount_;
+    $status = "Pending";
+    if($pending<=0){
+        $status = "Booked";
+    }
+
+    $query2 = "UPDATE orders SET order_status = '".$status."',pending_amount='".$pending."',payed_amount='".$payed."' WHERE id = '$orderid';";
+    $result2 = mysqli_query($conn, $query2);
+
+    $data1 = [
+        'order_id' => $orderid,
+        'payed'=>$amount_,
+        'date_payed'=>date('Y-m-d'),
+        'time_payed'=>date('H:i:s')
+    ];
+    $result = insert("credit_history", $data1);
+
+}
+
 function checkitem($item){
     global $conn;
     $q = "SELECT * FROM products WHERE `name`='".$item."';";

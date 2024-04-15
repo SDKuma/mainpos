@@ -62,11 +62,14 @@ $(document).ready(function () {
     }
   })
 
+  //settle bill
+
   // Procced to place order button click
   $(document).on("click", ".proceedToPlace", function () {
     var payment_mode = $("#payment_mode").val();
     var cphone = $("#cphone").val();
     var discount = $("#discount").val();
+    var amount_payed = $("#creditpay_val").val();
 
     if (payment_mode == "") {
       swal("Select Payment Mode", "Please select your payment mode", "warning");
@@ -86,7 +89,8 @@ $(document).ready(function () {
       proccedToPlaceBtn: true,
       payment_mode: payment_mode,
       cphone: cphone,
-      discount: discount
+      discount: discount,
+      amount_payed:amount_payed
     };
     $.ajax({
       type: "POST",
@@ -342,6 +346,8 @@ document.getElementById("brand_id_prod").addEventListener("change", async (e) =>
   });
 
 });
+
+
 
 document.getElementById("saveProduct").addEventListener("click", async (e) => {
   e.preventDefault();

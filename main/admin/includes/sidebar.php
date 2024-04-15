@@ -19,6 +19,10 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
                     Orders
                 </a>
+                <a class="nav-link <?= $page == 'credit-orders.php' ? 'active' : '' ?>" href="credit-orders.php">
+                    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                    Credit Orders
+                </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
                 <a class="nav-link <?= ($page == 'category-create.php') || ($page == 'categories.php') ? 'collapse active' : 'collapsed' ?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
