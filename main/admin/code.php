@@ -245,7 +245,7 @@ if (isset($_POST['saveProduct'])) {
     $brand = 0;
     $type = validate($_POST['type_id']);
     $buying = validate($_POST['buyprice']);
-    $status =0;
+    $status =1;
 
     if ($category_id == 'not_defined') {
         redirect('product-create.php', 'Please select a category.');

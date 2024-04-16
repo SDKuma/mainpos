@@ -7,7 +7,7 @@ if (is_numeric($paramResultId)) {
     $productId = validate($paramResultId);
     $product = getById('products', $productId);
     if ($product['status'] == 200) {
-        $productDeleteRes = delete('products', $productId);
+        $productDeleteRes = softdelete('products', $productId);
         if ($productDeleteRes) {
             $deleteImage = "../" . $product['data']['image'];
             if (file_exists($deleteImage)) {
