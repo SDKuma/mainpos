@@ -244,6 +244,13 @@ function softdelete($tableName, $id)
 
 }
 
+function updateretails($tableName, $id,$data){
+    global $conn;
+    $table = validate($tableName);
+    $id = validate($id);
+
+}
+
 
 // Delete data from db using id
 function delete($tableName, $id)

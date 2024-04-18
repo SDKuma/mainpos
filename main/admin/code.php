@@ -408,6 +408,65 @@ if (isset($_POST['updateCustomer'])) {
     }
 }
 
+//create retail products
+if(isset($_POST['saveRetailProduct'])){
+    $name = validate($_POST['retailitemname']);
+    $brand = validate($_POST['retailbrand']);
+    $type_ = validate($_POST['retailitemtype']);
+    $buyprice = validate($_POST['retailbuyprice']);
+    $sellprice = validate($_POST['retailprice']);
+    $qty = validate($_POST['retailqty']);
+    $unitsize = validate($_POST['retailunitsize']);
+
+    $data = [
+        'name' => $name,
+        'brand' => $brand,
+        'type'=>$type_,
+        'buy_price'=>$buyprice,
+        'price'=>$sellprice,
+        'qty'=>$qty,
+        'unit'=>$unitsize
+    ];
+
+    $result = insert('retail_products', $data);
+    if ($result) {
+        redirect('retail-product-create.php', 'Customer updated successfully.');
+    } else {
+        redirect('retail-product-create.php', 'Something went wrong.');
+    }
+}
+
+
+//update retails products
+if(isset($_POST['updateRetailProduct'])){
+    $id = validate($_POST['id']);
+    $name = validate($_POST['retailitemname']);
+    $brand = validate($_POST['retailbrand']);
+    $type_ = validate($_POST['retailitemtype']);
+    $buyprice = validate($_POST['retailbuyprice']);
+    $sellprice = validate($_POST['retailprice']);
+    $oldqty = validate($_POST['oldretailqty']);
+    $qty = validate($_POST['retailqty']);
+    $unitsize = validate($_POST['retailunitsize']);
+
+    $data = [
+        'name' => $name,
+        'brand' => $brand,
+        'type'=>$type_,
+        'buy_price'=>$buyprice,
+        'price'=>$sellprice,
+        'qty'=>(int)$qty+(int)$oldqty,
+        'unit'=>$unitsize
+    ];
+
+    $result = update('retail_products',$id, $data);
+    if ($result) {
+        redirect('retail-product-create.php', 'Customer updated successfully.');
+    } else {
+        redirect('retail-product-create.php', 'Something went wrong.');
+    }
+}
+
 // Create Scrap
 if (isset($_POST['saveScrap'])) {
     $scrap = validate($_POST['scrap']);

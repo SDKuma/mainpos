@@ -17,35 +17,34 @@ include('includes/header.php');
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="category_id">Item Brand</label>
-                                <input name="brand" id="brand" class="form-control" />
+                                <input name="retailbrand" id="retailbrand" class="form-control"/>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="category_id">Item Name</label>
-                                <input name="itemname" id="itemname" class="form-control" />
+                                <input name="retailitemname" id="retailitemname" class="form-control"/>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="category_id">Item type</label>
-                                <input name="itemtype" id="itemtype" class="form-control" />
+                                <input name="retailitemtype" id="retailitemtype" class="form-control"/>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="price">Buying Price *</label>
-                                <input type="number" id="buy_prod" name="buyprice" class="form-control">
+                                <input type="number" id="retailbuy_prod" name="retailbuyprice" class="form-control">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="price">Selling Price *</label>
-                                <input type="number" id="by_sell" name="price" class="form-control" required>
+                                <input type="number" id="retailby_sell" name="retailprice" class="form-control"
+                                       required>
                             </div>
-                            <div class="col-md-4 mb-3" style="display:none">
-                                <label for="image">Image</label>
-                                <input type="file" name="image" class="form-control">
+
+                            <div class="col-md-4 mb-3">
+                                <label for="name">Quantity</label>
+                                <input type="text" id="retailqty" name="retailqty" class="form-control" required>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="name">Product Name *</label>
-                                <input type="text" id="name_" name="name" class="form-control" required>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="name">Product Quanity *</label>
-                                <input type="text" id="prod_qty" name="prod_qty" class="form-control" required>
+                                <label for="name">Unit Size</label>
+                                <input type="text" id="retailunitsize" name="retailunitsize" class="form-control"
+                                       required>
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -76,20 +75,24 @@ include('includes/header.php');
                                 <th>ID</th>
                                 <th>Brand</th>
                                 <th>Name</th>
-                                <th>Amp</th>
-                                <th>Price(Rs)</th>
+                                <th>Type</th>
+                                <th>Buying Price(Rs)</th>
+                                <th>Selling Price(Rs)</th>
                                 <th>Quantity</th>
+                                <th>Unit</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
                             // $q = "SELECT `products`.*,`brands`.`name` as 'brand',`type`.`name` as 'type_' FROM products LEFT JOIN `brands` ON `products`.`Brand`=`brands`.`id` LEFT JOIN `type` ON `type`.`id`=`products`.`Type`;";
-                            $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id;";
+                            //$q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id;";
+                            $q = "SELECT * FROM retail_products WHERE status = 1;";
                             $result = mysqli_query($conn, $q);
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><td>" . $row['id'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['type_'] . "-" . $row['name'] . "</td><td>" . $row['amp'] . "</td><td>" . $row['price'] . "</td><td>" . $row['quantity'] . "</td><td><a href=product-edit.php?id=" . $row['id'] . " class='btn btn-sm btn-success'>Edit</a>
-                                    <a href=product-delete.php?id=" . $row['id'] . " class='btn btn-sm btn-danger'>Delete</a></td></tr>";
+//                                echo "<tr><td>" . $row['id'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['name'] . "-" . $row['type'] . "</td><td>" . $row['price'] . "</td><td>" . $row['price'] . "</td><td>" . $row['quantity'] . "</td><td><a href=product-edit.php?id=" . $row['id'] . " class='btn btn-sm btn-success'>Edit</a>
+//                                    <a href=product-delete.php?id=" . $row['id'] . " class='btn btn-sm btn-danger'>Delete</a></td></tr>";
+                                echo "<tr><td>".$row['id']."</td><td>".$row['brand']."</td><td>".$row['name']."</td><td>".$row['type']."</td><td>".$row['buy_price']."</td><td>".$row['price']."</td><td>".$row['qty']."</td><td>".$row['unit']."</td><td><a href=retail-product-delete.php?id=" . $row['id'] . " class='btn btn-sm btn-danger'>Delete</a> <a href=retail-product-edit.php?id=" . $row['id'] . " class='btn btn-sm btn-info'>Edit</a></td></tr>";
                             }
                             ?>
 

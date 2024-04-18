@@ -2,8 +2,8 @@ ALTER TABLE `orders` ADD `payed_amount` VARCHAR(255) NOT NULL DEFAULT '0' AFTER 
 ALTER TABLE `orders` ADD `pending_amount` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `payed_amount`;
 
 CREATE TABLE `mainpos`.`credit_history` (`id` INT(11) NOT NULL AUTO_INCREMENT , `order_id` VARCHAR(255) NOT NULL , `payed` VARCHAR(255) NOT NULL , `date_payed` VARCHAR(255) NOT NULL , `time_payed` TEXT NOT NULL , PRIMARY KEY (`id`));
-CREATE TABLE `mainpos`.`retail_products` (`id` INT(11) NOT NULL , `name` TEXT NOT NULL , `Brand` TEXT NOT NULL , `Type` VARCHAR(255) NOT NULL , `buying_price` INT(11) NOT NULL , `price` INT(11) NOT NULL ) ENGINE = InnoDB;
-
+CREATE TABLE `mainpos`.`retail_products` (`id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `brand` VARCHAR(255) NOT NULL , `type` VARCHAR(255) NOT NULL , `buy_price` VARCHAR(255) NOT NULL , `price` VARCHAR(255) NOT NULL , `qty` INT(11) NOT NULL , `unit` INT NOT NULL , `updated_at` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `retail_products` ADD `status` INT(1) NOT NULL DEFAULT '1' AFTER `updated_at`;
 //17-04
 ALTER TABLE `retail_products` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`);
 ALTER TABLE `retail_products` ADD `qty` VARCHAR(255) NULL DEFAULT NULL AFTER `price`, ADD `unit` VARCHAR(255) NULL DEFAULT NULL AFTER `qty`;
