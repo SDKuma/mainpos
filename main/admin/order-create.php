@@ -54,7 +54,7 @@ include('includes/header.php');
                                     <option value="not_defined">Select Product</option>
 
                                     <?php
-                                    $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id;";
+                                    $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE products.status='1';";
 
                                     $result = mysqli_query($conn, $q);
                                     while ($row = mysqli_fetch_assoc($result)) {
@@ -63,13 +63,47 @@ include('includes/header.php');
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3" style="display:none">
-                                <label for="quantity">Quantity *</label>
+                            <div class="col-md-3 mb-3" >
+                                <label style="display:none" for="quantity">Quantity *</label>
                                 <input type="hidden" name="quantity" class="form-control" value="1">
                             </div>
                             <div class="col-md-3 mb-3 text-end">
                                 <br>
                                 <button type="submit" name="addItem" class="btn btn-primary">Add Item</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-4 shadow-sm">
+                <div class="card-body">
+                    <?php alertMessage() ?>
+                    <form action="orders-code.php" method="POST">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="product_id"><b>Select Product *</b></label>
+                                <select name="retail_product_id" class="form-control myselect2" required>
+                                    <option value="not_defined">Select Product</option>
+
+                                    <?php
+                                    //$q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id;";
+                                    $q = "SELECT * FROM retail_products WHERE status='1';";
+
+                                    $result = mysqli_query($conn, $q);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<option value='" . $row['id'] . "'>" . $row['name'] . "-" . $row['type'] . "-" . $row['brand'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3" >
+                                <label for="quantity">Quantity *</label>
+                                <input type="text" name="rettail_quantity" class="form-control" required>
+                            </div>
+                            <div class="col-md-3 mb-3 text-end">
+                                <br>
+                                <button type="submit" name="addRetailItem" class="btn btn-primary">Add Retail Item</button>
                             </div>
                         </div>
                     </form>
