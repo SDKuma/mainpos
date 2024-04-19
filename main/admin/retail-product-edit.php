@@ -24,15 +24,15 @@ $row = mysqli_fetch_array($result);
                             <div class="col-md-4 mb-3">
                                 <label for="category_id">Item Brand</label>
                                 <input name="id" id="id" class="form-control" type="hidden" value=<?php echo $id; ?> />
-                                <input name="retailbrand" id="retailbrand" class="form-control" value=<?php echo $row['brand']; ?> />
+                                <input type="text" name="retailbrand" id="retailbrand" class="form-control" value=<?php echo $row['brand']; ?> />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="category_id">Item Name</label>
-                                <input name="retailitemname" id="retailitemname" class="form-control" value=<?php echo $row['name']; ?> />
+                                <input type="text" name="retailitemname" id="retailitemname" class="form-control" value=<?php echo $row['name']; ?> />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="category_id">Item type</label>
-                                <input name="retailitemtype" id="retailitemtype" class="form-control" value=<?php echo $row['type']; ?> />
+                                <input type="text" name="retailitemtype" id="retailitemtype" class="form-control" value=<?php echo $row['type']; ?> />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="price">Buying Price *</label>
