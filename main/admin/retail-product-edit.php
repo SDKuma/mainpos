@@ -24,6 +24,7 @@ $row = mysqli_fetch_array($result);
                             <div class="col-md-4 mb-3">
                                 <label for="category_id">Item Brand</label>
                                 <input name="id" id="id" class="form-control" type="hidden" value=<?php echo $id; ?> />
+                                <?php echo print_r(); ?>
                                 <input type="text" name="retailbrand" id="retailbrand" class="form-control" value=<?php echo $row['brand']; ?> />
                             </div>
                             <div class="col-md-4 mb-3">
