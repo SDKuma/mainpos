@@ -45,6 +45,27 @@
                                             //echo '<tr><td align="start" style="border-bottom: 1px solid #ccc;">' . $i . '</td><td align="start" style="border-bottom: 1px solid #ccc;">' . $row['brand'] . ' ' . $row['type_'] . ' ' . $row['amp'] . '<br>' . $row['name'] . '</td> <td align="start" style="border-bottom: 1px solid #ccc;">Rs. ' . number_format($orderitem['price']) . '</td><td align="start" style="border-bottom: 1px solid #ccc;">' . $orderitem['quantity'] . '</td><td  align="start" style="border-bottom: 1px solid #ccc;" class="fw-bold">Rs. ' . number_format($orderitem['quantity'] * $orderitem['price']) . '</td></tr>';
                                             $i++;
                                         }
+                                        $retail = "SELECT * FROM order_retail WHERE order_id ='" . $orderId . "';";
+                                        $retailresult = mysqli_query($conn, $retail);
+                                        $y = 1;
+                                        $rowscount = mysqli_num_rows($retailresult);
+                                        if($rowscount > 0){
+                                            echo "<tr><td colspan='5'><b>Retail Items</b></td>tr>";
+                                        }
+
+                                        while ($item = mysqli_fetch_assoc($retailresult)){
+                                            $retailProd = "SELECT * FROM retail_products WHERE id='" . $item['product_id'] . "';";
+                                            $retailProdresult = mysqli_query($conn, $retailProd);
+                                            $row1 = mysqli_fetch_assoc($retailProdresult);
+                                            echo "<tr><td>".$y."</td><td>".$row1['name']."<br>".$row1['brand']."</td><td>".$item['price']."</td><td>".$item['quantity']."</td><td><b>".number_format($item['price']*$item['quantity'])."</b></td></tr>";
+                                            $y++;
+                                        }
+
+
+
+
+
+
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Grand Total:</td><td style='font-weight: bold;font-size:20px'>Rs." . number_format($order['total_amount']) . "</td></tr>";
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Discount:</td><td style='font-weight: bold;font-size:20px'>Rs." . number_format($order['discount']) . "</td></tr>";
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Scrap Discount:</td><td style='font-weight: bold;font-size:20px'>Rs." . number_format($order['on_scrap_discount']) . "</td></tr>";

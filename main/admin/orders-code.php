@@ -381,17 +381,27 @@ if (isset($_POST['saveOrder'])) {
         }
 
         foreach ($sessionRetail as $retailItem) {
-            $productId = $prodItem['product_id'];
-            $price = $prodItem['price'];
-            $quantity = $prodItem['quantity'];
+            $productId = $retailItem['product_id'];
+            $price = $retailItem['price'];
+            $quantity = $retailItem['quantity'];
             $dataOrderItem = [
                 'order_id' => $lastOrderId,
                 'product_id' => $productId,
                 'price' => $price,
                 'quantity' => $quantity,
-                'date_trans'=>date('Y-m-d')
+                'date'=>date('Y-m-d')
             ];
-            $orderItemQuery = insert('order_items', $dataOrderItem);
+
+            $record = "SELECT * FROM retail_products WHERE id='$productId' LIMIT 1;";
+            $result = mysqli_query($conn, $record);
+            $retail_product = mysqli_fetch_assoc($result);
+
+            $updatedata = [
+                'qty' => (int)$retail_product['qty'] - (int)$quantity
+            ];
+
+            $orderItemQuery = insert('order_retail', $dataOrderItem);
+            $updateonred = update('retail_products', $productId, $updatedata);
         }
 
         unset($_SESSION['productItemIds']);
