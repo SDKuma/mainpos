@@ -56,9 +56,15 @@ $(document).ready(function () {
     let ele = document.getElementById("payment_mode").value;
     if(ele=="Credit"){
       document.getElementById("creditpay").style.display = "block";
+      document.getElementById("cnopay").style.display = "none";
+    }else if(ele=="CnO"){
+      document.getElementById("cnopay").style.display = "block";
+      document.getElementById("creditpay").style.display = "none";
+      document.getElementById("creditpay_val").value = 0;
     }else{
       document.getElementById("creditpay").style.display = "none";
       document.getElementById("creditpay_val").value = 0;
+      document.getElementById("cnopay").style.display = "none";
     }
   })
 
@@ -70,6 +76,8 @@ $(document).ready(function () {
     var cphone = $("#cphone").val();
     var discount = $("#discount").val();
     var amount_payed = $("#creditpay_val").val();
+    var cash_payed = $("#cashpay_val").val();
+    var online_payed = $("#onlinepay_val").val();
 
     if (payment_mode == "") {
       swal("Select Payment Mode", "Please select your payment mode", "warning");
@@ -90,7 +98,9 @@ $(document).ready(function () {
       payment_mode: payment_mode,
       cphone: cphone,
       discount: discount,
-      amount_payed:amount_payed
+      amount_payed:amount_payed,
+      online_payed:online_payed,
+      cash_payed:cash_payed
     };
     $.ajax({
       type: "POST",

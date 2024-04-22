@@ -164,6 +164,9 @@ date_default_timezone_set('Asia/Colombo');
                                                 if($_SESSION['payment_mode']=="Credit"){
                                                     echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".$_SESSION['amount_payed']."</td></tr>";
                                                     echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Amount Pending</td><td style='font-weight: bold;font-size: 20px'>".number_format($netotal-(int)$_SESSION['amount_payed'])."</td></tr>";
+                                                }else if($_SESSION['payment_mode']=="CnO"){
+                                                    echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Cash Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['online_payed'])."</td></tr>";
+                                                    echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Online Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['cash_payed'])."</td></tr>";
                                                 }
                                             ?>
                                             <tr>

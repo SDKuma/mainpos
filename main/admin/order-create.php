@@ -262,6 +262,18 @@ include('includes/header.php');
                                            class="form-control" value="0"/>
                                 </div>
                             </div>
+                            <div class="row" id="cnopay" style="display: none">
+                                <div class="col-md-4">
+                                    <label for="forPaymentMode"><b>Cash Pay</b></label>
+                                    <input type="number" placeholder="Cash" id="cashpay_val" name="cashpay_val"
+                                           class="form-control" value="0"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="forPaymentMode"><b>Online Pay</b></label>
+                                    <input type="number" placeholder="Online" id="onlinepay_val" name="onlinepay_val"
+                                           class="form-control" value="0"/>
+                                </div>
+                            </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-4">
@@ -271,7 +283,7 @@ include('includes/header.php');
                                         <option value="Cash Payment">Cash Payment</option>
                                         <option value="Online Payment">Online Payment</option>
                                         <option value="Credit">Credit Payment</option>
-
+                                        <option value="CnO">Cash and Online</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
