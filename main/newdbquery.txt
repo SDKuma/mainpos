@@ -12,3 +12,5 @@ ALTER TABLE `retail_products` ADD `status` INT(1) NOT NULL DEFAULT '1' AFTER `un
 //
 CREATE TABLE `mainpos`.`order_retail` (`id` INT(11) NOT NULL , `order_id` INT(11) NOT NULL , `product_id` INT(11) NOT NULL , `price` VARCHAR(255) NOT NULL , `quantity` INT NOT NULL , `date` VARCHAR(255) NOT NULL ) ENGINE = InnoDB;
 ALTER TABLE `orders` ADD `cash_payed` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `payment_mode`, ADD `online_payed` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `cash_payed`;
+ALTER TABLE `order_retail` ADD `profit` INT(11) NOT NULL DEFAULT '0' AFTER `quantity`;
+ALTER TABLE `order_items` ADD `profit` INT(11) NOT NULL DEFAULT '0' AFTER `quantity`;

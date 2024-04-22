@@ -70,7 +70,7 @@
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Discount:</td><td style='font-weight: bold;font-size:20px'>Rs." . number_format($order['discount']) . "</td></tr>";
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Scrap Discount:</td><td style='font-weight: bold;font-size:20px'>Rs." . number_format($order['on_scrap_discount']) . "</td></tr>";
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Net Grand Total:</td><td style='font-weight: bold;font-size:20px'>Rs. " . number_format($order['net_total']) . "</td></tr>";
-                                        echo "<tr><td colspan='5'>".$order['payment_mode']."</td></tr>";
+                                        echo "<tr><td colspan='5'>Payment type".$order['payment_mode']."</td></tr>";
                                         echo '</table> </div>';
                                     }
                                 }
