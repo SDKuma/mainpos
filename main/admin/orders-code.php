@@ -5,15 +5,72 @@ include("../config/function.php");
 if (!isset($_SESSION['productItemIds'])) {
     $_SESSION['productItemIds'] = [];
 }
+
+if (!isset($_SESSION['retailItemIds'])) {
+    $_SESSION['retailItemIds'] = [];
+}
+
+if (!isset($_SESSION['retailItems'])) {
+    $_SESSION['retailItems'] = [];
+}
 if (!isset($_SESSION['productItems'])) {
     $_SESSION['productItems'] = [];
 }
+//retail item
+if(isset($_POST["addRetailItem"])){
+    $product_id = validate($_POST['retail_product_id']);
+    $quantity = validate($_POST['rettail_quantity']);
+    if($product_id){
+        $row = getById("retail_products", $product_id);
+        if($row['data']){
+            $item = $row['data'];
+            if($quantity<=$item['qty']){
+                //saving retail item
+                $itemData = [
+                    'product_id' => $product_id,
+                    'quantity' => $quantity,
+                    'name' => $item['name']."<br/>".$item['brand'],
+                    'price' => $item['price'],
+                ];
+                //check retail array session
+                if(!in_array($row['data']['id'], $_SESSION['retailItemIds'])){
+                    array_push($_SESSION['retailItemIds'], $row['data']['id']);
+                    array_push($_SESSION['retailItems'], $itemData);
+                }else{
+                    foreach ($_SESSION['retailItems'] as $key => $prodSessionItem) {
+                        if ($prodSessionItem['product_id'] == $row['data']['id']) {
+                            $newQuantity = $prodSessionItem['quantity'] + $quantity;
+
+                            $productData = [
+                                'product_id' => $row['data']['id'],
+                                'name' => $row['data']['brand'].' '.$row['data']['type_'].' '.$row['data']['amp'].'AMP-'.$row['data']['name'],
+                                'image' => $row['data']['image'],
+                                'price' => $row['data']['price'],
+                                'quantity' => $newQuantity
+                            ];
+                            $_SESSION['retailItems'][$key] = $productData;
+                        }
+                    }
+                }
+                redirect('order-create.php', 'Item "' . $row['data']['name'] . '" added in cart.');
+            }else{
+                redirect('order-create.php', 'Low in Quantity');
+            }
+
+        }else{
+            redirect('order-create.php', 'No Item found');
+        }
+    }else{
+        redirect('order-create.php', 'Item not defined');
+    }
+}
+
 
 // Insert item
 if (isset($_POST['addItem'])) {
     $product_id = validate($_POST['product_id']);
     $quantity = validate($_POST['quantity']);
-    echo $product_id;
+//    echo $product_id;
 
     if ($product_id != 'not_defined') {
         $row = getProductById("products", $product_id);

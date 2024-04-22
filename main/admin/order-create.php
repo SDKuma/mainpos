@@ -63,7 +63,7 @@ include('includes/header.php');
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3" >
+                            <div class="col-md-3 mb-3">
                                 <label style="display:none" for="quantity">Quantity *</label>
                                 <input type="hidden" name="quantity" class="form-control" value="1">
                             </div>
@@ -78,7 +78,6 @@ include('includes/header.php');
 
             <div class="card mt-4 shadow-sm">
                 <div class="card-body">
-                    <?php alertMessage() ?>
                     <form action="orders-code.php" method="POST">
                         <div class="row">
                             <div class="col-md-4 mb-3">
@@ -97,13 +96,14 @@ include('includes/header.php');
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3" >
+                            <div class="col-md-3 mb-3">
                                 <label for="quantity">Quantity *</label>
                                 <input type="text" name="rettail_quantity" class="form-control" required>
                             </div>
                             <div class="col-md-3 mb-3 text-end">
                                 <br>
-                                <button type="submit" name="addRetailItem" class="btn btn-primary">Add Retail Item</button>
+                                <button type="submit" name="addRetailItem" class="btn btn-primary">Add Retail Item
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -116,8 +116,12 @@ include('includes/header.php');
                 </div>
                 <div class="card-body">
                     <?php
-                    if (isset($_SESSION['productItems'])) {
-                        $sessionProducts = $_SESSION['productItems'];
+                    if (isset($_SESSION['productItems']) || isset($_SESSION['retailItems'])) {
+                        if(isset($_SESSION['productItems'])){
+                            $sessionProducts = $_SESSION['productItems'];
+                        }else {
+                            $sessionProducts = [];
+                        }
                         if (empty($sessionProducts)) {
                             unset($_SESSION['productItemIds']);
                             unset($_SESSION['productItems']);
@@ -160,6 +164,33 @@ include('includes/header.php');
                                     </tr>
                                 <?php endforeach; ?>
 
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php
+                        if (isset($_SESSION['retailItems'])){
+                            $retails = $_SESSION['retailItems'];
+                        }else{
+                            $retails = [];
+                        }
+
+                        ?>
+                        <div class="table-responsive mb-3" id="productArea">
+                            <table class="table table-bordered table-striped" id="productContent">
+                                <thead>
+
+                                </thead>
+                                <tbody>
+                                <?php
+                                $i = 1;
+                                if ($retails) {
+                                    echo "<b>Retail Items</b>";
+                                    foreach ($retails as $key => $item) {
+                                        echo "<tr><td>" . $i . "</td><td>".$item['name']."</td><td>".$item['price']."</td><td>".$item['quantity']."</td><td>".number_format(($item['price']*$item['quantity']))."</td><td><a href='order-item--retail-delete.php?index=".$key."' class='btn btn-sm btn-danger'>Remove</a></td></tr>";
+                                        $i++;
+                                    }
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
