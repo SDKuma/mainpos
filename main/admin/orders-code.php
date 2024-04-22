@@ -261,11 +261,19 @@ if (isset($_POST['saveOrder'])) {
         }
 
         $sessionProducts = $_SESSION['productItems'];
+        $sessionRetail = $_SESSION['retailItems'];
+
         $totalAmount = 0;
 
         foreach ($sessionProducts as $amtItem) {
             $totalAmount +=  $amtItem['price'] * $amtItem['quantity'];
         }
+
+        foreach ($sessionRetail as $retailItem) {
+            $totalAmount +=  $retailItem['price'] * $retailItem['quantity'];
+        }
+
+
         if((int)$discount>0){
             $netTotal = (int)$totalAmount - (int)$discount-$totalScrap; 
         }else{
@@ -372,6 +380,20 @@ if (isset($_POST['saveOrder'])) {
             $updateProductQty = update('products', $productId, $dataUpdate);
         }
 
+        foreach ($sessionRetail as $retailItem) {
+            $productId = $prodItem['product_id'];
+            $price = $prodItem['price'];
+            $quantity = $prodItem['quantity'];
+            $dataOrderItem = [
+                'order_id' => $lastOrderId,
+                'product_id' => $productId,
+                'price' => $price,
+                'quantity' => $quantity,
+                'date_trans'=>date('Y-m-d')
+            ];
+            $orderItemQuery = insert('order_items', $dataOrderItem);
+        }
+
         unset($_SESSION['productItemIds']);
         unset($_SESSION['productItems']);
         unset($_SESSION['cphone']);
@@ -379,6 +401,8 @@ if (isset($_POST['saveOrder'])) {
         unset($_SESSION['invoice_no']);
         unset($_SESSION['scrap_items']);
         unset($_SESSION['amount_payed']);
+        unset($_SESSION['retailItems']);
+        unset($_SESSION['retailItemIds']);
 
 
         jsonResponse(200, 'success', 'Order placed successfully.');

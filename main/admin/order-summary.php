@@ -83,7 +83,9 @@ date_default_timezone_set('Asia/Colombo');
                             <?php
                             if (isset($_SESSION['productItems'])) {
                                 $sessionProducts = $_SESSION['productItems'];
-                            ?>
+                                ?>
+
+
                                 <div class="table-responsive mb-3">
                                     <table style="width: 100%;" cellpadding="5">
                                         <thead>
@@ -112,6 +114,17 @@ date_default_timezone_set('Asia/Colombo');
                                                 </tr>
                                             <?php endforeach; ?>
                                             <hr>
+                                            <?php
+                                                if(isset($_SESSION['retailItems'])){
+                                                    $retailItems = $_SESSION['retailItems'];
+                                                    foreach ($retailItems as $key => $row1) {
+                                                        echo "<tr><td></td><td>".$row1['name']."</td><td>".$row1['price']."</td><td>".$row1['quantity']."</td><td><b>".number_format($row1['price']*$row1['quantity'])."</a></td></tr>";
+                                                        $totalAmount += $row1['price'] * $row1['quantity'];
+                                                    }
+                                                }
+
+                                            ?>
+
                                             <?php 
                                                 if (isset($_SESSION['scrap_items'])){
                                                     $scrapitems = $_SESSION['scrap_items'];
