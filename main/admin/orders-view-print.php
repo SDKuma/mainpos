@@ -60,6 +60,18 @@
                                             echo "<tr><td>".$y."</td><td>".$row1['name']."<br>".$row1['brand']."</td><td>".$item['price']."</td><td>".$item['quantity']."</td><td><b>".number_format($item['price']*$item['quantity'])."</b></td></tr>";
                                             $y++;
                                         }
+
+                                        $scrapq = "SELECT * FROM order_scrap WHERE order_id ='" . $orderId . "';";
+                                        $scrapresult = mysqli_query($conn, $scrapq);
+                                        echo "<tr><td colspan='5'><br/></td></tr>";
+                                        echo "<tr><td colspan='5'><b>Scraps</b></td></tr>";
+                                        $a = 1;
+                                        while ($row2 = mysqli_fetch_assoc($scrapresult)){
+                                            echo "<tr><td>".$a."</td><td colspan='2'>".$row2["scrapname"]."</td><td>".$row2["amp"]."</td><td>".$row2["discount"]."</td></tr>";
+                                            $a++;
+                                        }
+
+
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Grand Total:</td><td style='font-weight: bold;font-size:20px'>Rs." . number_format($order['total_amount']) . "</td></tr>";
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Discount:</td><td style='font-weight: bold;font-size:20px'>Rs." . number_format($order['discount']) . "</td></tr>";
                                         echo "<tr><td colspan='4'  style='font-weight: bold;'>Scrap Discount:</td><td style='font-weight: bold;font-size:20px'>Rs." . number_format($order['on_scrap_discount']) . "</td></tr>";
