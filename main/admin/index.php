@@ -84,7 +84,7 @@ include('includes/header.php');
                     ?>
                     <table class="table table-striped-columns">
                         <tr>
-                            <th style="text-align: center">Card</th>
+                            <th style="text-align: center">Cash</th>
                             <th style="text-align: center">Online</th>
                             <th style="text-align: center">Card</th>
                             <th style="text-align: center">Credit</th>
