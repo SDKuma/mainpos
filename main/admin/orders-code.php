@@ -169,6 +169,8 @@ if (isset($_POST['proccedToPlaceBtn'])) {
     $payed_amount = validate($_POST['amount_payed']);//amount that user paid when it is a credit bill
     $payed_online = validate($_POST['online_payed']);
     $payed_cash = validate($_POST['cash_payed']);
+    $payed_c_cash = validate($_POST['cnccash']);
+    $payed_c_card = validate($_POST['cnccard']);
 
     // Checking for customer
     $checkCustomer = mysqli_query($conn, "SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
@@ -182,6 +184,8 @@ if (isset($_POST['proccedToPlaceBtn'])) {
             $_SESSION['amount_payed'] = $payed_amount;
             $_SESSION['online_payed'] = $payed_online;
             $_SESSION['cash_payed'] = $payed_cash;
+            $_SESSION['cnccash'] = $payed_c_cash;
+            $_SESSION['cnccard'] = $payed_c_card;
 
             jsonResponse(200, "success", 'Customer found with this phone number.');
         } else {
@@ -243,6 +247,8 @@ if (isset($_POST['saveOrder'])) {
     $amount_payed = $_SESSION['amount_payed'];
     $payed_cash = $_SESSION['cash_payed'];
     $payed_online = $_SESSION['online_payed'];
+    $cash_cnc = $_SESSION['cnccash'];
+    $card_cnc = $_SESSION['cnccard'];
 
     $totalScrap = 0;
 
@@ -294,6 +300,11 @@ if (isset($_POST['saveOrder'])) {
             $payed = $amount_payed;
             $pending_amount = $netTotal-$payed;
         }
+        $payed_card = 0;
+        if($payment_mode=="CnC"){
+            $payed_cash = $cash_cnc;
+            $payed_card = $card_cnc;
+        }
 
         $data = [
             'customer_id' => $customerData['id'],
@@ -311,6 +322,7 @@ if (isset($_POST['saveOrder'])) {
             'pending_amount'=>$pending_amount,
             'cash_payed'=>$payed_cash,
             'online_payed'=>$payed_online,
+            'card_payed'=>$payed_card
         ];
 
         $result = insert('orders', $data);

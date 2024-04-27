@@ -117,9 +117,9 @@ include('includes/header.php');
                 <div class="card-body">
                     <?php
                     if (isset($_SESSION['productItems']) || isset($_SESSION['retailItems'])) {
-                        if(isset($_SESSION['productItems'])){
+                        if (isset($_SESSION['productItems'])) {
                             $sessionProducts = $_SESSION['productItems'];
-                        }else {
+                        } else {
                             $sessionProducts = [];
                         }
                         if (empty($sessionProducts)) {
@@ -168,9 +168,9 @@ include('includes/header.php');
                             </table>
                         </div>
                         <?php
-                        if (isset($_SESSION['retailItems'])){
+                        if (isset($_SESSION['retailItems'])) {
                             $retails = $_SESSION['retailItems'];
-                        }else{
+                        } else {
                             $retails = [];
                         }
 
@@ -186,7 +186,7 @@ include('includes/header.php');
                                 if ($retails) {
                                     echo "<b>Retail Items</b>";
                                     foreach ($retails as $key => $item) {
-                                        echo "<tr><td>" . $i . "</td><td>".$item['name']."</td><td>".$item['price']."</td><td>".$item['quantity']."</td><td>".number_format(($item['price']*$item['quantity']))."</td><td><a href='order-item--retail-delete.php?index=".$key."' class='btn btn-sm btn-danger'>Remove</a></td></tr>";
+                                        echo "<tr><td>" . $i . "</td><td>" . $item['name'] . "</td><td>" . $item['price'] . "</td><td>" . $item['quantity'] . "</td><td>" . number_format(($item['price'] * $item['quantity'])) . "</td><td><a href='order-item--retail-delete.php?index=" . $key . "' class='btn btn-sm btn-danger'>Remove</a></td></tr>";
                                         $i++;
                                     }
                                 }
@@ -255,6 +255,7 @@ include('includes/header.php');
                                 </div>
                             </div>
                             <hr/>
+<!--                            credit-->
                             <div class="row" id="creditpay" style="display: none">
                                 <div class="col-md-4">
                                     <label for="forPaymentMode"><b>Payed Cash</b></label>
@@ -262,6 +263,7 @@ include('includes/header.php');
                                            class="form-control" value="0"/>
                                 </div>
                             </div>
+<!--                            cash and online-->
                             <div class="row" id="cnopay" style="display: none">
                                 <div class="col-md-4">
                                     <label for="forPaymentMode"><b>Cash Pay</b></label>
@@ -274,6 +276,19 @@ include('includes/header.php');
                                            class="form-control" value="0"/>
                                 </div>
                             </div>
+<!--                            //cash and card-->
+                            <div class="row" id="cncpay" style="display: none">
+                                <div class="col-md-4">
+                                    <label for="forPaymentMode"><b>Cash Pay</b></label>
+                                    <input type="number" placeholder="Cash" id="cnc_cashpay_val" name="cashpay_val"
+                                           class="form-control" value="0"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="forPaymentMode"><b>Card Pay</b></label>
+                                    <input type="number" placeholder="Online" id="cardpay_val" name="onlinepay_val"
+                                           class="form-control" value="0"/>
+                                </div>
+                            </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-4">
@@ -282,8 +297,10 @@ include('includes/header.php');
                                         <option value="">-- Select Payment --</option>
                                         <option value="Cash Payment">Cash Payment</option>
                                         <option value="Online Payment">Online Payment</option>
+                                        <option value="Card Payment">Card Payment</option>
                                         <option value="Credit">Credit Payment</option>
                                         <option value="CnO">Cash and Online</option>
+                                        <option value="CnC">Cash and Card</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">

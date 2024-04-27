@@ -14,3 +14,6 @@ CREATE TABLE `mainpos`.`order_retail` (`id` INT(11) NOT NULL , `order_id` INT(11
 ALTER TABLE `orders` ADD `cash_payed` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `payment_mode`, ADD `online_payed` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `cash_payed`;
 ALTER TABLE `order_retail` ADD `profit` INT(11) NOT NULL DEFAULT '0' AFTER `quantity`;
 ALTER TABLE `order_items` ADD `profit` INT(11) NOT NULL DEFAULT '0' AFTER `quantity`;
+
+//
+ALTER TABLE `orders` ADD `card_payed` INT(11) NOT NULL DEFAULT '0' AFTER `online_payed`;

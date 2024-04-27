@@ -168,6 +168,10 @@ date_default_timezone_set('Asia/Colombo');
                                                     echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Cash Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['online_payed'])."</td></tr>";
                                                     echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Online Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['cash_payed'])."</td></tr>";
                                                 }
+                                                else if($_SESSION['payment_mode']=="CnC"){
+                                                    echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Card Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['cnccard'])."</td></tr>";
+                                                    echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Cash Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['cnccash'])."</td></tr>";
+                                                }
                                             ?>
                                             <tr>
                                                 <td colspan="5">Payment Mode: <b><?= $_SESSION['payment_mode'] ?></b></td>
