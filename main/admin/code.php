@@ -98,7 +98,7 @@ if (isset($_POST['saveCategory'])) {
     $name = validate($_POST['name']);
     $description = "";
     $brand = validate($_POST['brand_id']);
-    $status =  1;
+    $status = 1;
 
     if ($name != '') {
         $nameCheck = mysqli_query($conn, "SELECT * FROM categories WHERE name='$name'");
@@ -113,7 +113,7 @@ if (isset($_POST['saveCategory'])) {
             'name' => $name,
             'description' => $description,
             'status' => $status,
-            'brand_id'=>$brand
+            'brand_id' => $brand
         ];
         $result = insert('categories', $data);
         if ($result) {
@@ -130,7 +130,7 @@ if (isset($_POST['saveCategory'])) {
 if (isset($_POST['saveBrand'])) {
     $name = validate($_POST['name']);
     $description = validate($_POST['description']);
-    $status = 1 ;
+    $status = 1;
 
     if ($name != '') {
         $nameCheck = mysqli_query($conn, "SELECT * FROM brands WHERE name='$name'");
@@ -166,7 +166,7 @@ if (isset($_POST['saveType'])) {
     $sell_price = validate($_POST['sell_price']);
     $amp = validate($_POST['amp']);
 
-    $status =  1 ;
+    $status = 1;
 
     if ($name != '') {
         $nameCheck = mysqli_query($conn, "SELECT * FROM `type` WHERE name='$name'");
@@ -180,10 +180,10 @@ if (isset($_POST['saveType'])) {
         $data = [
             'name' => $name,
             'description' => $description,
-            'category'=>$cat,
-            'buying_price'=>$buy_price,
-            'selling_price'=>$sell_price,
-            'amp'=>$amp
+            'category' => $cat,
+            'buying_price' => $buy_price,
+            'selling_price' => $sell_price,
+            'amp' => $amp
         ];
         $result = insert('type', $data);
         if ($result) {
@@ -245,25 +245,11 @@ if (isset($_POST['saveProduct'])) {
     $brand = 0;
     $type = validate($_POST['type_id']);
     $buying = validate($_POST['buyprice']);
-    $status =1;
+    $status = 1;
 
     if ($category_id == 'not_defined') {
         redirect('product-create.php', 'Please select a category.');
     }
-
-    // To check if the image is selected or not
-    // if ($_FILES['image']['size'] > 0) {
-    //     $path = "../assets/uploads/products/";
-    //     // Get image extention
-    //     $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-    //     // Generate file name
-    //     $fileName = time() . '.' . $image_ext;
-    //     // Move the uploaded image
-    //     move_uploaded_file($_FILES['image']['tmp_name'], $path . $fileName);
-    //     $finalImage = "assets/uploads/products/" . $fileName;
-    // } else {
-    //     $finalImage = "";
-    // }
 
     $data = [
         'category_id' => $category_id,
@@ -272,15 +258,19 @@ if (isset($_POST['saveProduct'])) {
         'price' => $price,
         'quantity' => $quantity,
         'image' => "/images/prods",
-        'Brand'=>$brand,
-        'Type'=>$type,
-        'buying_price'=>$buying,
+        'Brand' => $brand,
+        'Type' => $type,
+        'buying_price' => $buying,
         'status' => $status
     ];
+
     $result = insert('products', $data);
     if ($result) {
         jsonResponse(200, 'success', 'Product Creation Done.');
     } else {
+
+
+
         jsonResponse(200, 'error', 'Product Creation Error');
     }
 }
@@ -409,7 +399,7 @@ if (isset($_POST['updateCustomer'])) {
 }
 
 //create retail products
-if(isset($_POST['saveRetailProduct'])){
+if (isset($_POST['saveRetailProduct'])) {
     $name = validate($_POST['retailitemname']);
     $brand = validate($_POST['retailbrand']);
     $type_ = validate($_POST['retailitemtype']);
@@ -421,11 +411,11 @@ if(isset($_POST['saveRetailProduct'])){
     $data = [
         'name' => $name,
         'brand' => $brand,
-        'type'=>$type_,
-        'buy_price'=>$buyprice,
-        'price'=>$sellprice,
-        'qty'=>$qty,
-        'unit'=>$unitsize
+        'type' => $type_,
+        'buy_price' => $buyprice,
+        'price' => $sellprice,
+        'qty' => $qty,
+        'unit' => $unitsize
     ];
 
     $result = insert('retail_products', $data);
@@ -438,7 +428,7 @@ if(isset($_POST['saveRetailProduct'])){
 
 
 //update retails products
-if(isset($_POST['updateRetailProduct'])){
+if (isset($_POST['updateRetailProduct'])) {
     $id = validate($_POST['id']);
     $name = validate($_POST['retailitemname']);
     $brand = validate($_POST['retailbrand']);
@@ -452,14 +442,14 @@ if(isset($_POST['updateRetailProduct'])){
     $data = [
         'name' => $name,
         'brand' => $brand,
-        'type'=>$type_,
-        'buy_price'=>$buyprice,
-        'price'=>$sellprice,
-        'qty'=>(int)$qty+(int)$oldqty,
-        'unit'=>$unitsize
+        'type' => $type_,
+        'buy_price' => $buyprice,
+        'price' => $sellprice,
+        'qty' => (int)$qty + (int)$oldqty,
+        'unit' => $unitsize
     ];
 
-    $result = update('retail_products',$id, $data);
+    $result = update('retail_products', $id, $data);
     if ($result) {
         redirect('retail-product-create.php', 'Customer updated successfully.');
     } else {
@@ -471,10 +461,10 @@ if(isset($_POST['updateRetailProduct'])){
 if (isset($_POST['saveScrap'])) {
     $scrap = validate($_POST['scrap']);
     $rate = validate($_POST['rateid']);
-    
+
     $data = [
         'name' => $scrap,
-        'rate_type'=>$rate
+        'rate_type' => $rate
     ];
     $result = insert('scrapsmaster', $data);
     if ($result) {
@@ -487,10 +477,10 @@ if (isset($_POST['saveScrap'])) {
 // Item check
 if (isset($_POST['isItemCheck'])) {
     $item = validate($_POST['item']);
-    $result = checkitem($item); 
+    $result = checkitem($item);
     // jsonResponse(200, 'success', 'Product Creation Done.');
-    
-    echo ($result);
+
+    echo($result);
 }
 
 // Create Scrap weight
@@ -499,11 +489,11 @@ if (isset($_POST['saveSubScrap'])) {
     $subscrap = validate($_POST['subname']);
     $weight = validate($_POST['weight']);
 
-    
+
     $data = [
         'name' => $subscrap,
-        'scrap_id'=>$scrap,
-        'weight'=>$weight
+        'scrap_id' => $scrap,
+        'weight' => $weight
 
     ];
     $result = insert('scrap_weights', $data);
@@ -517,11 +507,11 @@ if (isset($_POST['saveSubScrap'])) {
 if (isset($_POST['updateRate'])) {
     $rateid = validate($_POST['rateid']);
     $rate = validate($_POST['rate']);
- 
+
     $data = [
         'rate_' => $rate
     ];
-    $result = update('scrap_rate',$rateid, $data);
+    $result = update('scrap_rate', $rateid, $data);
     if ($result) {
         redirect('scrap.php', 'Rate Updated');
     } else {
@@ -532,18 +522,17 @@ if (isset($_POST['updateRate'])) {
 
 if (isset($_POST['filterType'])) {
     $brand = validate($_POST['brand']);
- 
+
     // $data = [
     //     'brand' => $brand
     // ];
     $result = filtertypes($brand);
 
     $data = array();
-    while($row = mysqli_fetch_assoc($result)){
-        array_push($data,$row);
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($data, $row);
     }
-    jsonResponse(200,'OK',$data);
-
+    jsonResponse(200, 'OK', $data);
 
 
     // return jsonResponse(200, 'success', $result);;
@@ -555,7 +544,6 @@ if (isset($_POST['filterType'])) {
 }
 
 
-
 if (isset($_POST['updateType'])) {
     $rateid = validate($_POST['typeid']);
     $buy = validate($_POST['buy_price']);
@@ -564,17 +552,16 @@ if (isset($_POST['updateType'])) {
     $amp = validate($_POST['amp']);
 
 
-
     $data = [
-        'name'=>$name,
+        'name' => $name,
         'buying_price' => $buy,
-        'selling_price'=>$sell,
-        'amp'=>$amp
+        'selling_price' => $sell,
+        'amp' => $amp
     ];
-    $result = update('type',$rateid, $data);
+    $result = update('type', $rateid, $data);
 
     if ($result) {
-        $res = mysqli_query($conn, "UPDATE products SET `price`=".$sell." WHERE `Type`='".$rateid."';");
+        $res = mysqli_query($conn, "UPDATE products SET `price`=" . $sell . " WHERE `Type`='" . $rateid . "';");
         redirect('type-create.php', 'Rate Updated');
         //print_r($result);
     } else {
