@@ -426,8 +426,50 @@ async function checkforitem(code) {
             return response;
         },
     });
-
     return x;
+}
 
+async function getinvoiceitems(){
+    var invoice = document.getElementById('orderinvoice').value;
+    let x = $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            invoice: invoice,
+            isInvoiceItem: true
+        },
+        success: async function (response) {
+            // console.log(response)
+            if(JSON.parse(response)['status']==200){
+                var items = JSON.parse(response)['message'];
+                var ht = "<ul>";
+                for(let i in items){
+                    ht +=`<li id="item${items[i]['id']}" class="items" onclick="selectitem(${items[i]['id']})"><b>${items[i]['br']} ${items[i]['ca']} - ${items[i]['ty']}</b>  <br/> ${items[i]['name']}</li>`
+                }
+                ht +="</ul>"
+                document.getElementById('items-con').innerHTML = ht;
+            }
 
+        },
+        error:async function (err){
+            console.log(err)
+        }
+    });
+}
+var returnitems = [];
+async function selectitem(itemid) {
+    if(checkrow_(itemid)){
+
+    }
+
+}
+
+function checkrow_(row){
+    let temp = returnitems.filter((item)=>item==row);
+    return temp.length;
+}
+
+function removerow_(row){
+    let temp = selected_row.filter((item)=>item!=row);
+    return temp;
 }

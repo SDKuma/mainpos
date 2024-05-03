@@ -6,9 +6,7 @@ include('includes/header.php');
         <div class="container-fluid px-4">
             <div class="card mt-4 shadow-sm">
                 <div class="card-header">
-                    <h4 class="mb-0">Retail Add Product
-
-                    </h4>
+                    <h4 class="mb-0">Retail Add Product</h4>
 
                 </div>
                 <div class="card-body">
@@ -92,7 +90,7 @@ include('includes/header.php');
                             while ($row = mysqli_fetch_assoc($result)) {
 //                                echo "<tr><td>" . $row['id'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['name'] . "-" . $row['type'] . "</td><td>" . $row['price'] . "</td><td>" . $row['price'] . "</td><td>" . $row['quantity'] . "</td><td><a href=product-edit.php?id=" . $row['id'] . " class='btn btn-sm btn-success'>Edit</a>
 //                                    <a href=product-delete.php?id=" . $row['id'] . " class='btn btn-sm btn-danger'>Delete</a></td></tr>";
-                                echo "<tr><td>".$row['id']."</td><td>".$row['brand']."</td><td>".$row['name']."</td><td>".$row['type']."</td><td>".$row['buy_price']."</td><td>".$row['price']."</td><td>".$row['qty']."</td><td>".$row['unit']."</td><td><a href=retail-product-delete.php?id=" . $row['id'] . " class='btn btn-sm btn-danger'>Delete</a> <a href=retail-product-edit.php?id=" . $row['id'] . " class='btn btn-sm btn-info'>Edit</a></td></tr>";
+                                echo "<tr><td>" . $row['id'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['name'] . "</td><td>" . $row['type'] . "</td><td>" . $row['buy_price'] . "</td><td>" . $row['price'] . "</td><td>" . $row['qty'] . "</td><td>" . $row['unit'] . "</td><td><a href=retail-product-delete.php?id=" . $row['id'] . " class='btn btn-sm btn-danger'>Delete</a> <a href=retail-product-edit.php?id=" . $row['id'] . " class='btn btn-sm btn-info'>Edit</a></td></tr>";
                             }
                             ?>
 

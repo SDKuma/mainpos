@@ -568,3 +568,16 @@ if (isset($_POST['updateType'])) {
         redirect('type-create.php', 'Something went wrong.');
     }
 }
+
+if(isset($_POST['isInvoiceItem'])) {
+    $invoice = $_POST['invoice'];
+    $querystring = "SELECT orders.invoice_no,orders.order_date,products.*,`type`.name as ty, categories.name as ca,brands.name as br FROM orders JOIN order_items ON order_items.order_id = orders.id JOIN products ON products.id = order_items.product_id JOIN `type` ON `type`.id = products.`Type` JOIN categories ON categories.id=`type`.category JOIN brands ON brands.id = categories.brand_id WHERE orders.invoice_no='" . $invoice . "';";
+    $result = mysqli_query($conn, $querystring);
+
+    $data = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($data, $row);
+    }
+    jsonResponse(200, 'OK', $data);
+
+}
