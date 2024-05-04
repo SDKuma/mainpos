@@ -32,7 +32,8 @@ include('includes/header.php');
                     </div>
                     <div class="col-md-4 mb-3">
                         <div id="items-con">
-
+                            <label for="product_id"><b>Warenty Date</b></label>
+                            <input type="date" id="warrntydate" class="form-control">
                         </div>
 
                     </div>

@@ -83,6 +83,8 @@ date_default_timezone_set('Asia/Colombo');
                                                 Invoice No: <?php echo "return-00".$invoice_no; ?> </p>
                                             <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">
                                                 Return Note Date: <?= date('d M Y H:i:s'); ?> </p>
+                                            <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">
+                                                Warranty Start Date: <?php echo $headdetails['wrdate'] ?> </p>
                                         </td>
                                     </tr>
                                     </tbody>

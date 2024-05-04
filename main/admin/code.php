@@ -586,6 +586,7 @@ if(isset($_POST["returnItem"])){
     $newbat = $_POST["newbatid"];
     $oldbat = $_POST["oldbat"];
     $reason = $_POST["reason"];
+    $wrdate = $_POST["wrdate"];
 
     $querystring1 = "SELECT * FROM `products` WHERE `id`='" . $newbat . "';";
     $result1 = mysqli_query($conn, $querystring1);
@@ -597,7 +598,8 @@ if(isset($_POST["returnItem"])){
         "released_item"=>$newbat,
         "return_comment"=>$reason,
         "released_name"=>$row1['name'],
-        "tr_date"=>date("Y-m-d H:i:s")
+        "tr_date"=>date("Y-m-d H:i:s"),
+        "wrdate"=>$wrdate
     ];
 
     $result = insert('returns', $data);

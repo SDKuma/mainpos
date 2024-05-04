@@ -475,6 +475,7 @@ async function genreturns(){
     var newbattery = document.getElementById("product_id").value;
     var reason = document.getElementById("reason").value;
     var returned = document.getElementById("oldbattery").value;
+    var wrdate = document.getElementById("warrntydate").value;
     // for(let i in returnitems){
     //     returned +=returnitems[i]+",";
     // }
@@ -486,6 +487,7 @@ async function genreturns(){
             newbatid:newbattery,
             oldbat:returned,
             reason:reason,
+            wrdate:wrdate,
             returnItem: true
         },
         success: async function (response) {
