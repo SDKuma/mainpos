@@ -458,18 +458,69 @@ async function getinvoiceitems(){
 }
 var returnitems = [];
 async function selectitem(itemid) {
-    if(checkrow_(itemid)){
-
+    unselect();
+    returnitems = [];
+    if(checkrow_(itemid)==0){
+        returnitems.push(itemid);
+        document.getElementById(`item${itemid}`).style.backgroundColor = 'lightgreen';
+    }else{
+        returnitems = removerow_(itemid);
+        document.getElementById(`item${itemid}`).style.backgroundColor = 'lightgray';
     }
+    console.log(returnitems);
+}
 
+async function genreturns(){
+    var invo = document.getElementById("orderinvoice").value;
+    var newbattery = document.getElementById("product_id").value;
+    var reason = document.getElementById("reason").value;
+    var returned = "";
+    for(let i in returnitems){
+        returned +=returnitems[i]+",";
+    }
+    let x = $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            invoice: invo,
+            newbatid:newbattery,
+            oldbat:returnitems[0],
+            reason:reason,
+            returnItem: true
+        },
+        success: async function (response) {
+            let res = JSON.parse(response);
+            console.log(res)
+            if(res['status']){
+                window.open(`./return-summary.php?invoice_no=${res['message']}`);
+                location.reload();
+            }
+        },
+        error:async function (err){
+            console.log(err)
+        }
+    });
+
+}
+
+async function launchmodal(){
+    $("#orderSuccessModal").modal("show");
 }
 
 function checkrow_(row){
     let temp = returnitems.filter((item)=>item==row);
+    console.log(temp)
     return temp.length;
 }
 
 function removerow_(row){
-    let temp = selected_row.filter((item)=>item!=row);
+    let temp = returnitems.filter((item)=>item!=row);
     return temp;
+}
+
+function unselect(){
+    for (const key in returnitems) {
+        console.log(key)
+        document.getElementById(`item${returnitems[key]}`).style.backgroundColor = 'lightgray';
+    }
 }

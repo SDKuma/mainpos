@@ -64,7 +64,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                         <a class="nav-link <?= $page == 'retail-product-create.php' ? 'active' : '' ?>"
                            href="retail-product-create.php">Add Retail Product</a>
                         <a class="nav-link <?= $page == 'grn.php' ? 'active' : '' ?>"
-                           href="grn.php">Process Transfers</a>
+                           href="grn.php">Product Return</a>
                     </nav>
                 </div>
 

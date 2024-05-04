@@ -1,6 +1,6 @@
 <?php
 include("../config/function.php");
-
+date_default_timezone_set('Asia/Colombo');
 
 // Insert admin
 if (isset($_POST['saveAdmin'])) {
@@ -579,5 +579,26 @@ if(isset($_POST['isInvoiceItem'])) {
         array_push($data, $row);
     }
     jsonResponse(200, 'OK', $data);
+}
 
+if(isset($_POST["returnItem"])){
+    $invoice = $_POST['invoice'];
+    $newbat = $_POST["newbatid"];
+    $oldbat = $_POST["oldbat"];
+    $reason = $_POST["reason"];
+    $data = [
+        "invoice"=>$invoice,
+        "received_item"=>$oldbat,
+        "released_item"=>$newbat,
+        "return_comment"=>$reason,
+        "tr_date"=>date("Y-m-d H:i:s")
+    ];
+
+    $result = insert('returns', $data);
+    if($result){
+        $querystring = "UPDATE products SET `quantity`=" . 0 . " WHERE `id`='" . $newbat . "';";
+        $result = mysqli_query($conn, $querystring);
+    }
+
+    jsonResponse(200, 'OK', $invoice);
 }
