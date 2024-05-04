@@ -23,10 +23,12 @@ include('includes/header.php');
                 <?php alertMessage() ?>
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label for="category_id">Invoice Number</label>
-                        <input name="orderinvoice" id="orderinvoice" class="form-control"/>
-                        <br/>
-                        <button class="btn btn-success btn-sm" onclick="getinvoiceitems()">Get Items</button>
+<!--                        <label for="category_id">Invoice Number</label>-->
+<!--                        <input name="orderinvoice" id="orderinvoice" class="form-control"/>-->
+<!--                        <br/>-->
+<!--                        <button class="btn btn-success btn-sm" onclick="getinvoiceitems()">Get Items</button>-->
+                        <label for="product_id"><b>Old Battery</b></label>
+                        <input type="text" id="oldbattery" class="form-control">
                     </div>
                     <div class="col-md-4 mb-3">
                         <div id="items-con">
@@ -38,7 +40,7 @@ include('includes/header.php');
                         <div id="items-con">
                             <label for="product_id"><b>Select Product *</b></label>
                             <select name="product_id" class="form-control myselect2" required id="product_id">
-                                <option value="not_defined">Select Product</option>
+                                <option value="not_defined">New Battery</option>
 
                                 <?php
                                 $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE products.quantity!='0';";
@@ -75,9 +77,12 @@ include('includes/header.php');
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Returned Invoice</th>
-                        <th></th>
+                        <th>Returned Battery Barcode</th>
+                        <th>Released Battery Barcode</th>
 
+                        <th>Returned Date</th>
+                        <th>Reason</th>
+                        <th>Returned Date</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -85,7 +90,7 @@ include('includes/header.php');
                             $query = "SELECT * FROM `returns` ORDER BY `id` DESC";
                             $result = mysqli_query($conn, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><td>".$row['id']."</td><td>".$row['invoice']."</td><td><a href='./return-summary.php?invoice_no=".$row['invoice']."'>View</td></tr>";
+                                echo "<tr><td>".$row['id']."</td><td>".$row['received_item']."</td><td>".$row['released_name']."</td><td>".$row['tr_date']."</td><td>".$row['return_comment']."</td><td><a href='./return-summary.php?recid=".$row['id']."'>View</td></tr>";
                             }
                         ?>
                     </tbody>

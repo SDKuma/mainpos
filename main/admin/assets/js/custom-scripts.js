@@ -471,20 +471,20 @@ async function selectitem(itemid) {
 }
 
 async function genreturns(){
-    var invo = document.getElementById("orderinvoice").value;
+    //var invo = document.getElementById("orderinvoice").value;
     var newbattery = document.getElementById("product_id").value;
     var reason = document.getElementById("reason").value;
-    var returned = "";
-    for(let i in returnitems){
-        returned +=returnitems[i]+",";
-    }
+    var returned = document.getElementById("oldbattery").value;
+    // for(let i in returnitems){
+    //     returned +=returnitems[i]+",";
+    // }
     let x = $.ajax({
         type: "POST",
         url: "code.php",
         data: {
-            invoice: invo,
+            invoice:"None",
             newbatid:newbattery,
-            oldbat:returnitems[0],
+            oldbat:returned,
             reason:reason,
             returnItem: true
         },

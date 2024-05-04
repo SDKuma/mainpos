@@ -31,19 +31,29 @@ date_default_timezone_set('Asia/Colombo');
                         </div>
                         <div class="card-body">
                             <?php
-                            $invoice_no = $_GET['invoice_no'];
-                            $querystr = "SELECT * FROM `returns` WHERE invoice= '".$invoice_no."';";
-                            $result = mysqli_query($conn, $querystr);
-                            $headdetails = mysqli_fetch_assoc($result);
+
+                            if(isset($_GET['recid'])){
+                                $invoice_no = $_GET['recid'];
+                                $querystr = "SELECT * FROM `returns` WHERE id= '".$invoice_no."';";
+                                $result = mysqli_query($conn, $querystr);
+                                $headdetails = mysqli_fetch_assoc($result);
+                            }else{
+                                $querystr = "SELECT * FROM `returns` ORDER BY id DESC LIMIT 1;";
+                                $result = mysqli_query($conn, $querystr);
+                                $headdetails = mysqli_fetch_assoc($result);
+                                $invoice_no = $headdetails['id'];
+                            }
+
+
 
                             $oldbattery = $headdetails['received_item'];
                             $newattery = $headdetails['released_item'];
                             $reason = $headdetails['return_comment'];
                             $date = $headdetails['tr_date'];
 
-                            $oldbatdet = "SELECT products.name,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE products.id='" . $oldbattery . "';";
-                            $olddetails = mysqli_query($conn, $oldbatdet);
-                            $olddetails_ = mysqli_fetch_assoc($olddetails);
+//                            $oldbatdet = "SELECT products.name,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE products.id='" . $oldbattery . "';";
+//                            $olddetails = mysqli_query($conn, $oldbatdet);
+//                            $olddetails_ = mysqli_fetch_assoc($olddetails);
 
                             $newbatdet = "SELECT products.name,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE products.id='" . $newattery . "';";
                             $newdetails = mysqli_query($conn, $newbatdet);
@@ -70,7 +80,7 @@ date_default_timezone_set('Asia/Colombo');
                                             <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">
                                                Return Item Note</h5>
                                             <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">
-                                                Invoice No: <?php echo $invoice_no; ?> </p>
+                                                Invoice No: <?php echo "return-00".$invoice_no; ?> </p>
                                             <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">
                                                 Return Note Date: <?= date('d M Y H:i:s'); ?> </p>
                                         </td>
@@ -95,7 +105,7 @@ date_default_timezone_set('Asia/Colombo');
                                         <tr>
                                             <td>
                                                 <?php
-                                                    echo "<h5>".$olddetails_["brand"]." ".$olddetails_["cat"]." ".$olddetails_["type_"]."</h5>".$olddetails_['name'];
+                                                    echo "<h5>".$oldbattery."</h5>";
                                                 ?>
                                             </td>
                                         </tr>

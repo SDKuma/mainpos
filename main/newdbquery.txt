@@ -21,3 +21,4 @@ ALTER TABLE `orders` ADD `card_payed` INT(11) NOT NULL DEFAULT '0' AFTER `online
 //
 CREATE TABLE `mainpos`.`returns` (`id` INT(11) NOT NULL AUTO_INCREMENT , `invoice` VARCHAR(255) NOT NULL , `received_item` VARCHAR(255) NOT NULL , `released_item` VARCHAR(255) NOT NULL , `tr_date` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ALTER TABLE `returns` ADD `return_comment` TEXT NULL DEFAULT NULL AFTER `released_item`;
+ALTER TABLE `returns` ADD `released_name` VARCHAR(255) NOT NULL AFTER `released_item`;
