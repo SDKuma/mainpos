@@ -529,7 +529,27 @@ function renderitems(){
 
 function completetransfer(){
     var store = document.getElementById("store_id").value;
-
+    var tritems = (trnasitems);
+    let x = $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            store:store,
+            items:tritems,
+            setTrItems: true
+        },
+        success: async function (response) {
+            let res = JSON.parse(response);
+            console.log()
+            console.log(res)
+            if(res['status']){
+                // window.open(`./return-summary.php?invoice_no=${res['message']}`);
+                location.reload();
+            }
+        },
+        error:async function (err){
+            console.log(err)
+        }});
 }
 
 async function removetritem(id){

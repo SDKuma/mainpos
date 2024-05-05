@@ -624,6 +624,29 @@ if(isset($_POST["saveStore"])){
 
     $result = insert('stores', $data);
     redirect('store-create.php', 'store Created');
+}
 
+if(isset($_POST["setTrItems"])){
+    $name = validate($_POST['store']);
+    $items = ($_POST['items']);
+    $data = [
+        'date'=>date("Y-m-d"),
+        'store_id'=>$name,
+    ];
+
+    $result = insert('transfers', $data);
+    $trid = mysqli_insert_id($conn);
+
+//    $decoded_items = json_decode($items,true);
+    foreach($items as $item){
+        $data = [
+            'trans_id'=>$trid,
+            'prod_id'=>$item['id']
+        ];
+
+        $result1 = insert('tr_items', $data);
+    }
+
+    jsonResponse(200, 'OK', $trid);
 
 }

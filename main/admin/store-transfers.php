@@ -15,7 +15,7 @@ include('includes/header.php');
         <div class="container-fluid px-4">
             <div class="card mt-4 shadow-sm">
                 <div class="card-header">
-                    <h4 class="mb-0">Add Store
+                    <h4 class="mb-0">Store Transfers
                         <!--                    <a href="categories.php" class="btn btn-primary float-end">Go Back</a>-->
                     </h4>
 
@@ -62,7 +62,7 @@ include('includes/header.php');
                             <hr/>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <button type="submit" name="saveStore" class="btn btn-primary">Save</button>
+                            <button name="saveStore" class="btn btn-primary" onclick="completetransfer()" >Save</button>
                         </div>
                     </div>
                     <!--                    </form>-->
@@ -72,20 +72,21 @@ include('includes/header.php');
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
+                                    <th>Date</th>
+                                    <th>Store</th>
+                                    <th>Comment</th>
                                     <th></th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                                $q = "SELECT * FROM stores";
+                                $q = "SELECT transfers.*,stores.name as store FROM transfers LEFT JOIN stores ON transfers.store_id = stores.id;";
                                 $result = mysqli_query($conn, $q);
                                 $i = 1;
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr><td>" . $i . "</td><td>" . $row['name'] . "</td><td>" . $row['address'] . "</td><td>" . $row['phone'] . "</td><td><a class='btn btn-info' href=./edittype.php?id=" . $row['id'] . ">Edit</a>&nbsp;<a class='btn btn-danger' href=./deletetype.php?id=" . $row['id'] . ">Delete</a></td></tr>";
+//                                    echo "<tr><td>" . $i . "</td><td>" . $row['name'] . "</td><td>" . $row['address'] . "</td><td>" . $row['phone'] . "</td><td><a class='btn btn-info' href=./edittype.php?id=" . $row['id'] . ">Edit</a>&nbsp;<a class='btn btn-danger' href=./deletetype.php?id=" . $row['id'] . ">Delete</a></td></tr>";
+                                    echo "<tr><td>".$i."</td><td>".$row['date']."</td><td>".$row['store']."</td><td>".$row['comment']."</td><td></td></tr>";
                                     $i++;
                                 }
                                 ?>
