@@ -1,7 +1,16 @@
 <?php
 include('includes/header.php');
 ?>
+    <style>
+        .tritemslist {
 
+            background: lightgreen;
+            padding: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+    </style>
     <main>
         <div class="container-fluid px-4">
             <div class="card mt-4 shadow-sm">
@@ -41,7 +50,7 @@ include('includes/header.php');
 
                                 $result = mysqli_query($conn, $q);
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<option value='" . $row['id'] . "|".$row['brand']."-".$row['amp']."AMP-".$row['name']."'>" . $row['brand'] . "-" . $row['amp'] . "AMP-" . $row['name'] . "</option>";
+                                    echo "<option value='" . $row['id'] . "|" . $row['brand'] . "-" . $row['amp'] . "AMP-" . $row['name'] . "'>" . $row['brand'] . "-" . $row['amp'] . "AMP-" . $row['name'] . "</option>";
                                 }
                                 ?>
                             </select>
@@ -49,6 +58,7 @@ include('includes/header.php');
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="name">Transfer Items</label>
+                            <div id="tritems"></div>
                             <hr/>
                         </div>
                         <div class="col-md-6 mb-3">

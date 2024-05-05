@@ -506,15 +506,35 @@ async function genreturns(){
 }
 
 var trnasitems = [];
-function addtritem(){
+async function addtritem(){
     var store = document.getElementById("store_id").value;
     var item = document.getElementById("product_id").value.split("|");
     var itemval = item[0];
     var itemname = item[1];
     let x = {id:itemval,name:itemname,store:store}
-    trnasitems.push(x)
-    console.log(trnasitems)
+    await trnasitems.push(x)
+    renderitems();
 
+}
+
+function renderitems(){
+    let ht = '';
+    var a = 1
+    for(let i in trnasitems){
+        ht +=  `<div class="tritemslist" onclick="removetritem(${trnasitems[i].id})">${a}.  ${trnasitems[i].name}</div>`;
+        a++;
+    }
+    document.getElementById("tritems").innerHTML = ht;
+}
+
+function completetransfer(){
+    var store = document.getElementById("store_id").value;
+
+}
+
+async function removetritem(id){
+    trnasitems = trnasitems.filter(item => item.id != id)
+    renderitems();
 }
 
 async function launchmodal(){
