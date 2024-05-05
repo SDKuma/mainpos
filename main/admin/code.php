@@ -610,3 +610,20 @@ if(isset($_POST["returnItem"])){
 
     jsonResponse(200, 'OK', $invoice);
 }
+
+if(isset($_POST["saveStore"])){
+    $name = validate($_POST['name']);
+    $address = validate($_POST['address']);
+    $phone = validate($_POST['phone']);
+
+    $data = [
+        'name' => $name,
+        'address' => $address,
+        'phone' => $phone
+    ];
+
+    $result = insert('stores', $data);
+    redirect('store-create.php', 'store Created');
+
+
+}

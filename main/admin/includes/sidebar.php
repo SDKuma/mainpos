@@ -67,6 +67,23 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                            href="grn.php">Product Return</a>
                     </nav>
                 </div>
+                <div class="sb-sidenav-menu-heading">Manage Stores</div>
+                <a class="nav-link <?= ($page == 'customer-create.php') || ($page == 'customers.php') ? 'collapse active' : 'collapsed' ?>"
+                   href="#" data-bs-toggle="collapse" data-bs-target="#collapseStores" aria-expanded="false"
+                   aria-controls="collapseCustomers">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Stores
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse <?= ($page == 'store-create.php') || ($page == 'store-transfers.php') ? 'show' : '' ?>"
+                     id="collapseStores" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link <?= $page == 'store-create.php' ? 'active' : '' ?>"
+                           href="store-create.php">Add STORE</a>
+                        <a class="nav-link <?= $page == 'store-transfers.php' ? 'active' : '' ?>" href="store-transfers.php">Store
+                            Transfers</a>
+                    </nav>
+                </div>
 
                 <div class="sb-sidenav-menu-heading">Manage Users</div>
                 <a class="nav-link <?= ($page == 'customer-create.php') || ($page == 'customers.php') ? 'collapse active' : 'collapsed' ?>"

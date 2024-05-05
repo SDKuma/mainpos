@@ -505,6 +505,18 @@ async function genreturns(){
 
 }
 
+var trnasitems = [];
+function addtritem(){
+    var store = document.getElementById("store_id").value;
+    var item = document.getElementById("product_id").value.split("|");
+    var itemval = item[0];
+    var itemname = item[1];
+    let x = {id:itemval,name:itemname,store:store}
+    trnasitems.push(x)
+    console.log(trnasitems)
+
+}
+
 async function launchmodal(){
     $("#orderSuccessModal").modal("show");
 }
