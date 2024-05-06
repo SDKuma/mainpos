@@ -7,7 +7,7 @@ include('includes/header.php');
             <div class="card mt-4 shadow-sm">
                 <div class="card-header">
                     <h4 class="mb-0">
-                        Customers
+                        Date wise sales
                     </h4>
                 </div>
                 <div class="card-body row">
@@ -29,8 +29,8 @@ include('includes/header.php');
             </div>
             <div class="card mt-4 shadow-sm">
                 <div class="card-header">
-                    <h4 class="mb-0">Customers
-                        <a href="#" class="btn btn-primary float-end">Add Customer</a>
+                    <h4 class="mb-0">Detailed Chart
+                        <a href="#" class="btn btn-primary float-end"></a>
                     </h4>
                 </div>
                 <div class="card-body">

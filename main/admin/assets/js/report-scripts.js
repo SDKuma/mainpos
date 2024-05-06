@@ -32,7 +32,8 @@ async function getreport() {
                             datasets: [{
                                 label: '# of Votes',
                                 data: amount,
-                                borderWidth: 1
+                                borderWidth: 1,
+                                borderColor: '#FF6384',
                             }]
                         },
                         options: {
@@ -45,7 +46,7 @@ async function getreport() {
                     });
                 } else {
                     await new Chart(ctx, {
-                        type: 'bar',
+                        type: 'line',
                         data: {
                             labels: label,
                             datasets: [{
