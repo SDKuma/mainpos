@@ -17,11 +17,15 @@ async function getreport() {
             const ctx = document.getElementById('myChart');
             let label = [];
             let amount = [];
+            let total = 0
             for (let i in data) {
                 await label.push(data[i]['order_date']);
                 await amount.push(Number(data[i]['SUM(net_total)']));
+                total += (Number(data[i]['SUM(net_total)']));
+                console.log(total);
             }
-            setTimeout(async () => {
+            document.getElementById("completeamount").innerText = "Rs."+total;
+                setTimeout(async () => {
 
                 if (ctx.$chartjs) {
                     ctx.destroy();

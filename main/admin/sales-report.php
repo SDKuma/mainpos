@@ -23,7 +23,8 @@ include('includes/header.php');
                         <button class="btn btn-primary" onclick="location.reload()" id="refreshbtn" style="display: none">Refresh</button>
                     </div>
                     <div class="col-md-3">
-
+                        Income Total
+                        <h1 id="completeamount"></h1>
                     </div>
                 </div>
             </div>
