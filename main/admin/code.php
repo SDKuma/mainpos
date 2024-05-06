@@ -643,8 +643,9 @@ if(isset($_POST["setTrItems"])){
             'trans_id'=>$trid,
             'prod_id'=>$item['id']
         ];
-
+        $querystring = "UPDATE products SET `quantity`=" . 0 . " WHERE `id`='" . $item['id'] . "';";
         $result1 = insert('tr_items', $data);
+        $result0 = mysqli_query($conn, $querystring);
     }
 
     jsonResponse(200, 'OK', $trid);
