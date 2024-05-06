@@ -80,11 +80,28 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link <?= $page == 'store-create.php' ? 'active' : '' ?>"
                            href="store-create.php">Add STORE</a>
-                        <a class="nav-link <?= $page == 'store-transfers.php' ? 'active' : '' ?>" href="store-transfers.php">Store
+                        <a class="nav-link <?= $page == 'store-transfers.php' ? 'active' : '' ?>"
+                           href="store-transfers.php">Store
                             Transfers</a>
                     </nav>
                 </div>
-
+                <div class="sb-sidenav-menu-heading">Reports</div>
+                <a class="nav-link <?= ($page == 'item-report.php') || ($page == 'sales-report.php') ? 'collapse active' : 'collapsed' ?>"
+                   href="#" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false"
+                   aria-controls="collapseCustomers">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Reports
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse <?= ($page == 'item-report.php') || ($page == 'sales-report.php') ? 'show' : '' ?>"
+                     id="collapseReports" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link <?= $page == 'item-report.php' ? 'active' : '' ?>" href="item-report.php">Product
+                            Reports</a>
+                        <a class="nav-link <?= $page == 'sales-report.php' ? 'active' : '' ?>" href="sales-report.php">Sales
+                            Reports</a>
+                    </nav>
+                </div>
                 <div class="sb-sidenav-menu-heading">Manage Users</div>
                 <a class="nav-link <?= ($page == 'customer-create.php') || ($page == 'customers.php') ? 'collapse active' : 'collapsed' ?>"
                    href="#" data-bs-toggle="collapse" data-bs-target="#collapseCustomers" aria-expanded="false"

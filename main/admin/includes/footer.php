@@ -51,8 +51,9 @@
 
 <!-- <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script> -->
 <script src="./../admin/assets/js/alrtfy.min.js"></script>
-
+<script src="./../admin/assets/js/chart.js"></script>
 <script src="assets/js/custom-scripts.js"></script>
+<script src="assets/js/report-scripts.js"></script>
 <script src="assets/js/DataTables/datatables.js"></script>
 <script>
     $(document).ready( function () {

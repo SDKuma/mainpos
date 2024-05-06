@@ -651,3 +651,19 @@ if(isset($_POST["setTrItems"])){
     jsonResponse(200, 'OK', $trid);
 
 }
+
+if(isset($_POST["getReports"])){
+    $fromdate = validate($_POST['fromdate']);
+    $todate = validate($_POST['todate']);
+
+    $reportq = "SELECT SUM(net_total),order_date FROM orders WHERE order_date BETWEEN '" . $fromdate . "' AND '" . $todate . "' GROUP BY order_date;";
+    $result = mysqli_query($conn, $reportq);
+    $data = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+//        $rw = array("date"=>$row["order_date"],"amount"=>$row["ne"]);
+        array_push($data, $row);
+    }
+
+    jsonResponse(200, 'OK', $data);
+
+}
