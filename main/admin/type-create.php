@@ -54,6 +54,10 @@ include('includes/header.php');
                             <label for="name">Selling Price *</label>
                             <input type="text" name="sell_price" class="form-control" required>
                         </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name">Batch *</label>
+                            <input type="text" name="batch" class="form-control" required>
+                        </div>
                         <div class="col-md-6 mb-3">
                             <button type="submit" name="saveType" class="btn btn-primary">Save</button>
                         </div>
@@ -67,6 +71,7 @@ include('includes/header.php');
                                         <th>Brand</th>
                                         <th>Category</th>
                                         <th>Type</th>
+                                        <th>Batch</th>
                                         <th>Amp</th>
                                         <th>Buying(Rs.)</th>
                                         <th>Selling(Rs.)</th>
@@ -79,7 +84,7 @@ include('includes/header.php');
                                         $q = "SELECT `type`.*, categories.name as cat, brands.name as brand FROM `type` LEFT JOIN `categories` ON `type`.`category`=`categories`.`id` LEFT JOIN `brands` ON `categories`.`brand_id`=`brands`.`id` WHERE `type`.`status`=1;";
                                         $result = mysqli_query($conn, $q);
                                         while($row =  mysqli_fetch_assoc($result)){
-                                            echo "<tr><td>".$row['id']."</td><td>".$row['brand']."</td><td>".$row['cat']."</td><td>".$row['name']."</td><td>".$row['amp']."</td><td>".$row['buying_price']."</td><td>".$row['selling_price']."</td><td><a class='btn btn-info' href=./edittype.php?id=".$row['id'].">Edit</a>&nbsp;<a class='btn btn-danger' href=./deletetype.php?id=".$row['id'].">Delete</a></td></tr>";
+                                            echo "<tr><td>".$row['id']."</td><td>".$row['brand']."</td><td>".$row['cat']."</td><td>".$row['name']."</td><td>".$row['tbatch']."</td><td>".$row['amp']."</td><td>".$row['buying_price']."</td><td>".$row['selling_price']."</td><td><a class='btn btn-info' href=./edittype.php?id=".$row['id'].">Edit</a>&nbsp;<a class='btn btn-danger' href=./deletetype.php?id=".$row['id'].">Delete</a></td></tr>";
                                         }
                                     ?>
                                 </tbody>    

@@ -41,7 +41,7 @@ include('includes/header.php');
                                     if (mysqli_num_rows($types) > 0) {
                                         foreach ($types as $item) :
                                             ?>
-                                            <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
+                                            <option value="<?= $item['id'] ?>"><?= $item['name'] ?> - <?= $item['tbatch'] ?></option>
                                         <?php
                                         endforeach;
                                     }

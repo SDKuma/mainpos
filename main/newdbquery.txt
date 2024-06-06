@@ -30,3 +30,5 @@ ALTER TABLE `stores` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMA
 
 CREATE TABLE `mainpos`.`transfers` (`id` INT NOT NULL AUTO_INCREMENT , `date` VARCHAR(255) NOT NULL , `store_id` INT(11) NOT NULL , `comment` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 CREATE TABLE `mainpos`.`tr_items` (`id` INT(11) NOT NULL AUTO_INCREMENT , `trans_id` INT(11) NOT NULL , `prod_id` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `type` ADD `tbatch` VARCHAR(255) NULL DEFAULT '0' AFTER `amp`; 
