@@ -41,7 +41,10 @@ include('includes/header.php');
                                 $q2 = "SELECT * FROM `products` WHERE `id`='".$prod."'; ";
                                 $r2 =  mysqli_query($conn, $q2);
                                 $row1 = mysqli_fetch_assoc($r2);
-                                $subprofit = ((int)$row1['price']-(int)$row1['buying_price'])*(int)$row['quantity'];
+                                if($row1){
+                                //if($row1['price']&&$row1['buying_price']&&$row['quantity']){
+                                    $subprofit = ((int)$row1['price']-(int)$row1['buying_price'])*(int)$row['quantity'];
+                                }
 
                                 $item_tot +=$subprofit;
                             }
