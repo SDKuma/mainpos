@@ -429,7 +429,7 @@ async function checkforitem(code) {
     return x;
 }
 
-async function getinvoiceitems(){
+async function getinvoiceitems() {
     var invoice = document.getElementById('orderinvoice').value;
     let x = $.ajax({
         type: "POST",
@@ -440,18 +440,18 @@ async function getinvoiceitems(){
         },
         success: async function (response) {
             // console.log(response)
-            if(JSON.parse(response)['status']==200){
+            if (JSON.parse(response)['status'] == 200) {
                 var items = JSON.parse(response)['message'];
                 var ht = "<ul>";
-                for(let i in items){
-                    ht +=`<li id="item${items[i]['id']}" class="items" onclick="selectitem(${items[i]['id']})"><b>${items[i]['br']} ${items[i]['ca']} - ${items[i]['ty']}</b>  <br/> ${items[i]['name']}</li>`
+                for (let i in items) {
+                    ht += `<li id="item${items[i]['id']}" class="items" onclick="selectitem(${items[i]['id']})"><b>${items[i]['br']} ${items[i]['ca']} - ${items[i]['ty']}</b>  <br/> ${items[i]['name']}</li>`
                 }
-                ht +="</ul>"
+                ht += "</ul>"
                 document.getElementById('items-con').innerHTML = ht;
             }
 
         },
-        error:async function (err){
+        error: async function (err) {
             console.log(err)
         }
     });
@@ -460,17 +460,17 @@ var returnitems = [];
 async function selectitem(itemid) {
     unselect();
     returnitems = [];
-    if(checkrow_(itemid)==0){
+    if (checkrow_(itemid) == 0) {
         returnitems.push(itemid);
         document.getElementById(`item${itemid}`).style.backgroundColor = 'lightgreen';
-    }else{
+    } else {
         returnitems = removerow_(itemid);
         document.getElementById(`item${itemid}`).style.backgroundColor = 'lightgray';
     }
     console.log(returnitems);
 }
 
-async function genreturns(){
+async function genreturns() {
     //var invo = document.getElementById("orderinvoice").value;
     var newbattery = document.getElementById("product_id").value;
     var reason = document.getElementById("reason").value;
@@ -483,22 +483,22 @@ async function genreturns(){
         type: "POST",
         url: "code.php",
         data: {
-            invoice:"None",
-            newbatid:newbattery,
-            oldbat:returned,
-            reason:reason,
-            wrdate:wrdate,
+            invoice: "None",
+            newbatid: newbattery,
+            oldbat: returned,
+            reason: reason,
+            wrdate: wrdate,
             returnItem: true
         },
         success: async function (response) {
             let res = JSON.parse(response);
             console.log(res)
-            if(res['status']){
+            if (res['status']) {
                 window.open(`./return-summary.php?invoice_no=${res['message']}`);
                 location.reload();
             }
         },
-        error:async function (err){
+        error: async function (err) {
             console.log(err)
         }
     });
@@ -506,73 +506,83 @@ async function genreturns(){
 }
 
 var trnasitems = [];
-async function addtritem(){
+async function addtritem() {
     var store = document.getElementById("store_id").value;
     var item = document.getElementById("product_id").value.split("|");
     var itemval = item[0];
     var itemname = item[1];
-    let x = {id:itemval,name:itemname,store:store}
-    await trnasitems.push(x)
-    renderitems();
+    let x = { id: itemval, name: itemname, store: store }
+    if (trnasitems.filter(item => item.name == x.name).length == 0) {
+        await trnasitems.push(x)
+        renderitems();
+        document.getElementById("trf-error").innerHTML = "";
+    }else{
+        document.getElementById("trf-error").innerHTML = "Duplicate record";
+    }
+
+
+
+
 
 }
 
-function renderitems(){
+function renderitems() {
     let ht = '';
     var a = 1
-    for(let i in trnasitems){
-        ht +=  `<div class="tritemslist" onclick="removetritem(${trnasitems[i].id})">${a}.  ${trnasitems[i].name}</div>`;
+    for (let i in trnasitems) {
+        ht += `<div class="tritemslist" onclick="removetritem(${trnasitems[i].id})">${a}.  ${trnasitems[i].name}</div>`;
         a++;
     }
     document.getElementById("tritems").innerHTML = ht;
 }
 
-function completetransfer(){
+function completetransfer() {
     var store = document.getElementById("store_id").value;
     var tritems = (trnasitems);
     let x = $.ajax({
         type: "POST",
         url: "code.php",
         data: {
-            store:store,
-            items:tritems,
+            store: store,
+            items: tritems,
             setTrItems: true
         },
         success: async function (response) {
             let res = JSON.parse(response);
             console.log()
             console.log(res)
-            if(res['status']){
+            if (res['status']) {
                 // window.open(`./return-summary.php?invoice_no=${res['message']}`);
                 location.reload();
             }
         },
-        error:async function (err){
+        error: async function (err) {
             console.log(err)
-        }});
+        }
+    });
 }
 
-async function removetritem(id){
+async function removetritem(id) {
     trnasitems = trnasitems.filter(item => item.id != id)
     renderitems();
 }
 
-async function launchmodal(){
+async function launchmodal() {
     $("#orderSuccessModal").modal("show");
 }
 
-function checkrow_(row){
-    let temp = returnitems.filter((item)=>item==row);
+function checkrow_(row) {
+    let temp = returnitems.filter((item) => item == row);
     console.log(temp)
     return temp.length;
 }
 
-function removerow_(row){
-    let temp = returnitems.filter((item)=>item!=row);
+function removerow_(row) {
+    let temp = returnitems.filter((item) => item != row);
     return temp;
 }
 
-function unselect(){
+function unselect() {
     for (const key in returnitems) {
         console.log(key)
         document.getElementById(`item${returnitems[key]}`).style.backgroundColor = 'lightgray';

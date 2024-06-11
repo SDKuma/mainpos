@@ -55,6 +55,7 @@ include('includes/header.php');
                                 ?>
                             </select>
                             <button id="addtritem" class="btn btn-info btn-sm" onclick="addtritem()">Add Item</button>
+                            <span id="trf-error" style="color:red;font-size:12px"></span>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="name">Transfer Items</label>
