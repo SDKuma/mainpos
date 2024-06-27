@@ -170,7 +170,7 @@ if (isset($_POST['saveType'])) {
     $status = 1;
 
     if ($name != '') {
-        $nameCheck = mysqli_query($conn, "SELECT * FROM `type` WHERE name='$name'");
+        $nameCheck = mysqli_query($conn, "SELECT * FROM `type` WHERE name='$name' AND `tbatch`='$batch' ");
 
         if ($nameCheck) {
             if (mysqli_num_rows($nameCheck) > 0) {
