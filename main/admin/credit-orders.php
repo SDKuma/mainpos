@@ -37,7 +37,7 @@ include('includes/header.php');
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-4">
-                            <h4 class="mb-0">Orders</h4>
+                            <h4 class="mb-0">Credit Pending Orders</h4>
                         </div>
                         <div class="col-md-8 ">
                             <form action="" method="GET">
@@ -78,12 +78,75 @@ include('includes/header.php');
 
                             <tbody>
                             <?php
-                            $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit';";
+                            $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit' AND orders.pending_amount !='0';";
                             $orders = mysqli_query($conn, $q);
                             $i = 1;
                             while ($row = mysqli_fetch_assoc($orders)) {
                                 echo "<tr><td>" . $row["invoice_no"] . "</td><td>" . $row['customer'] . "</td><td>" . $row['order_date'] . "</td><td>" . $row['total_amount'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['on_scrap_discount'] . "</td><td>Rs. " . number_format((int)$row['payed_amount']) . "</td><td>" . $row['pending_amount'] . "</td><td>" . $row['order_status'] . "</td><td>
-                                    <a href='orders-view-print.php?track=" . $row['tracking_no'] . "' class='btn btn-primary mb-0 px-2 btn-sm'>Print</a>  <a id='btnsettle' onclick='opensettlemodal(".$row["id"].",".$row["pending_amount"].")' class='btn btn-danger mb-0 px-2 btn-sm'>Settle</a>  <a href='credit-history.php?order=".$row['id']."' class='btn btn-info btn-sm'>View History</a></td></tr>";
+                                    <a href='orders-view-print.php?track=" . $row['id'] . "' class='btn btn-primary mb-0 px-2 btn-sm'>Print</a>  <a id='btnsettle' onclick='opensettlemodal(".$row["id"].",".$row["pending_amount"].")' class='btn btn-danger mb-0 px-2 btn-sm'>Settle</a>  <a href='credit-history.php?order=".$row['id']."' class='btn btn-info btn-sm'>View History</a></td></tr>";
+                                $i += 1;
+                            }
+                            ?>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid px-4">
+            <div class="card mt-4 shadow-sm">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 class="mb-0">Credit Payed Orders</h4>
+                        </div>
+                        <div class="col-md-8 ">
+                            <form action="" method="GET">
+                                <div class="row g-1">
+                                    <div class="col-md-4">
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered align-item-center justify-content-center"
+                               id="orderstable1">
+                            <thead>
+                            <tr>
+
+                                <th>Invoice</th>
+                                <th>Customer</th>
+                                <th>Order Date</th>
+                                <th>Total</th>
+                                <th>Discount</th>
+                                <th>Scr. Discount</th>
+                                <th>Payed </th>
+                                <th>Pending</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <?php
+                            $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit' AND orders.pending_amount ='0';";
+                            $orders = mysqli_query($conn, $q);
+                            $i = 1;
+                            while ($row = mysqli_fetch_assoc($orders)) {
+                                echo "<tr><td>" . $row["invoice_no"] . "</td><td>" . $row['customer'] . "</td><td>" . $row['order_date'] . "</td><td>" . $row['total_amount'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['on_scrap_discount'] . "</td><td>Rs. " . number_format((int)$row['payed_amount']) . "</td><td>" . $row['pending_amount'] . "</td><td>" . $row['order_status'] . "</td><td>
+                                    <a href='orders-view-print.php?track=" . $row['id'] . "' class='btn btn-primary mb-0 px-2 btn-sm'>Print</a>  <a href='credit-history.php?order=".$row['id']."' class='btn btn-info btn-sm'>View History</a></td></tr>";
                                 $i += 1;
                             }
                             ?>
@@ -102,6 +165,8 @@ include('includes/header.php');
             $('#pend_amount').val(pending_);
             $('#orderid').val(orderid);
         }
+
+        
     </script>
 
 <?php

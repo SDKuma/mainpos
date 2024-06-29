@@ -72,6 +72,10 @@
         $('#orderstable').DataTable();   
     });
 
+    $(document).ready( function () {
+        $('#orderstable1').DataTable();   
+    });
+
     $(document).ready(function() {
         $('.myselect2').select2();
     });
