@@ -530,7 +530,7 @@ function renderitems() {
     let ht = '';
     var a = 1
     for (let i in trnasitems) {
-        ht += `<div class="tritemslist" onclick="removetritem(${trnasitems[i].id})">${a}.  ${trnasitems[i].name}</div>`;
+        ht += `<div class="tritemslist" onclick="removetritem(${trnasitems[i].id})">${a}.  ${trnasitems[i].name}   <span style="float:right;color:red" >X</span></div>`;
         a++;
     }
     document.getElementById("tritems").innerHTML = ht;

@@ -2,14 +2,21 @@
 include('includes/header.php');
 ?>
     <style>
+    
         .tritemslist {
-
-            background: lightgreen;
-            padding: 5px;
+            padding: 10px;
             cursor: pointer;
             font-weight: bold;
             margin: 5px;
+            border: 1px gray solid;
+            border-radius: 16px;
         }
+
+        .tritemslist:hover {
+            box-shadow: 2px 2px 5px 0px;
+        }
+        
+       
     </style>
     <main>
         <div class="container-fluid px-4">
@@ -58,7 +65,7 @@ include('includes/header.php');
                             <span id="trf-error" style="color:red;font-size:12px"></span>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="name">Transfer Items</label>
+                            <label for="name" style="font-weight:bold">Transfer Items</label>
                             <div id="tritems"></div>
                             <hr/>
                         </div>
