@@ -89,12 +89,12 @@ include('includes/header.php');
                                 </thead>
                                 <tbody>
                                 <?php
-                                $q = "SELECT transfers.*,stores.name as store FROM transfers LEFT JOIN stores ON transfers.store_id = stores.id;";
+                                $q = "SELECT transfers.*,stores.name as store,stores.id as storeid FROM transfers LEFT JOIN stores ON transfers.store_id = stores.id;";
                                 $result = mysqli_query($conn, $q);
                                 $i = 1;
                                 while ($row = mysqli_fetch_assoc($result)) {
 //                                    echo "<tr><td>" . $i . "</td><td>" . $row['name'] . "</td><td>" . $row['address'] . "</td><td>" . $row['phone'] . "</td><td><a class='btn btn-info' href=./edittype.php?id=" . $row['id'] . ">Edit</a>&nbsp;<a class='btn btn-danger' href=./deletetype.php?id=" . $row['id'] . ">Delete</a></td></tr>";
-                                    echo "<tr><td>".$i."</td><td>".$row['date']."</td><td>".$row['store']."</td><td>".$row['comment']."</td><td></td></tr>";
+                                    echo "<tr><td>".$i."</td><td>".$row['date']."</td><td>".$row['store']."</td><td>".$row['comment']."</td><td><a href='./store-transfer-view.php?id=".$row['id']."&storeid=".$row['storeid']."'> View Details </a></td></tr>";
                                     $i++;
                                 }
                                 ?>
