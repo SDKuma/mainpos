@@ -50,15 +50,7 @@
                                     while ($row = mysqli_fetch_assoc($result)) {
                                        echo "<tr><td>".$i."</td><td>" . $row['brand'] . "-" . $row['amp'] . "AMP-" . $row['name'] . "</td></tr>";
                                        $i++;
-                                    }  
-
-                                // $q = "SELECT transfers.*,stores.name as store FROM transfers LEFT JOIN stores ON transfers.store_id = stores.id;";
-                                // $result = mysqli_query($conn, $q);
-                                // $i = 1;
-                                // while ($row = mysqli_fetch_assoc($result)) {
-                                //     echo "<tr><td>".$i."</td><td>".$row['date']."</td><td>".$row['store']."</td><td>".$row['comment']."</td><td><a href='#'> View Details </a></td></tr>";
-                                //     $i++;
-                                // }
+                                    } 
                                 ?>
                                 </tbody>
                             </table>

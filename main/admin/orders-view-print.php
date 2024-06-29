@@ -20,7 +20,7 @@
                                     } else {
                                         $trackingNo = validate($_GET['track']);
                                         //getting main details
-                                        $orderquery = "SELECT orders.*,customers.name,customers.email,customers.phone,customers.address FROM `orders` LEFT JOIN `customers` ON orders.customer_id = customers.id WHERE orders.tracking_no = '" . $trackingNo . "' LIMIT 1;";
+                                        $orderquery = "SELECT orders.*,customers.name,customers.email,customers.phone,customers.address FROM `orders` LEFT JOIN `customers` ON orders.customer_id = customers.id WHERE orders.id = '" . $trackingNo . "' LIMIT 1;";
                                         $result = mysqli_query($conn, $orderquery);
                                         $order = mysqli_fetch_assoc($result);
                                         $orderId = $order['id'];

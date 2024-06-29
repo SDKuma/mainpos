@@ -51,7 +51,7 @@ include('includes/header.php');
                                 $i = 1;
                                 while($row=mysqli_fetch_assoc($orders)){
                                     echo "<tr><td>".$i."</td><td>".$row['tracking_no']."</td><td>".$row['customer']."</td><td>".$row['order_date']."</td><td>".$row['total_amount']."</td><td>".$row['discount']."</td><td>".$row['on_scrap_discount']."</td><td>".$row['net_total']."</td><td>".$row['payment_mode']."</td><td>
-                                    <a href='orders-view-print.php?track=".$row['tracking_no']."' class='btn btn-primary mb-0 px-2 btn-sm'>Print</a></td></tr>";    
+                                    <a href='orders-view-print.php?track=".$row['id']."' class='btn btn-primary mb-0 px-2 btn-sm'>Print</a></td></tr>";    
                                     $i +=1;
                                 }
                             ?>
