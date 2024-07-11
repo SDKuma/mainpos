@@ -34,7 +34,7 @@ include('includes/header.php');
                         <div class="col-md-4 mb-3">
                             <label for="name">Store Name *</label>
                             <select name="store_id" id="store_id" class="form-control myselect2" required>
-                                <option value="not_defined">Select Product</option>
+                                <option value="not_defined">Select a Store</option>
 
                                 <?php
                                 $q = "SELECT * FROM stores";
@@ -45,7 +45,7 @@ include('includes/header.php');
                                 }
                                 ?>
                             </select>
-
+                            <span id="trf-store-err" style="color:red;font-size:12px;font-weight:bold"></span>        
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="name">Item</label>
