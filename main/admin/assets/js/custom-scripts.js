@@ -285,7 +285,7 @@ $(document).ready(function () {
 });
 
 // Print billing area
-function printBillingArea() {
+async function printBillingArea() {
     var divContents = document.getElementById("myBillingArea").innerHTML;
     var a = window.open("", "");
     a.document.write("<html><title>POS System in PHP</title>");
@@ -293,7 +293,9 @@ function printBillingArea() {
     a.document.write(divContents);
     a.document.write("</body</html>");
     a.document.close();
-    a.print();
+    await a.print();
+    document.getElementById('cusn').style.fontSize='15px';
+    document.getElementById('cusp').style.fontSize='15px';
 }
 
 // Downlaod pdf
