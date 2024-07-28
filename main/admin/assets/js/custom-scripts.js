@@ -397,9 +397,10 @@ if (document.getElementById("saveProduct")) {
                     console.log(response);
                     var res = JSON.parse(response);
                     if (res.status == 200) {
-                        console.log(res);
+                        console.log('5555555',res);
                         // await swal(res.message, res.message, res.status_type);
                         document.getElementById('name_').value = "";
+                        location.reload();
                     } else {
                         swal("Error", "Product create Error", 'error');
                     }
