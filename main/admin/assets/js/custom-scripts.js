@@ -516,7 +516,7 @@ async function addtritem() {
         await trnasitems.push(x)
         renderitems();
         document.getElementById("trf-error").innerHTML = "";
-    }else{
+    } else {
         document.getElementById("trf-error").innerHTML = "Duplicate record";
     }
 
@@ -538,28 +538,33 @@ function renderitems() {
 
 function completetransfer() {
     var store = document.getElementById("store_id").value;
-    var tritems = (trnasitems);
-    let x = $.ajax({
-        type: "POST",
-        url: "code.php",
-        data: {
-            store: store,
-            items: tritems,
-            setTrItems: true
-        },
-        success: async function (response) {
-            let res = JSON.parse(response);
-            console.log()
-            console.log(res)
-            if (res['status']) {
-                // window.open(`./return-summary.php?invoice_no=${res['message']}`);
-                location.reload();
+    if (store!='not_defined') {
+        var tritems = (trnasitems);
+        let x = $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                store: store,
+                items: tritems,
+                setTrItems: true
+            },
+            success: async function (response) {
+                let res = JSON.parse(response);
+                console.log()
+                console.log(res)
+                if (res['status']) {
+                    // window.open(`./return-summary.php?invoice_no=${res['message']}`);
+                    location.reload();
+                }
+            },
+            error: async function (err) {
+                console.log(err)
             }
-        },
-        error: async function (err) {
-            console.log(err)
-        }
-    });
+        });
+    }else{
+        document.getElementById("trf-store-err").innerHTML = "Please select a store";
+    }
+
 }
 
 async function removetritem(id) {
