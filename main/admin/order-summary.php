@@ -56,8 +56,8 @@ date_default_timezone_set('Asia/Colombo');
                                                 <tr>
                                                     <td>
                                                         <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">Customer Details</h5>
-                                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Name: <?= $cRowData['name'] ?> </p>
-                                                        <p style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Phone No: <?= $cRowData['phone'] ?> </p>
+                                                        <p id="cusn" style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Name: <?= $cRowData['name'] ?> </p>
+                                                        <p id="cusp" style="font-size: 14px; line-height: 20px; margin:0px; padding: 0;">Customer Phone No: <?= $cRowData['phone'] ?> </p>
                                                         <p style="font-size: 14px; line-height: 20px; margin: 0px; padding: 0;">Customer Email Id: <?= $cRowData['email'] ?> </p>
                                                     <td align="end">
                                                         <h5 style="font-size: 20px; line-height: 30px; margin:0px; padding: 0;">Invoice Details</h5>

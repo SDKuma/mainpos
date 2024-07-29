@@ -1,7 +1,7 @@
 <?php
     include('includes/header.php');
     $trid = $_GET["id"];
-    $storeid = $_GET["id"];
+    $storeid = $_GET["storeid"];
     
     $trq = "SELECT * FROM transfers WHERE id=".$trid.";";
     $trresult = mysqli_query($conn, $trq);
@@ -21,13 +21,15 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <table class="table">            
                                 <tr>
                                     <td>Store Name</td>
                                     <th><?php echo $srow["name"]; ?></th>
                                     <td>Transfer Date</td>
                                     <th><?php echo $trrow["date"]; ?></th>
+                                    <td></td>
+                                    <th><a href="print-transfer.php?id=<?php echo $trid; ?>&storeid=<?php echo $storeid;?>" target="_blank" class="btn btn-primary btn-sm">Print</a></th>
 
                                 </tr>    
                             </table>

@@ -285,7 +285,7 @@ $(document).ready(function () {
 });
 
 // Print billing area
-function printBillingArea() {
+async function printBillingArea() {
     var divContents = document.getElementById("myBillingArea").innerHTML;
     var a = window.open("", "");
     a.document.write("<html><title>POS System in PHP</title>");
@@ -293,7 +293,9 @@ function printBillingArea() {
     a.document.write(divContents);
     a.document.write("</body</html>");
     a.document.close();
-    a.print();
+    await a.print();
+    document.getElementById('cusn').style.fontSize='15px';
+    document.getElementById('cusp').style.fontSize='15px';
 }
 
 // Downlaod pdf
@@ -397,9 +399,10 @@ if (document.getElementById("saveProduct")) {
                     console.log(response);
                     var res = JSON.parse(response);
                     if (res.status == 200) {
-                        console.log(res);
+                        console.log('5555555',res);
                         // await swal(res.message, res.message, res.status_type);
                         document.getElementById('name_').value = "";
+                        location.reload();
                     } else {
                         swal("Error", "Product create Error", 'error');
                     }
