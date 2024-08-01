@@ -263,16 +263,21 @@ if (isset($_POST['saveProduct'])) {
         'Brand' => $brand,
         'Type' => $type,
         'buying_price' => $buying,
-        'status' => $status
+        'status' => $status,
+        'exactdate'=>date('Y-m-d')
     ];
 
     $result = insert('products', $data);
+    $rows = array();
+    $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE `exactdate`='".date('Y-m-d')."' ORDER BY products.id DESC;";
+    $result = mysqli_query($conn,$q);
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($rows, $row);
+    }
+
     if ($result) {
-        jsonResponse(200, 'success', 'Product Creation Done.');
+        jsonResponse(200, 'success', 'Product Creation Done.',$rows);
     } else {
-
-
-
         jsonResponse(200, 'error', 'Product Creation Error');
     }
 }

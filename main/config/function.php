@@ -261,7 +261,6 @@ function delete($tableName, $id)
     $id = validate($id);
 
     $query = "DELETE FROM $table WHERE id = '$id' LIMIT 1";
-
     $result = mysqli_query($conn, $query);
     return $result;
 }
@@ -288,12 +287,13 @@ function logoutSession()
 }
 
 // To return jsonResponse result
-function jsonResponse($status, $status_type, $message)
+function jsonResponse($status, $status_type, $message,$data=[])
 {
     $response = [
         'status' => $status,
         'status_type' => $status_type,
-        'message' => $message
+        'message' => $message,
+        'data' => $data
     ];
     echo json_encode($response);
     return;

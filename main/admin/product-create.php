@@ -14,7 +14,7 @@ date_default_timezone_set('Asia/Colombo');
                 </div>
                 <div class="card-body">
                     <?php alertMessage() ?>
-                    <form action="code.php" method="POST" enctype="multipart/form-data">
+                    <form action="#" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="category_id">Select Brand *</label>
@@ -70,8 +70,7 @@ date_default_timezone_set('Asia/Colombo');
 
                             <div class="col-md-6 mb-3">
                                 <br>
-                                <button type="submit" onclick="" name="saveProduct" id="saveProduct"
-                                        class="btn btn-primary">Save
+                                <button type="submit" onclick="saveproductF(event)" name="saveProduct" id="saveProduct" class="btn btn-primary">Save
                                 </button>
                             </div>
                         </div>
@@ -90,6 +89,25 @@ date_default_timezone_set('Asia/Colombo');
                 <div class="card-body">
                     <?php alertMessage() ?>
                     <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Brand</th>
+                                <th>Name</th>
+                                <th>Amp</th>
+                                <th>Price(Rs)</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="todaylist">
+
+
+                            </tbody>
+                        </table>
+
+
                         <table class="table table-striped table-bordered" id="product-table">
                             <thead>
                             <tr>

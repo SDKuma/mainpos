@@ -370,6 +370,56 @@ if (document.getElementById("brand_id_prod")) {
     });
 }
 
+async function saveproductF(event){
+    event.preventDefault();
+    var name = document.getElementById('name_').value;
+    var price = document.getElementById('by_sell').value;
+    var buyprice = document.getElementById('buy_prod').value;
+    var type_id = document.getElementById('type_id_prod').value;
+    var category_id = document.getElementById('category_id').value;
+
+    var data = {
+        saveProduct: true,
+        name: name,
+        price: price,
+        buyprice: buyprice,
+        type_id: type_id,
+        category_id: category_id,
+    };
+
+    let resc = await checkforitem(name);
+    if (resc == '0') {
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: data,
+            success: async function (response) {
+                console.log(response);
+                var res = JSON.parse(response);
+                if (res.status == 200) {
+                    var jsndata = JSON.parse(response);
+                    var rows = jsndata['data'];
+                    var ht = '';
+                    for(let i in rows){
+                            ht +=`<tr style="background-color: lightgreen"><td></td><td>${rows[i]['id']}</td><td>${rows[i]['brand']}</td><td>${rows[i]['type_']}-${rows[i]['name']}</td><td>${rows[i]['amp']}</td><td>${rows[i]['price']}</td></tr>`;
+                    }
+
+                    document.getElementById('todaylist').innerHTML = ht;
+                    // await swal(res.message, res.message, res.status_type);
+                    document.getElementById('name_').value = "";
+                    // location.reload();
+                } else {
+                    swal("Error", "Product create Error", 'error');
+                }
+            },
+        });
+    } else {
+        swal("Error", "Product already exist", 'error');
+    }
+}
+
+
+
 
 if (document.getElementById("saveProduct")) {
     document.getElementById("saveProduct").addEventListener("click", async (e) => {
@@ -399,10 +449,10 @@ if (document.getElementById("saveProduct")) {
                     console.log(response);
                     var res = JSON.parse(response);
                     if (res.status == 200) {
-                        console.log('5555555',res);
+
                         // await swal(res.message, res.message, res.status_type);
                         document.getElementById('name_').value = "";
-                        location.reload();
+                        // location.reload();
                     } else {
                         swal("Error", "Product create Error", 'error');
                     }
