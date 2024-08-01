@@ -185,7 +185,7 @@ if (isset($_POST['saveType'])) {
             'buying_price' => $buy_price,
             'selling_price' => $sell_price,
             'amp' => $amp,
-            'tbatch'=>$batch
+            'tbatch' => $batch
         ];
         $result = insert('type', $data);
         if ($result) {
@@ -252,34 +252,41 @@ if (isset($_POST['saveProduct'])) {
     if ($category_id == 'not_defined') {
         redirect('product-create.php', 'Please select a category.');
     }
+    $qs = "SELECT * FROM products WHERE name='$name';";
+    $result = mysqli_query($conn, $qs);
+    $rowount = mysqli_num_rows($result);
+    if ($rowount == 0) {
+        $data = [
+            'category_id' => $category_id,
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+            'quantity' => $quantity,
+            'image' => "/images/prods",
+            'Brand' => $brand,
+            'Type' => $type,
+            'buying_price' => $buying,
+            'status' => $status,
+            'exactdate' => date('Y-m-d')
+        ];
 
-    $data = [
-        'category_id' => $category_id,
-        'name' => $name,
-        'description' => $description,
-        'price' => $price,
-        'quantity' => $quantity,
-        'image' => "/images/prods",
-        'Brand' => $brand,
-        'Type' => $type,
-        'buying_price' => $buying,
-        'status' => $status,
-        'exactdate'=>date('Y-m-d')
-    ];
+        $result = insert('products', $data);
+        $rows = array();
+        $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE `exactdate`='" . date('Y-m-d') . "' ORDER BY products.id DESC;";
+        $result = mysqli_query($conn, $q);
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($rows, $row);
+        }
 
-    $result = insert('products', $data);
-    $rows = array();
-    $q = "SELECT products.*,`Type`.`name` as 'type_',`Type`.`amp` as 'amp',categories.name as cat,brands.name as brand FROM products LEFT JOIN `type` ON `type`.`id` = products.`Type` LEFT JOIN categories ON categories.id=products.category_id LEFT JOIN brands ON brands.id=categories.brand_id WHERE `exactdate`='".date('Y-m-d')."' ORDER BY products.id DESC;";
-    $result = mysqli_query($conn,$q);
-    while ($row = mysqli_fetch_assoc($result)) {
-        array_push($rows, $row);
-    }
-
-    if ($result) {
-        jsonResponse(200, 'success', 'Product Creation Done.',$rows);
-    } else {
+        if ($result) {
+            jsonResponse(200, 'success', 'Product Creation Done.', $rows);
+        } else {
+            jsonResponse(200, 'error', 'Product Creation Error');
+        }
+    }else{
         jsonResponse(200, 'error', 'Product Creation Error');
     }
+
 }
 
 // Update product
@@ -576,7 +583,7 @@ if (isset($_POST['updateType'])) {
     }
 }
 
-if(isset($_POST['isInvoiceItem'])) {
+if (isset($_POST['isInvoiceItem'])) {
     $invoice = $_POST['invoice'];
     $querystring = "SELECT orders.invoice_no,orders.order_date,products.*,`type`.name as ty, categories.name as ca,brands.name as br FROM orders JOIN order_items ON order_items.order_id = orders.id JOIN products ON products.id = order_items.product_id JOIN `type` ON `type`.id = products.`Type` JOIN categories ON categories.id=`type`.category JOIN brands ON brands.id = categories.brand_id WHERE orders.invoice_no='" . $invoice . "';";
     $result = mysqli_query($conn, $querystring);
@@ -588,7 +595,7 @@ if(isset($_POST['isInvoiceItem'])) {
     jsonResponse(200, 'OK', $data);
 }
 
-if(isset($_POST["returnItem"])){
+if (isset($_POST["returnItem"])) {
     $invoice = $_POST['invoice'];
     $newbat = $_POST["newbatid"];
     $oldbat = $_POST["oldbat"];
@@ -600,17 +607,17 @@ if(isset($_POST["returnItem"])){
     $row1 = mysqli_fetch_assoc($result1);
 
     $data = [
-        "invoice"=>$invoice,
-        "received_item"=>$oldbat,
-        "released_item"=>$newbat,
-        "return_comment"=>$reason,
-        "released_name"=>$row1['name'],
-        "tr_date"=>date("Y-m-d H:i:s"),
-        "wrdate"=>$wrdate
+        "invoice" => $invoice,
+        "received_item" => $oldbat,
+        "released_item" => $newbat,
+        "return_comment" => $reason,
+        "released_name" => $row1['name'],
+        "tr_date" => date("Y-m-d H:i:s"),
+        "wrdate" => $wrdate
     ];
 
     $result = insert('returns', $data);
-    if($result){
+    if ($result) {
         $querystring = "UPDATE products SET `quantity`=" . 0 . " WHERE `id`='" . $newbat . "';";
         $result = mysqli_query($conn, $querystring);
     }
@@ -618,7 +625,7 @@ if(isset($_POST["returnItem"])){
     jsonResponse(200, 'OK', $invoice);
 }
 
-if(isset($_POST["saveStore"])){
+if (isset($_POST["saveStore"])) {
     $name = validate($_POST['name']);
     $address = validate($_POST['address']);
     $phone = validate($_POST['phone']);
@@ -633,22 +640,22 @@ if(isset($_POST["saveStore"])){
     redirect('store-create.php', 'store Created');
 }
 
-if(isset($_POST["setTrItems"])){
+if (isset($_POST["setTrItems"])) {
     $name = validate($_POST['store']);
     $items = ($_POST['items']);
     $data = [
-        'date'=>date("Y-m-d"),
-        'store_id'=>$name,
+        'date' => date("Y-m-d"),
+        'store_id' => $name,
     ];
 
     $result = insert('transfers', $data);
     $trid = mysqli_insert_id($conn);
 
 //    $decoded_items = json_decode($items,true);
-    foreach($items as $item){
+    foreach ($items as $item) {
         $data = [
-            'trans_id'=>$trid,
-            'prod_id'=>$item['id']
+            'trans_id' => $trid,
+            'prod_id' => $item['id']
         ];
         $querystring = "UPDATE products SET `quantity`=" . 0 . " WHERE `id`='" . $item['id'] . "';";
         $result1 = insert('tr_items', $data);
@@ -659,7 +666,7 @@ if(isset($_POST["setTrItems"])){
 
 }
 
-if(isset($_POST["getReports"])){
+if (isset($_POST["getReports"])) {
     $fromdate = validate($_POST['fromdate']);
     $todate = validate($_POST['todate']);
 
