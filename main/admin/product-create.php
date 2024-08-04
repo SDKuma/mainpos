@@ -81,10 +81,8 @@ date_default_timezone_set('Asia/Colombo');
         <div class="container-fluid px-4">
             <div class="card mt-4 shadow-sm">
                 <div class="card-header">
-                    <h4 class="mb-0">Products
-
-                    </h4>
-
+                    <h4 class="mb-0">Products</h4>
+                    <a class="btn btn-success" href="print-stock-update.php" target="_blank">Print Today's Stock Update</a>
                 </div>
                 <div class="card-body">
                     <?php alertMessage() ?>
@@ -98,7 +96,6 @@ date_default_timezone_set('Asia/Colombo');
                                 <th>Name</th>
                                 <th>Amp</th>
                                 <th>Price(Rs)</th>
-
                             </tr>
                             </thead>
                             <tbody id="todaylist">
