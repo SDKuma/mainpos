@@ -96,7 +96,6 @@ date_default_timezone_set('Asia/Colombo');
                                 <th>Name</th>
                                 <th>Amp</th>
                                 <th>Price(Rs)</th>
-
                             </tr>
                             </thead>
                             <tbody id="todaylist">
