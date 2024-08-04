@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require "dbcon.php";
+require "dbcon1.php";
 
 // Input field validation
 function validate($inputData)
