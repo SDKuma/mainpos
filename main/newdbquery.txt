@@ -35,3 +35,6 @@ ALTER TABLE `type` ADD `tbatch` VARCHAR(255) NULL DEFAULT '0' AFTER `amp`;
 
 //Aug 1
 ALTER TABLE `products` ADD `exactdate` VARCHAR(255) NULL DEFAULT NULL AFTER `status`;
+
+
+CREATE TABLE `mainpos`.`melimit` (`id` INT NOT NULL AUTO_INCREMENT , `val_1` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
