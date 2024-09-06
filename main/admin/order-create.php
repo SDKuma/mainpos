@@ -77,6 +77,7 @@ include('includes/header.php');
             </div>
 
             <div class="card mt-4 shadow-sm">
+
                 <div class="card-body">
                     <form action="orders-code.php" method="POST">
                         <div class="row">
@@ -253,9 +254,14 @@ include('includes/header.php');
                                     <input type="number" placeholder="Discount" id="discount" name="discount"
                                            class="form-control" value="0"/>
                                 </div>
+                                <div class="col-md-4">
+                                    <label for="forPaymentMode"><b>Service Charge</b></label>
+                                    <input type="number" placeholder="Discount" id="serv_charge" name="serv_charge"
+                                           class="form-control" value="0"/>
+                                </div>
                             </div>
                             <hr/>
-<!--                            credit-->
+                            <!--                            credit-->
                             <div class="row" id="creditpay" style="display: none">
                                 <div class="col-md-4">
                                     <label for="forPaymentMode"><b>Payed Cash</b></label>
@@ -263,7 +269,7 @@ include('includes/header.php');
                                            class="form-control" value="0"/>
                                 </div>
                             </div>
-<!--                            cash and online-->
+                            <!--                            cash and online-->
                             <div class="row" id="cnopay" style="display: none">
                                 <div class="col-md-4">
                                     <label for="forPaymentMode"><b>Cash Pay</b></label>
@@ -276,7 +282,7 @@ include('includes/header.php');
                                            class="form-control" value="0"/>
                                 </div>
                             </div>
-<!--                            //cash and card-->
+                            <!--                            //cash and card-->
                             <div class="row" id="cncpay" style="display: none">
                                 <div class="col-md-4">
                                     <label for="forPaymentMode"><b>Cash Pay</b></label>

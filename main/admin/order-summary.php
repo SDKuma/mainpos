@@ -124,6 +124,14 @@ date_default_timezone_set('Asia/Colombo');
                                                 }
 
                                             ?>
+                                            <?php
+                                                if((int)$_SESSION['service']!==0){
+                                                    echo "<tr><td>*</td><td colspan='3'>Service Charge</td><td>".number_format($_SESSION['service'], 0)."</td></tr>";
+                                                    $totalAmount = $totalAmount + (int)$_SESSION['service'];
+                                                }
+
+
+                                            ?>
 
                                             <?php 
                                                 if (isset($_SESSION['scrap_items'])){
@@ -169,8 +177,9 @@ date_default_timezone_set('Asia/Colombo');
                                                     echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Online Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['cash_payed'])."</td></tr>";
                                                 }
                                                 else if($_SESSION['payment_mode']=="CnC"){
-                                                    echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Card Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['cnccard'])."</td></tr>";
                                                     echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Cash Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['cnccash'])."</td></tr>";
+                                                    echo "<tr><td colspan='4' style='font-weight: bold;font-size: 20px'>Card Amount Payed</td><td style='font-weight: bold;font-size: 20px'>".number_format($_SESSION['cnccard'])."</td></tr>";
+
                                                 }
                                             ?>
                                             <tr>

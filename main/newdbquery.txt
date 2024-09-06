@@ -38,3 +38,6 @@ ALTER TABLE `products` ADD `exactdate` VARCHAR(255) NULL DEFAULT NULL AFTER `sta
 
 
 CREATE TABLE `mainpos`.`melimit` (`id` INT NOT NULL AUTO_INCREMENT , `val_1` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+//Sept 6
+ALTER TABLE `orders` ADD `service_charge` VARCHAR(255) NULL DEFAULT '0' AFTER `on_scrap_discount`;

@@ -88,6 +88,8 @@ $(document).ready(function () {
         var online_payed = $("#onlinepay_val").val();
         var cnccash = $("#cnc_cashpay_val").val();
         var cnccard = $("#cardpay_val").val();
+        var serv_charge = $("#serv_charge").val();
+
 
         if (payment_mode == "") {
             swal("Select Payment Mode", "Please select your payment mode", "warning");
@@ -112,7 +114,8 @@ $(document).ready(function () {
             online_payed: online_payed,
             cash_payed: cash_payed,
             cnccash: cnccash,
-            cnccard: cnccard
+            cnccard: cnccard,
+            service_charge:serv_charge
         };
         $.ajax({
             type: "POST",

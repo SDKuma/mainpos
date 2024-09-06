@@ -53,12 +53,18 @@
                                             echo "<tr><td colspan='5'><b>Retail Items</b></td>tr>";
                                         }
 
+
+
                                         while ($item = mysqli_fetch_assoc($retailresult)){
                                             $retailProd = "SELECT * FROM retail_products WHERE id='" . $item['product_id'] . "';";
                                             $retailProdresult = mysqli_query($conn, $retailProd);
                                             $row1 = mysqli_fetch_assoc($retailProdresult);
                                             echo "<tr><td>".$y."</td><td>".$row1['name']."<br>".$row1['brand']."</td><td>".$item['price']."</td><td>".$item['quantity']."</td><td><b>".number_format($item['price']*$item['quantity'])."</b></td></tr>";
                                             $y++;
+                                        }
+
+                                        if((int)$order['service_charge'] > 0){
+                                            echo "<tr><td>*</td><td colspan='3'><b>Service Charge</b></td><td>Rs. ".$order['service_charge']."</td><tr>";
                                         }
 
                                         $scrapq = "SELECT * FROM order_scrap WHERE order_id ='" . $orderId . "';";

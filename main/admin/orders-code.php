@@ -171,7 +171,7 @@ if (isset($_POST['proccedToPlaceBtn'])) {
     $payed_cash = validate($_POST['cash_payed']);
     $payed_c_cash = validate($_POST['cnccash']);
     $payed_c_card = validate($_POST['cnccard']);
-
+    $serve_charge = validate($_POST['service_charge']);
     // Checking for customer
     $checkCustomer = mysqli_query($conn, "SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
 
@@ -186,6 +186,7 @@ if (isset($_POST['proccedToPlaceBtn'])) {
             $_SESSION['cash_payed'] = $payed_cash;
             $_SESSION['cnccash'] = $payed_c_cash;
             $_SESSION['cnccard'] = $payed_c_card;
+            $_SESSION['service'] = $serve_charge;
 
             jsonResponse(200, "success", 'Customer found with this phone number.');
         } else {
@@ -249,6 +250,7 @@ if (isset($_POST['saveOrder'])) {
     $payed_online = $_SESSION['online_payed'];
     $cash_cnc = $_SESSION['cnccash'];
     $card_cnc = $_SESSION['cnccard'];
+    $service = $_SESSION['service'];
 
     $totalScrap = 0;
 
@@ -291,7 +293,7 @@ if (isset($_POST['saveOrder'])) {
         }else{
             $netTotal = $totalAmount-$totalScrap;
         }
-
+        $netTotal = $netTotal+(int)$service;
         $status_ = "Booked";
         $payed = $netTotal;
         $pending_amount = 0;
@@ -322,7 +324,8 @@ if (isset($_POST['saveOrder'])) {
             'pending_amount'=>$pending_amount,
             'cash_payed'=>$payed_cash,
             'online_payed'=>$payed_online,
-            'card_payed'=>$payed_card
+            'card_payed'=>$payed_card,
+            'service_charge'=>$service
         ];
 
         $result = insert('orders', $data);

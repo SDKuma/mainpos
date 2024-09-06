@@ -34,12 +34,13 @@ include('includes/header.php');
                                 <th></th>
                                 <th>Tracking No.</th>
                                 <th>Customer</th>
+                                <th>Method</th>
                                 <th>Order Date</th>
                                 <th>Total</th>
+                                <th>Service Charge </th>
                                 <th>Discount</th>
                                 <th>Srcap Discount</th>
                                 <th>Net Total</th>
-                                <th>Payment</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -50,8 +51,9 @@ include('includes/header.php');
                                 $orders = mysqli_query($conn, $q);
                                 $i = 1;
                                 while($row=mysqli_fetch_assoc($orders)){
-                                    echo "<tr><td>".$i."</td><td>".$row['tracking_no']."</td><td>".$row['customer']."</td><td>".$row['order_date']."</td><td>".$row['total_amount']."</td><td>".$row['discount']."</td><td>".$row['on_scrap_discount']."</td><td>".$row['net_total']."</td><td>".$row['payment_mode']."</td><td>
-                                    <a href='orders-view-print.php?track=".$row['id']."' class='btn btn-primary mb-0 px-2 btn-sm'>Print</a></td></tr>";    
+                                    echo "<tr><td>".$i."</td><td>".$row['tracking_no']."</td><td>".$row['customer']."</td><td>".$row['payment_mode']."</td><td>".$row['order_date']."</td><td>".$row['total_amount']."</td><td>".$row['service_charge']."</td><td>".$row['discount']."</td><td>".$row['on_scrap_discount']."</td><td>".$row['net_total']."</td><td>
+                                    <a href='orders-view-print.php?track=".$row['id']."' class=' '><i class='fa fa-print' aria-hidden='true'></i>
+</a></td></tr>";
                                     $i +=1;
                                 }
                             ?>
