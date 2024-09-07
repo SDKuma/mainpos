@@ -96,7 +96,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                 <div class="collapse <?= ($page == 'item-report.php') || ($page == 'sales-report.php') ? 'show' : '' ?>"
                      id="collapseReports" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link <?= $page == 'item-report.php' ? 'active' : '' ?>" href="item-report.php">Product
+                        <a class="nav-link <?= $page == 'products-report.php' ? 'active' : '' ?>" href="products-report.php">Product
                             Reports</a>
                         <a class="nav-link <?= $page == 'sales-report.php' ? 'active' : '' ?>" href="sales-report.php">Sales
                             Reports</a>
