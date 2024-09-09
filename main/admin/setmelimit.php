@@ -4,8 +4,5 @@
     $result2 = mysqli_query($conn, $query);
 
     header('location:melimits.php');
-
-
-
-
+//EMTRAC EMTRAC-EFB50B20L 40 AH
 ?>

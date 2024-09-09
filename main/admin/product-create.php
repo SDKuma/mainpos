@@ -38,7 +38,7 @@ date_default_timezone_set('Asia/Colombo');
                                 <select name="type_id" id="type_id_prod" class="form-control myselect2" required>
                                     <option value="not_defined">Select Type</option>
                                     <?php
-                                    $types = getAll('type');
+                                    $types = getAll('type','status');
                                     if (mysqli_num_rows($types) > 0) {
                                         foreach ($types as $item) :
                                             ?>
