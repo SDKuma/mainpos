@@ -38,11 +38,12 @@ date_default_timezone_set('Asia/Colombo');
                                 <select name="type_id" id="type_id_prod" class="form-control myselect2" required>
                                     <option value="not_defined">Select Type</option>
                                     <?php
-                                    $types = getAll('type','status');
+                                    $types = getAll('type', 'status');
                                     if (mysqli_num_rows($types) > 0) {
                                         foreach ($types as $item) :
                                             ?>
-                                            <option value="<?= $item['id'] ?>"><?= $item['name'] ?> - <?= $item['tbatch'] ?></option>
+                                            <option value="<?= $item['id'] ?>"><?= $item['name'] ?>
+                                                - <?= $item['tbatch'] ?></option>
                                         <?php
                                         endforeach;
                                     }
@@ -70,7 +71,8 @@ date_default_timezone_set('Asia/Colombo');
 
                             <div class="col-md-6 mb-3">
                                 <br>
-                                <button type="submit" onclick="saveproductF(event)" name="saveProduct" id="saveProduct" class="btn btn-primary">Save
+                                <button type="submit" onclick="saveproductF(event)" name="saveProduct" id="saveProduct"
+                                        class="btn btn-primary">Save
                                 </button>
                             </div>
                         </div>
@@ -82,7 +84,8 @@ date_default_timezone_set('Asia/Colombo');
             <div class="card mt-4 shadow-sm">
                 <div class="card-header">
                     <h4 class="mb-0">Products</h4>
-                    <a class="btn btn-success" href="print-stock-update.php" target="_blank">Print Today's Stock Update</a>
+                    <a class="btn btn-success" href="print-stock-update.php" target="_blank">Print Today's Stock
+                        Update</a>
                 </div>
                 <div class="card-body">
                     <?php alertMessage() ?>
@@ -125,17 +128,17 @@ date_default_timezone_set('Asia/Colombo');
                             $result = mysqli_query($conn, $q);
                             $a = 1;
                             while ($row = mysqli_fetch_assoc($result)) {
-                                $cre =explode(" ",$row['created_at']);
+                                $cre = explode(" ", $row['created_at']);
                                 //echo "----".$cre[0].'///'.date('Y-m-d');
-                                if($cre[0]==date("Y-m-d")){
+                                if ($cre[0] == date("Y-m-d")) {
                                     $style = 'style="background-color:lightgreen;"';
-                                }else{
+                                } else {
                                     $style = 'style="background-color:none;"';
                                 }
 
-                                echo "<tr ".$style." id='prodrw" . $row['id'] . "' onclick='selectthis(" . $row['id'] . ")'><td>".$a."</td><td>" . $row['id'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['type_'] . "-" . $row['name'] . "</td><td>" . $row['amp'] . "</td><td>" . $row['price'] . "</td><td>" . $row['quantity'] . "</td><td><a href=product-edit.php?id=" . $row['id'] . " class='btn btn-sm btn-success'>Edit</a>
+                                echo "<tr " . $style . " id='prodrw" . $row['id'] . "' onclick='selectthis(" . $row['id'] . ")'><td>" . $a . "</td><td>" . $row['id'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['type_'] . "-" . $row['name'] . "</td><td>" . $row['amp'] . "</td><td>" . $row['price'] . "</td><td>" . $row['quantity'] . "</td><td><a href=product-edit.php?id=" . $row['id'] . " class='btn btn-sm btn-success'>Edit</a>
                                     <a href=product-delete.php?id=" . $row['id'] . " class='btn btn-sm btn-danger'>Delete</a></td></tr>";
-                                    $a++;
+                                $a++;
                             }
                             ?>
 
@@ -148,26 +151,27 @@ date_default_timezone_set('Asia/Colombo');
     </main>
     <script>
         var selected_row = [];
+
         function selectthis(row) {
             console.log(row)
             console.log(checkrow(row))
-            if(checkrow(row)==0){
+            if (checkrow(row) == 0) {
                 selected_row.push(row);
-                document.getElementById("prodrw"+row).style.background = "lightblue";
-            }else{
+                document.getElementById("prodrw" + row).style.background = "lightblue";
+            } else {
                 selected_row = removerow(row);
-                document.getElementById("prodrw"+row).style.background = "white";
+                document.getElementById("prodrw" + row).style.background = "white";
             }
 
         }
 
-        function checkrow(row){
-            let temp = selected_row.filter((item)=>item==row);
+        function checkrow(row) {
+            let temp = selected_row.filter((item) => item == row);
             return temp.length;
         }
 
-        function removerow(row){
-            let temp = selected_row.filter((item)=>item!=row);
+        function removerow(row) {
+            let temp = selected_row.filter((item) => item != row);
             return temp;
         }
     </script>
