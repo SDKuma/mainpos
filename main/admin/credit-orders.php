@@ -1,5 +1,12 @@
 <?php
 include('includes/header.php');
+if(isset($_GET['key'])&&$_GET['key']=="LOPX45P8"){
+    $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit' AND orders.pending_amount !='0';";
+    $q1 = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit' AND orders.pending_amount ='0';";
+}else{
+    $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit' AND orders.pending_amount !='0' AND orders.flag1 = 0;";
+    $q1 = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit' AND orders.pending_amount ='0' AND orders.flag1 =0; ;";
+}
 ?>
     <main>
         <div class="modal fade" id="paycreditModal" data-bs-backdrop="static" data-bs-keyboards="false" tabindex="-1"
@@ -78,7 +85,7 @@ include('includes/header.php');
 
                             <tbody>
                             <?php
-                            $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit' AND orders.pending_amount !='0';";
+
                             $orders = mysqli_query($conn, $q);
                             $i = 1;
                             while ($row = mysqli_fetch_assoc($orders)) {
@@ -141,8 +148,7 @@ include('includes/header.php');
 
                             <tbody>
                             <?php
-                            $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.payment_mode='Credit' AND orders.pending_amount ='0';";
-                            $orders = mysqli_query($conn, $q);
+                            $orders = mysqli_query($conn, $q1);
                             $i = 1;
                             while ($row = mysqli_fetch_assoc($orders)) {
                                 echo "<tr><td>" . $row["invoice_no"] . "</td><td>" . $row['customer'] . "</td><td>" . $row['order_date'] . "</td><td>" . $row['total_amount'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['on_scrap_discount'] . "</td><td>Rs. " . number_format((int)$row['payed_amount']) . "</td><td>" . $row['pending_amount'] . "</td><td>" . $row['order_status'] . "</td><td>

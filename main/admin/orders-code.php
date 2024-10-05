@@ -308,6 +308,16 @@ if (isset($_POST['saveOrder'])) {
             $payed_card = $card_cnc;
         }
 
+        $limq = "SELECT * FROM `melimit` WHERE `id` = 1;";
+        $limres = mysqli_query($conn, $limq);
+        $limrow = mysqli_fetch_assoc($limres);
+
+        if((int)$limrow['val_1']<$totalAmount){
+            $fl = 1;
+        }else{
+            $fl = 0;
+        }
+
         $data = [
             'customer_id' => $customerData['id'],
             'tracking_no' => rand(11111, 99999),
@@ -325,7 +335,8 @@ if (isset($_POST['saveOrder'])) {
             'cash_payed'=>$payed_cash,
             'online_payed'=>$payed_online,
             'card_payed'=>$payed_card,
-            'service_charge'=>$service
+            'service_charge'=>$service,
+            'flag1'=>$fl
         ];
 
         $result = insert('orders', $data);

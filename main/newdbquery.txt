@@ -41,3 +41,6 @@ CREATE TABLE `mainpos`.`melimit` (`id` INT NOT NULL AUTO_INCREMENT , `val_1` VAR
 
 //Sept 6
 ALTER TABLE `orders` ADD `service_charge` VARCHAR(255) NULL DEFAULT '0' AFTER `on_scrap_discount`;
+
+//Oct 5
+ALTER TABLE `orders` ADD `flag1` VARCHAR(255) NULL DEFAULT '0' AFTER `on_scrap_discount`;

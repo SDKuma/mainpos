@@ -1,5 +1,11 @@
 <?php
 include('includes/header.php');
+if(isset($_GET['key'])&&$_GET['key']=="LOPX45P8"){
+    $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id;";
+}else{
+    $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.flag1 = 0;";
+}
+
 ?>
 <main>
     <div class="container-fluid px-4">
@@ -47,7 +53,7 @@ include('includes/header.php');
 
                         <tbody>
                             <?php
-                                $q = "SELECT orders.*,customers.name as customer FROM orders JOIN customers ON orders.customer_id = customers.id;";
+
                                 $orders = mysqli_query($conn, $q);
                                 $i = 1;
                                 while($row=mysqli_fetch_assoc($orders)){
