@@ -62,6 +62,14 @@ include('includes/header.php');
                     </h5>
                 </div>
             </div>
+            <div class="col-md-3 mb-3">
+                <div class="card card-body bg-info p-3">
+                    <p class="text-sm mb-0 text-capitalize">Invoice Total discounts</p>
+                    <h5 class="fw-bold mb-0">
+                        <?php echo $discount_value  ?>
+                    </h5>
+
+            </div>
         </div>    
     </div>
 </main>
