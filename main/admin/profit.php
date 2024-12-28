@@ -45,10 +45,19 @@ include('includes/header.php');
                                 //if($row1['price']&&$row1['buying_price']&&$row['quantity']){
                                     $subprofit = ((int)$row1['price']-(int)$row1['buying_price'])*(int)$row['quantity'];
                                 }
-
                                 $item_tot +=$subprofit;
                             }
-                            echo $item_tot;
+
+                        $q1 = "SELECT * FROM `orders` WHERE `order_date`='".$dt."'; ";
+                        $r1 =  mysqli_query($conn, $q1);
+                        $discount_value = 0;
+                        while($row1 = mysqli_fetch_assoc($r1)){
+                            $discount_value +=($row1['discount']+$row1['on_scrap_discount']);
+                        }
+                        $final_value = $item_tot - $discount_value;
+
+
+                            echo $final_value;
                         ?> 
                     </h5>
                 </div>
