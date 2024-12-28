@@ -97,7 +97,7 @@ function checkitem($item)
 function filtertypes($id)
 {
     global $conn;
-    $q = "SELECT brands.id as brand,`type`.name as typename,`type`.id as typeid  FROM `brands` JOIN categories ON brands.id=categories.brand_id JOIN `type` ON `type`.`category`=categories.id WHERE brands.id = " . $id . ";";
+    $q = "SELECT brands.id as brand,`type`.name as typename,`type`.id as typeid  FROM `brands` JOIN categories ON brands.id=categories.brand_id JOIN `type` ON `type`.`category`=categories.id WHERE brands.id = " . $id . " AND WHERE `types.status = '1'`;";
     $r = mysqli_query($conn, $q);
     return $r;
 }
