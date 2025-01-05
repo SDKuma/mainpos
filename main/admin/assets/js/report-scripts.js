@@ -16,10 +16,12 @@ async function getprofit() {
                 let pro_rows = data["datarows"];
                 let tot_profit = 0;
                 let tb_html = `<table width="100%" calss="table"><tr style="font-size: 20px;font-weight: bold;background-color: lightgray;"><td></td><td>Item</td><td>Selling</td><td>Buying</td><td>Profit</td></tr>`;
+                var y = 1
                 for(let i in pro_rows){
                     var profit = Number(pro_rows[i]['selling']) - Number(pro_rows[i]['buying']);
                     tot_profit +=profit;
-                    tb_html +=`<tr><td></td><td>${pro_rows[i]['item']}</td><td>Rs. ${pro_rows[i]['selling']}</td><td>Rs. ${pro_rows[i]['buying']}</td><td>Rs.${profit}</td></tr>`;
+                    tb_html +=`<tr style="border-bottom: 1px gray solid"><td>${y}</td><td>${pro_rows[i]['item']}</td><td>Rs. ${pro_rows[i]['selling']}</td><td>Rs. ${pro_rows[i]['buying']}</td><td>Rs.${profit}</td></tr>`;
+                    y++;
                 }
                 tb_html +=`<tr style="font-size: 20px;font-weight: bold;background-color: lightgray;"><td colspan="4">Total Profit Before Discount</td><td>Rs. ${tot_profit}</td></tr></table>`;
                 document.getElementById("profit-table").innerHTML = tb_html;
