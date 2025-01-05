@@ -12,6 +12,7 @@ async function getprofit() {
                 var data = JSON.parse(response)['message'];
                 var profit = Number(data['profit'])-Number(data['discount']);
                 document.getElementById("completeamount").innerText = `Rs.${profit}`;
+            document.getElementById("discount").innerText = `Rs.${data['discount']}`;
                 let pro_rows = data["datarows"];
                 let tot_profit = 0;
                 let tb_html = `<table width="100%" calss="table"><tr style="font-size: 20px;font-weight: bold;background-color: lightgray;"><td></td><td>Item</td><td>Selling</td><td>Buying</td><td>Profit</td></tr>`;
