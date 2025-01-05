@@ -45,6 +45,7 @@ include('includes/header.php');
                                 //if($row1['price']&&$row1['buying_price']&&$row['quantity']){
                                     $subprofit = ((int)$row1['price']-(int)$row1['buying_price'])*(int)$row['quantity'];
                                 }
+                                //echo ((int)$row1['price']-(int)$row1['buying_price']); 
                                 $item_tot +=$subprofit;
                             }
 
