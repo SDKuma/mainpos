@@ -14,7 +14,7 @@ include('includes/header.php');
             <div class="card-body">
                 <?php alertMessage() ?>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered" id="customers-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
