@@ -79,6 +79,10 @@
     $(document).ready(function() {
         $('.myselect2').select2();
     });
+
+    $(document).ready( function () {
+        $('#customers-table').DataTable();
+    });
     
 </script>
 </body>
