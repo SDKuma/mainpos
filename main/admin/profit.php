@@ -92,6 +92,10 @@ include('includes/header.php');
                         <button class="btn btn-primary" onclick="location.reload()" id="refreshbtn" style="display: none">Refresh</button>
                     </div>
                     <div class="col-md-3">
+                        Total Discount given
+                        <h1 id="discount"></h1>
+                    </div>
+                    <div class="col-md-3">
                         Income Profit
                         <h1 id="completeamount"></h1>
                     </div>
