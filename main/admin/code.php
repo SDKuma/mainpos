@@ -707,7 +707,7 @@ if(isset($_POST["getProfit"])){
     $r1 = mysqli_query($conn, $q1);
     $discount_value = 0;
     while ($row1 = mysqli_fetch_assoc($r1)) {
-        $discount_value += ($row1['discount'] + $row1['on_scrap_discount']);
+        $discount_value += ($row1['discount']);
     }
 //    $final_value = $item_tot - $discount_value;
 

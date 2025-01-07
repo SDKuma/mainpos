@@ -52,7 +52,7 @@ include('includes/header.php');
                         $r1 = mysqli_query($conn, $q1);
                         $discount_value = 0;
                         while ($row1 = mysqli_fetch_assoc($r1)) {
-                            $discount_value += ($row1['discount'] + $row1['on_scrap_discount']);
+                            $discount_value += ($row1['discount']);
                         }
                         $final_value = $item_tot - $discount_value;
                         echo $final_value;
@@ -62,7 +62,7 @@ include('includes/header.php');
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card card-body bg-info p-3">
-                    <p class="text-sm mb-0 text-capitalize">Invoice Total discounts(Scrap Discount + Discount)</p>
+                    <p class="text-sm mb-0 text-capitalize">Invoice Total discounts</p>
                     <h5 class="fw-bold mb-0">
                         <?php echo $discount_value ?>
                     </h5>
