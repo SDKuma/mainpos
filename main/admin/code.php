@@ -703,6 +703,15 @@ if(isset($_POST["getProfit"])){
         $item_tot += $subprofit;
     }
 
+    //calculate scrap
+    $dt = date('Y-m-d');
+    $q = "SELECT * FROM `order_scrap` WHERE date_trans='" . $dt . "'; ";
+    $r = mysqli_query($conn, $q);
+    $scrap_tot = 0;
+    while ($row = mysqli_fetch_assoc($r)) {
+     $scrap_tot += $row['profit'];
+    }
+
     $q1 = "SELECT * FROM `orders` WHERE `order_date`='" . $dt . "'; ";
     $r1 = mysqli_query($conn, $q1);
     $discount_value = 0;
@@ -711,6 +720,6 @@ if(isset($_POST["getProfit"])){
     }
 //    $final_value = $item_tot - $discount_value;
 
-    $data = ["profit"=>$item_tot,"discount"=>$discount_value,"datarows"=>$tb_rows];
+    $data = ["profit"=>$item_tot,"discount"=>$discount_value,"scrap_profit"=>$scrap_tot,"datarows"=>$tb_rows];
     jsonResponse(200, 'OK', $data);
 }
