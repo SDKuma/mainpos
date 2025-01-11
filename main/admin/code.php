@@ -714,3 +714,22 @@ if(isset($_POST["getProfit"])){
     $data = ["profit"=>$item_tot,"discount"=>$discount_value,"datarows"=>$tb_rows];
     jsonResponse(200, 'OK', $data);
 }
+
+if(isset($_POST['getHistory'])){
+    $total = 0;
+    $customer = $_POST['customer'];
+
+    $customer_query = "SELECT * FROM customers WHERE id ='".$customer."' ;";
+    $customer_result = mysqli_query($conn, $customer_query);
+    $customer_row = mysqli_fetch_assoc($customer_result);
+
+    $query = "SELECT * FROM orders WHERE customer_id='".$customer."';";
+    $result = mysqli_query($conn, $query);
+    $customer_orders = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($customer_orders,$row);
+        $total += (int)$row['net_total'];
+    }
+    $data = array("total"=>$total,"orders"=>$customer_orders,"customer"=>$customer_row);
+    jsonResponse(200, 'OK', "customer orders",$data);
+}

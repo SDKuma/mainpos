@@ -53,13 +53,11 @@ if(isset($_GET['key'])&&$_GET['key']=="LOPX45P8"){
 
                         <tbody>
                             <?php
-
                                 $orders = mysqli_query($conn, $q);
                                 $i = 1;
                                 while($row=mysqli_fetch_assoc($orders)){
                                     echo "<tr><td>".$i."</td><td>".$row['tracking_no']."</td><td>".$row['customer']."</td><td>".$row['payment_mode']."</td><td>".$row['order_date']."</td><td>".$row['total_amount']."</td><td>".$row['service_charge']."</td><td>".$row['discount']."</td><td>".$row['on_scrap_discount']."</td><td>".$row['net_total']."</td><td>
-                                    <a href='orders-view-print.php?track=".$row['id']."' class=' '><i class='fa fa-print' aria-hidden='true'></i>
-</a></td></tr>";
+                                    <a href='orders-view-print.php?track=".$row['id']."' class=' '><i class='fa fa-print' aria-hidden='true'></i></a></td></tr>";
                                     $i +=1;
                                 }
                             ?>

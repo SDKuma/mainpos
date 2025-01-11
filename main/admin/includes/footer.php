@@ -54,6 +54,7 @@
 <script src="./../admin/assets/js/chart.js"></script>
 <script src="assets/js/custom-scripts.js"></script>
 <script src="assets/js/report-scripts.js"></script>
+<script src="assets/js/customer.js"></script>
 <script src="assets/js/DataTables/datatables.js"></script>
 <script>
     $(document).ready( function () {

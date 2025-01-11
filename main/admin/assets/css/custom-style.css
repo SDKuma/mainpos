@@ -16,3 +16,18 @@ input.qty.quantityInput {
   outline: 0;
   margin-right: 1px;
 }
+
+#history-modal{
+  margin-top: 10%;
+  padding: 10px;
+  border:0px;
+  box-shadow: 0px 0px 5px;
+  width: 800px;
+  min-height: 400px;
+}
+
+
+#customer-detail-footer{
+  margin-top: -45px;
+  float: right;
+}
