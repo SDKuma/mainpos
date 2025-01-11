@@ -1,5 +1,7 @@
 <?php
 include('includes/header.php');
+$scrap_profit = 0;
+
 ?>
 <main>
     <div class="container-fluid px-4">
@@ -21,6 +23,7 @@ include('includes/header.php');
                             $scrap_tot += $row['profit'];
                         }
                         echo $scrap_tot;
+                        $scrap_profit = $scrap_tot;
                         ?>
                     </h5>
                 </div>
@@ -54,7 +57,7 @@ include('includes/header.php');
                         while ($row1 = mysqli_fetch_assoc($r1)) {
                             $discount_value += ($row1['discount']);
                         }
-                        $final_value = $item_tot - $discount_value;
+                        $final_value = ($item_tot+$scrap_profit) - $discount_value;
                         echo $final_value;
                         ?>
                     </h5>

@@ -10,7 +10,7 @@ async function getprofit() {
             }, success: async function (response) {
             console.log(response);
                 var data = JSON.parse(response)['message'];
-                var profit = Number(data['profit'])-Number(data['discount']);
+                var profit = Number(data['profit'])-Number(data['discount'])+Number(data['scrap_profit']);
                 document.getElementById("completeamount").innerText = `Rs.${profit}`;
             document.getElementById("discount").innerText = `Rs.${data['discount']}`;
                 let pro_rows = data["datarows"];
@@ -107,15 +107,7 @@ async function getreport() {
 
                 console.log(2, ctx.$chartjs);
 
-            }, 2000)
-
-            // let res = JSON.parse(response);
-            // console.log()
-            // console.log(res)
-            // if(res['status']){
-            //     // window.open(`./return-summary.php?invoice_no=${res['message']}`);
-            //     location.reload();
-            // }
+            }, 2000);
         },
         error: async function (err) {
 
