@@ -40,7 +40,7 @@ if ($headers['Authorization'] == '58874sad558asdasc65asd58asqw4d') {
 
     echo json_encode(["status"=>true,"data"=>$data]);
 } else {
-
+    echo json_encode(["status"=>false]);
 }
 
 
