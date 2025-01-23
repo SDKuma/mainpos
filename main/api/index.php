@@ -3,9 +3,9 @@ $headers = getallheaders();
 echo json_encode($headers);
 if ($headers['Authorization'] == '58874sad558asdasc65asd58asqw4d') {
     define("DB_SERVER", "localhost");
-    define("DB_USERNAME", "root");
-    define("DB_PASSWORD", "");
-    define("DB_DATABASE", "mainpos2");
+    define("DB_USERNAME", "jkadmin");
+    define("DB_PASSWORD", "b23rW_a123");
+    define("DB_DATABASE", "mainpos");
 
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
