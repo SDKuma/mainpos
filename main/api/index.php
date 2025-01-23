@@ -24,8 +24,8 @@ if ($headers['Authorization'] == '58874sad558asdasc65asd58asqw4d') {
         array_push($today_orders, $order);
     }
 
-//    $d1 = date('Y-m');
-    $d1 = "2024-12";
+    $d1 = date('Y-m');
+    //$d1 = "2024-12";
     $q1 = "SELECT * FROM orders WHERE order_date LIKE '%".$d1."%';";
     $orders1 = mysqli_query($conn, $q1);
     while ($order1 = mysqli_fetch_assoc($orders1)) {
