@@ -1,6 +1,5 @@
 <?php
 $headers = getallheaders();
-echo json_encode($headers);
 if ($headers['Authorization'] == '58874sad558asdasc65asd58asqw4d') {
     define("DB_SERVER", "localhost");
     define("DB_USERNAME", "jkadmin");
