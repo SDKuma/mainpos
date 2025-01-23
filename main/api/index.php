@@ -1,5 +1,6 @@
 <?php
 $headers = getallheaders();
+echo json_encode($headers);
 if ($headers['Authorization'] == '58874sad558asdasc65asd58asqw4d') {
     define("DB_SERVER", "localhost");
     define("DB_USERNAME", "root");
@@ -14,7 +15,7 @@ if ($headers['Authorization'] == '58874sad558asdasc65asd58asqw4d') {
 
     $d = date('Y-m-d');
 
-    $q = "SELECT * FROM orders WHERE order_date = '".$d."';";
+    $q = "SELECT * FROM orders WHERE order_date = '" . $d . "';";
     $orders = mysqli_query($conn, $q);
     $today_total = 0;
     $month_total = 0;
@@ -26,21 +27,19 @@ if ($headers['Authorization'] == '58874sad558asdasc65asd58asqw4d') {
 
     $d1 = date('Y-m');
     //$d1 = "2024-12";
-    $q1 = "SELECT * FROM orders WHERE order_date LIKE '%".$d1."%';";
+    $q1 = "SELECT * FROM orders WHERE order_date LIKE '%" . $d1 . "%';";
     $orders1 = mysqli_query($conn, $q1);
     while ($order1 = mysqli_fetch_assoc($orders1)) {
         $month_total += (int)$order1['net_total'];
     }
 
 
-    $data = array("today_total"=>$today_total,"month_total"=>$month_total,"orders_today"=>$today_orders);
+    $data = array("today_total" => $today_total, "month_total" => $month_total, "orders_today" => $today_orders);
 
 
-
-
-    echo json_encode(["status"=>true,"data"=>$data]);
+    echo json_encode(["status" => true, "data" => $data]);
 } else {
-    echo json_encode(["status"=>false]);
+    echo json_encode(["status" => false]);
 }
 
 
